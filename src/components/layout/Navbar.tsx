@@ -30,7 +30,7 @@ export default function Navbar() {
       </NavigationMenu>
 
       <div className="flex items-center gap-2">
-        <Button variant="ghost" asChild className="text-gray-700">
+        <Button variant="ghost" asChild className="text-gray-700  ">
           <Link href="/login">Login</Link>
         </Button>
         <Button asChild>
