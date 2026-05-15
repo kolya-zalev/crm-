@@ -31,7 +31,7 @@ export function AppSidebar() {
           <img
             src="/favicon.ico"
             alt="avatar"
-            className="w-full h-full object-cover "
+            className="w-full h-full object-cover " 
           />
         </div>
         <p className="mt-4 font-semibold text-lg text-white text-center">

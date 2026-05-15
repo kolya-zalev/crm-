@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/layout/AppSidebar";
+import  Navbar  from "@/components/layout/Navbar";
 
 
 const jetbrainsMono = JetBrains_Mono({
@@ -45,6 +46,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex">
         <SidebarProvider>
+          <Navbar />
           <AppSidebar />
           <main className="flex-1 p-6">
         
