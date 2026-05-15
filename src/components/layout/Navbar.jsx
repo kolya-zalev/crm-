@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/navigation-menu"
 import {Button} from "@/components/ui/button"
 
-export default function NavigationMenuDemo() {
+export default function Navbar() {
   return (
     <NavigationMenuItem>
       <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
