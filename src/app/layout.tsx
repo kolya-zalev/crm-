@@ -4,8 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/layout/AppSidebar";
-import  Navbar  from "@/components/layout/Navbar";
-
+import Navbar from "@/components/layout/Navbar";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -44,15 +43,14 @@ export default function RootLayout({
         jetbrainsMono.variable,
       )}
     >
-      <body className="min-h-full flex">
-        <SidebarProvider>
-          <Navbar />
-          <AppSidebar />
-          <main className="flex-1 p-6">
-        
-            {children}
-          </main>
-        </SidebarProvider>
+      <body className="min-h-full flex flex-col">
+        <Navbar />
+        <div className="flex flex-1">
+          <SidebarProvider>
+            <AppSidebar />
+            <main className="flex-1 p-6">{children}</main>
+          </SidebarProvider>
+        </div>
       </body>
     </html>
   );

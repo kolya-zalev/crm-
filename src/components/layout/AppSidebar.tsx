@@ -11,19 +11,11 @@ import {
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
+import { sidebarItems } from '@/app/config/routing'
 export function AppSidebar() {
-  const navItems = [
-    { label: "New Job" },
-    { label: "Archive" },
-    { label: "Bookmark" },
-    { label: "Share" },
-    { label: "Download" },
-    { label: "Print" },
-    { label: "Settings" },
-  ];
-  const pathname = usePathname();
+  
+
   return (
     <Sidebar>
       <SidebarHeader className="items-center py-8">
@@ -40,7 +32,7 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent className="px-4 mt-4">
         <SidebarMenu>
-          {navItems.map((item) => (
+          {sidebarItems.map((item) => (
             <SidebarMenuItem key={item.label}>
               <SidebarMenuButton className="text-white hover:bg-blue-600 gap-4 text-base py-6">
                 {item.label}
