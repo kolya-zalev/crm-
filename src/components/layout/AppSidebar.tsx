@@ -23,24 +23,26 @@ export function AppSidebar() {
     { label: "Print" },
     { label: "Settings" },
   ];
-const pathname = usePathname
+  const pathname = usePathname();
   return (
     <Sidebar>
       <SidebarHeader className="items-center py-8">
-        <div className="w-24 h-24 rounded-full overflow-hidden boerder-4 border-white">
+        <div className="w-24 h-24 rounded-full bg-blue-400 flex items-center justify-center text-white text-3xl font-bold">
           <img
             src="/favicon.ico"
             alt="avatar"
             className="w-full h-full object-cover "
           />
         </div>
-        <p className="mt-4 font-semibold text-lg">Name</p>
+        <p className="mt-4 font-semibold text-lg text-white text-center">
+          Name
+        </p>
       </SidebarHeader>
       <SidebarContent className="px-4 mt-4">
         <SidebarMenu>
           {navItems.map((item) => (
             <SidebarMenuItem key={item.label}>
-              <SidebarMenuButton className="text-white hover:bg-blue-400 gap-4 py-6">
+              <SidebarMenuButton className="text-white hover:bg-blue-600 gap-4 text-base py-6">
                 {item.label}
               </SidebarMenuButton>
             </SidebarMenuItem>
