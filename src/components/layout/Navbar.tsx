@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { navItems } from "@/app/config/routing";
 export default function Navbar() {
   return (
-    <header className="h-14 border-b bg-white flex items-center justify-between px-6">
+    <header className="h-14 border-2 border-gray-400   flex items-center justify-between px-6">
       <NavigationMenu className="max-w-none">
         <NavigationMenuList>
           {navItems.map((item) => (
@@ -21,12 +21,13 @@ export default function Navbar() {
                 asChild
                 className={navigationMenuTriggerStyle()}
               >
-                <Link href={item.href} className="text-gray-700">{item.label}</Link>
+                <Link href={item.href} className="text-gray-700">
+                  {item.label}
+                </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
           ))}
         </NavigationMenuList>
-        
       </NavigationMenu>
 
       <div className="flex items-center gap-2">

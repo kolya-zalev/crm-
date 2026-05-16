@@ -33,7 +33,7 @@ export function AppSidebar() {
         <SidebarMenu>
           {sidebarItems.map((item) => (
             <SidebarMenuItem key={item.label}>
-              <SidebarMenuButton className="text-white hover:bg-blue-600 gap-4 text-base py-6">
+              <SidebarMenuButton className="text-white hover:bg-blue-300 gap-4 text-base py-6">
                 {item.label}
               </SidebarMenuButton>
             </SidebarMenuItem>
