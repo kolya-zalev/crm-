@@ -20,8 +20,8 @@ export function AppSidebar() {
       <SidebarHeader className="items-center py-8">
         <div className="w-24 h-24 rounded-full bg-blue-400 flex items-center justify-center text-white text-3xl font-bold">
           <img
-            src="/favicon.ico"
-            alt="avatar"
+            // src="/favicon.ico"
+            // alt="avatar"
             className="w-full h-full object-cover " 
           />
         </div>
@@ -30,10 +30,10 @@ export function AppSidebar() {
         </p>
       </SidebarHeader>
       <SidebarContent className="px-4 mt-4">
-        <SidebarMenu>
+        <SidebarMenu className="">
           {sidebarItems.map((item) => (
             <SidebarMenuItem key={item.label}>
-              <SidebarMenuButton className="text-white hover:bg-blue-300 gap-4 text-base py-6">
+              <SidebarMenuButton className="text-white hover:bg-blue-300 gap-4 text-base py-8">
                 {item.label}
               </SidebarMenuButton>
             </SidebarMenuItem>

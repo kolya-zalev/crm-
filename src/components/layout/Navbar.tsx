@@ -9,19 +9,19 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
-import { navItems } from "@/app/config/routing";
+import { homeRoute } from "@/app/config/routing";
 export default function Navbar() {
   return (
     <header className="h-14 border-2 border-gray-400   flex items-center justify-between px-6">
-      <NavigationMenu className="max-w-none">
+      <NavigationMenu className="max-w-none ">
         <NavigationMenuList>
-          {navItems.map((item) => (
+          {homeRoute.map((item) => (
             <NavigationMenuItem key={item.href}>
               <NavigationMenuLink
                 asChild
                 className={navigationMenuTriggerStyle()}
               >
-                <Link href={item.href} className="text-gray-700">
+                <Link href={item.href} className="text-gray-700  ">
                   {item.label}
                 </Link>
               </NavigationMenuLink>

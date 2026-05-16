@@ -1,4 +1,4 @@
-export const navItems = [{ href: "/", label: "Home" }];
+export const homeRoute = [{ href: "/", label: "Home" }];
 
 export const sidebarItems = [
   { href: "/dashboard", label: "Dashboard" },

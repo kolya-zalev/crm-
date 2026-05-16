@@ -43,12 +43,12 @@ export default function RootLayout({
         jetbrainsMono.variable,
       )}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="h-full flex flex-col overflow-hidden">
         <Navbar />
-        <div className="flex flex-1">
+        <div className="flex flex-1 overflow-hidden">
           <SidebarProvider>
             <AppSidebar />
-            <main className="flex-1 p-6">{children}</main>
+            <main className="flex-1 overflow-y-auto p-6">{children}</main>
           </SidebarProvider>
         </div>
       </body>
