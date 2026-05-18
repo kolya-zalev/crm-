@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { homeRoute } from "./config/locate";
+import { homeRoute } from "../config/locate";
 
 const NotFoundPage = () => {
   return (
