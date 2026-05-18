@@ -11,10 +11,8 @@ import {
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
-import { sidebarItems } from '@/app/config/routing'
+import { sidebarItems } from "@/app/config/locate";
 export function AppSidebar() {
-  
-
   return (
     <Sidebar>
       <SidebarHeader className="items-center py-8">
@@ -22,7 +20,7 @@ export function AppSidebar() {
           <img
             // src="/favicon.ico"
             // alt="avatar"
-            className="w-full h-full object-cover " 
+            className="w-full h-full object-cover "
           />
         </div>
         <p className="mt-4 font-semibold text-lg text-white text-center">
