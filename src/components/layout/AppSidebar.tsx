@@ -11,7 +11,7 @@ import {
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
-import { sidebarItems } from "@/app/config/locate";
+import { sidebarItems } from "@/config/locate";
 export function AppSidebar() {
   return (
     <Sidebar>

@@ -9,7 +9,8 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
-import { homeRoute } from "@/app/config/locate";
+import { homeRoute } from "@/config/locate";
+
 export default function Navbar() {
   return (
     <header className="h-14 border-2 border-gray-400   flex items-center justify-between px-6">
