@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { brand } from "../config/utils";
+import { brand } from "../utils/utils";
 
 const NotFoundPage = () => {
   return (

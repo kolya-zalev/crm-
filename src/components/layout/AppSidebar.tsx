@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { sidebarItems, isNavItemActive } from "@/config/utils";
+import { sidebarItems, isNavItemActive } from "@/utils/utils";
 import { cn } from "@/lib/utils";
 
 export function AppSidebar() {

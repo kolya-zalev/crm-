@@ -9,8 +9,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
-import { brand, authRoutes } from "@/config/utils";
-
+import { brand, authRoutes } from "@/utils/utils";
 
 export default function Navbar() {
   return (
