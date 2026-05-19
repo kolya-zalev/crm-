@@ -1,4 +1,4 @@
-type Lead = {
+export type Lead = {
   id: string;
   name: string;
   email: string;
@@ -9,3 +9,5 @@ type Lead = {
   notes: string;
   source?: string;
 };
+
+
