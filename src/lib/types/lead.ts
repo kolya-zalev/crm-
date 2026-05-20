@@ -4,7 +4,7 @@ export type Lead = {
   email: string;
   phone?: string;
   company: string;
-  status: "new" | "contacted" | "qualifield" | "won" | "lost";
+  status: "new" | "contacted" | "qualified" | "won" | "lost";
   tags: string[];
   notes: string;
   source?: string;

@@ -28,7 +28,7 @@ export const fakeLeads: Lead[] = [
     email: "Alexexample@gmail.com",
     phone: "+44444444",
     company: "Apple",
-    status: "qualifield",
+    status: "qualified",
     tags: [],
     notes: "yes",
     source: "no",
