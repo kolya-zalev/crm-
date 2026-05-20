@@ -33,5 +33,34 @@ export const handlers = [
     return HttpResponse.json(newLead, { status: 201 });
   }),
 
+  http.put<{ id: string }>("/api/leads/:id", async ({ request, params }) => {
+    const { id } = params;
+    const body = (await request.json()) as Partial<Omit<Lead, "id">>;
+    const index = leadsDb.findIndex((l) => l.id === id);
+    if (index === -1) {
+      return HttpResponse.json(
+        {
+          error: {
+            message: "Index not found",
+            code: "NOT_FOUND",
+          },
+        },
+        { status: 404 },
+      );
+    }
+    const updated = { ...leadsDb[index], ...body, id: leadsDb[index].id };
+    leadsDb[index] = updated;
+    return HttpResponse.json(updated);
+  }),
 
+  http.delete<{id: string}>('/api/leads/:id', async({params}) => {
+    const {id} = params
+    const index = leadsDb.findIndex(l => l.id === id)
+    if(index !== -1){
+      leadsDb.splice(index, 1)
+      return new HttpResponse(null, {status: 204})
+    }
+    return new HttpResponse(null, {status: 404})
+
+  })
 ];
