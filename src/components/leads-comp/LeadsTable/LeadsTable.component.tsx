@@ -13,6 +13,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
   Select,
   SelectContent,
   SelectGroup,
@@ -42,6 +48,9 @@ export default function LeadsTableComponent({
   onSearchChange,
   onFilterChange,
   onDelete,
+  selectedLead,
+  onView,
+  onCloseView,
 }: LeadsTableComponentProps) {
   return (
     <div className="flex flex-col gap-4">
@@ -161,7 +170,7 @@ export default function LeadsTableComponent({
                         </Button>
                         <Button
                           className="cursor-pointer rounded-xl bg-white-700 hover:bg-gray-300 text-black h-6 p-1"
-                          onClick={() => console.log("view", lead.id)}
+                          onClick={() => onView(lead.id)}
                         >
                           <GrView />
                         </Button>
@@ -180,6 +189,26 @@ export default function LeadsTableComponent({
           </Table>
         </div>
       )}
+      <Dialog onOpenChange={onCloseView} open={selectedLead !== null}>
+        <DialogContent aria-describedby={undefined}>
+          <DialogHeader>
+            <DialogTitle>
+              <div className="flex flex-col gap-3 py-4">
+                Name: {selectedLead?.name}
+              </div>
+            </DialogTitle>
+          </DialogHeader>
+          <div className="flex flex-col gap-3 py-4 text-base">
+            <span>Email: {selectedLead?.email}</span>
+            <span>Phone: {selectedLead?.phone}</span>
+            <span>Company: {selectedLead?.company}</span>
+            <span>
+              <Badge variant="outline">Status: {selectedLead?.status}</Badge>
+            </span>
+            <span> Tags: {selectedLead?.tags.join(", ")}</span>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

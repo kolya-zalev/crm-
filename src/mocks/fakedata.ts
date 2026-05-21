@@ -50,7 +50,7 @@ export const fakeLeads: Lead[] = [
     phone: "+8777777777",
     company: "Sony",
     status: "lost",
-    tags: [],
+    tags: ['1'],
     notes: "yes",
     source: "no",
   },

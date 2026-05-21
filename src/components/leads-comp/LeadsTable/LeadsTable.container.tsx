@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { Lead } from "@/lib/types/lead";
-import LeadsTableComponent from "@/components/leads-comp/LeadsTable/LeadsTable.component"
-
+import LeadsTableComponent from "@/components/leads-comp/LeadsTable/LeadsTable.component";
 export default function LeadsTableContainer() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [filter, setFilter] = useState("all");
+  const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
 
   useEffect(() => {
     fetch("/api/leads")
@@ -35,16 +35,26 @@ export default function LeadsTableContainer() {
     await fetch(`/api/leads/${id}`, { method: "DELETE" });
     setLeads(leads.filter((item) => item.id !== id));
   };
+  const handleView = (id: string) => {
+    const found = leads.find((item) => item.id === id);
+    if (found) {
+      setSelectedLead(found);
+    }
 
+    
+  };
   return (
     <LeadsTableComponent
       leads={filterLeads}
       search={search}
       filter={filter}
+      selectedLead={selectedLead}
       isLoading={isLoading}
       onSearchChange={setSearch}
       onFilterChange={setFilter}
       onDelete={handleDelete}
+      onView={handleView}
+      onCloseView={() => setSelectedLead(null)}
     />
   );
 }
