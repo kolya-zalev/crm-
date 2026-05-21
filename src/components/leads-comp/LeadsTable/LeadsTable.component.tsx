@@ -30,15 +30,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { LeadsTableComponentProps } from "./LeadsTable.types";
+import { LeadsStatusBadge } from "../LeadsStatusBadge";
 
-const statusStyle = {
-  new: "bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300",
-  contacted: "bg-sky-50 text-sky-700 dark:bg-sky-950 dark:text-sky-300",
-  qualified:
-    "bg-purple-50 text-purple-700 dark:bg-purple-950 dark:text-purple-300",
-  won: "bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-300",
-  lost: "bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-300",
-};
 
 export default function LeadsTableComponent({
   leads,
@@ -95,7 +88,7 @@ export default function LeadsTableComponent({
       ) : (
         <div className="rounded-xl border border-gray-300 overflow-hidden shadow-sm">
           <Table className="text-base border-collapse">
-            <TableHeader className="bg-gray-50">
+            <TableHeader className="bg-gray-200">
               <TableRow>
                 <TableHead className="text-center font-semibold text-gray-700">
                   Name
@@ -149,13 +142,7 @@ export default function LeadsTableComponent({
                       {lead.company}
                     </TableCell>
                     <TableCell className="text-center">
-                      <Badge
-                        className={
-                          statusStyle[lead.status as keyof typeof statusStyle]
-                        }
-                      >
-                        {lead.status}
-                      </Badge>
+                     <LeadsStatusBadge status={lead.status} />
                     </TableCell>
                     <TableCell className="text-center text-gray-600">
                       {lead.tags.length > 0 ? lead.tags.join(", ") : "—"}
@@ -193,7 +180,7 @@ export default function LeadsTableComponent({
         <DialogContent aria-describedby={undefined}>
           <DialogHeader>
             <DialogTitle>
-              <div className="flex flex-col gap-3 py-4">
+              <div className="flex flex-col ">
                 Name: {selectedLead?.name}
               </div>
             </DialogTitle>
