@@ -1,0 +1,50 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { Lead } from "@/lib/types/lead";
+import LeadsTableComponent from "@/components/leads-comp/LeadsTable/LeadsTable.component"
+
+export default function LeadsTableContainer() {
+  const [leads, setLeads] = useState<Lead[]>([]);
+  const [search, setSearch] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [filter, setFilter] = useState("all");
+
+  useEffect(() => {
+    fetch("/api/leads")
+      .then((r) => r.json())
+      .then((data) => {
+        setLeads(data);
+        setIsLoading(false);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  const filterLeads = leads.filter((lead) => {
+    const matchesSearch =
+      lead.name.toLowerCase().includes(search.toLowerCase()) ||
+      lead.email.toLowerCase().includes(search.toLowerCase()) ||
+      lead.company.toLowerCase().includes(search.toLowerCase());
+    const matchesFilter =
+      filter === "all" || filter === "" ? true : lead.status === filter;
+
+    return matchesSearch && matchesFilter;
+  });
+
+  const handleDelete = async (id: string) => {
+    await fetch(`/api/leads/${id}`, { method: "DELETE" });
+    setLeads(leads.filter((item) => item.id !== id));
+  };
+
+  return (
+    <LeadsTableComponent
+      leads={filterLeads}
+      search={search}
+      filter={filter}
+      isLoading={isLoading}
+      onSearchChange={setSearch}
+      onFilterChange={setFilter}
+      onDelete={handleDelete}
+    />
+  );
+}

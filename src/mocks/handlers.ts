@@ -59,7 +59,7 @@ export const handlers = [
   }),
 
   http.delete<IdParam>("/api/leads/:id", async ({ params }) => {
-    await delay(1000);
+    await delay(1);
     const { id } = params;
     const index = leadsDb.findIndex((l) => l.id === id);
     if (index === -1) {
