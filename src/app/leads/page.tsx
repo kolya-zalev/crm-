@@ -1,4 +1,7 @@
 "use client";
+import { MdDelete } from "react-icons/md";
+import { GrView } from "react-icons/gr";
+import { AiFillEdit } from "react-icons/ai";
 
 import {
   Table,
@@ -113,7 +116,7 @@ export default function TableLeads() {
           placeholder="Search"
         />
         <Select value={filter} onValueChange={setFilter}>
-          <SelectTrigger className="w-full max-w-48">
+          <SelectTrigger className="w-full max-w-48 rounded-xl">
             <SelectValue placeholder="Filter" />
           </SelectTrigger>
           <SelectContent>
@@ -127,54 +130,76 @@ export default function TableLeads() {
             </SelectGroup>
           </SelectContent>
         </Select>
+        <p className="p-2  ml-auto">Total Leads: {filterLeads.length}</p>
         <Button
-          className="ml-auto"
+          className="ml-auto rounded-xl bg-blue-300 hover:bg-blue-500 shadow-xl cursor-pointer"
           onClick={() => console.log("Add Lead")}
-          variant="outline"
         >
           Add Lead
         </Button>
       </div>
 
       <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-25">Name</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Phone</TableHead>
-            <TableHead>Company</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Tags</TableHead>
-            <TableHead>Action</TableHead>
+        <TableHeader  >
+          <TableRow >
+            <TableHead className="text-center">Name</TableHead>
+            <TableHead className="text-center">Email</TableHead>
+            <TableHead className="text-center">Phone</TableHead>
+            <TableHead className="text-center">Company</TableHead>
+            <TableHead className="text-center">Status</TableHead>
+            <TableHead className="text-center">Tags</TableHead>
+            <TableHead className="text-center">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {filterLeads.map((lead) => (
-            <TableRow key={lead.id}>
-              <TableCell className="font-medium">{lead.name}</TableCell>
-              <TableCell>{lead.email}</TableCell>
-              <TableCell>{lead.phone}</TableCell>
-              <TableCell>{lead.company}</TableCell>
-              <TableCell>
-                <Badge className={statusStyle[lead.status]}>
-                  {lead.status}
-                </Badge>
-              </TableCell>
-              <TableCell>{lead.tags.join(", ")}</TableCell>
-
-              <TableCell>
-                <Button onClick={() => console.log("edit", lead.id)}>
-                  Edit
-                </Button>
-                <Button onClick={() => console.log("view", lead.id)}>
-                  View
-                </Button>
-                <Button onClick={() => console.log("delete", lead.id)}>
-                  Delete
-                </Button>
+          {filterLeads.length === 0 ? (
+            <TableRow>
+              <TableCell colSpan={7} className="py-4 text-center text-gray-500">
+                No leads found
               </TableCell>
             </TableRow>
-          ))}
+          ) : (
+            filterLeads.map((lead) => (
+              <TableRow key={lead.id}>
+                <TableCell className="text-center">{lead.name}</TableCell>
+                <TableCell className="text-center">{lead.email}</TableCell>
+                <TableCell className="text-center">{lead.phone}</TableCell>
+                <TableCell className="text-center">{lead.company}</TableCell>
+                <TableCell className="text-center">
+                  <Badge
+                    className={
+                      statusStyle[lead.status as keyof typeof statusStyle]
+                    }
+                  >
+                    {lead.status}
+                  </Badge>
+                </TableCell>
+                <TableCell className="text-center">{lead.tags.join(", ")}</TableCell>
+
+                <TableCell className="flex flex-row gap-1 justify-center ">
+                  <Button
+                    className="cursor-pointer rounded-xl bg-white-700 hover:bg-gray-300 text-black h-6 p-1 "
+                    onClick={() => console.log("edit", lead.id)}
+                  >
+                    <AiFillEdit />
+                  </Button>
+                  <Button
+                    className="cursor-pointer rounded-xl bg-white-700 hover:bg-gray-300 text-black h-6 p-1 "
+                    onClick={() => console.log("view", lead.id)}
+                  >
+                    <GrView />
+                  </Button>
+                  <Button
+                    className="cursor-pointer rounded-xl bg-white-700 hover:bg-gray-300 text-black h-6 p-1"
+                    onClick={() => console.log("delete", lead.id)}
+                  >
+                    <MdDelete />
+                  </Button>
+                  
+                </TableCell>
+              </TableRow>
+            ))
+          )}
         </TableBody>
       </Table>
     </div>

@@ -38,8 +38,8 @@ export function AppSidebar() {
                   asChild
                   isActive={active}
                   className={cn(
-                    "text-white hover:bg-blue-300 gap-4 text-base py-8",
-                    active && "bg-blue-500 font-semibold",
+                    "text-white hover:bg-blue-300 gap-4 text-base py-8 rounded-xl",
+                    active && "bg-blue-500 font-semibold ",
                   )}
                 >
                   <Link href={item.href}>{item.label}</Link>
