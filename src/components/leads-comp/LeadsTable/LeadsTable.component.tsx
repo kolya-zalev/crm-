@@ -18,20 +18,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import {LeadsFilter} from '@/components/leads-comp/LeadsFilter'
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import {LeadsSearch} from '@/components/leads-comp/LeadsSearch'
 import { LeadsTableComponentProps } from "./LeadsTable.types";
 import { LeadsStatusBadge } from "../LeadsStatusBadge";
-
+import { EmptyState } from "../EmptyState";
 
 export default function LeadsTableComponent({
   leads,
@@ -48,27 +41,8 @@ export default function LeadsTableComponent({
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-row gap-2 items-center">
-        <Input
-          className="rounded-xl w-64 max-w-xs border border-black"
-          value={search}
-          onChange={(e) => onSearchChange(e.target.value)}
-          placeholder="Search"
-        />
-        <Select value={filter} onValueChange={onFilterChange}>
-          <SelectTrigger className="w-full max-w-48 rounded-xl border border-black">
-            <SelectValue placeholder="Filter" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="all">All</SelectItem>
-              <SelectItem value="new">New</SelectItem>
-              <SelectItem value="contacted">Contacted</SelectItem>
-              <SelectItem value="qualified">Qualified</SelectItem>
-              <SelectItem value="won">Won</SelectItem>
-              <SelectItem value="lost">Lost</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+        <LeadsSearch value={search} onChange={onSearchChange}/>
+        <LeadsFilter value={filter} onChange={onFilterChange} />
         <p className="p-2 ml-auto font-medium">Total Leads: {leads.length}</p>
         <Button
           className="rounded-xl bg-blue-300 hover:bg-blue-500 shadow-xl cursor-pointer"
@@ -115,14 +89,7 @@ export default function LeadsTableComponent({
             </TableHeader>
             <TableBody className="divide-y divide-gray-300 bg-white">
               {leads.length === 0 ? (
-                <TableRow>
-                  <TableCell
-                    colSpan={7}
-                    className="py-8 text-center text-gray-500 font-medium"
-                  >
-                    No leads found
-                  </TableCell>
-                </TableRow>
+                <EmptyState />
               ) : (
                 leads.map((lead) => (
                   <TableRow
