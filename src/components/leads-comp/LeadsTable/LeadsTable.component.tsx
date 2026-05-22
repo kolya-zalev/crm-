@@ -12,16 +12,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {LeadsFilter} from '@/components/leads-comp/LeadsFilter'
+import { LeadViewModal } from "@/components/leads-comp/LeadsModal/LeadViewModal";
+import { LeadsFilter } from "@/components/leads-comp/LeadsFilter";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {LeadsSearch} from '@/components/leads-comp/LeadsSearch'
+import { LeadsSearch } from "@/components/leads-comp/LeadsSearch";
 import { LeadsTableComponentProps } from "./LeadsTable.types";
 import { LeadsStatusBadge } from "../LeadsStatusBadge";
 import { EmptyState } from "../EmptyState";
@@ -41,7 +36,7 @@ export default function LeadsTableComponent({
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-row gap-2 items-center">
-        <LeadsSearch value={search} onChange={onSearchChange}/>
+        <LeadsSearch value={search} onChange={onSearchChange} />
         <LeadsFilter value={filter} onChange={onFilterChange} />
         <p className="p-2 ml-auto font-medium">Total Leads: {leads.length}</p>
         <Button
@@ -109,7 +104,7 @@ export default function LeadsTableComponent({
                       {lead.company}
                     </TableCell>
                     <TableCell className="text-center">
-                     <LeadsStatusBadge status={lead.status} />
+                      <LeadsStatusBadge status={lead.status} />
                     </TableCell>
                     <TableCell className="text-center text-gray-600">
                       {lead.tags.length > 0 ? lead.tags.join(", ") : "—"}
@@ -143,26 +138,7 @@ export default function LeadsTableComponent({
           </Table>
         </div>
       )}
-      <Dialog onOpenChange={onCloseView} open={selectedLead !== null}>
-        <DialogContent aria-describedby={undefined}>
-          <DialogHeader>
-            <DialogTitle>
-              <div className="flex flex-col ">
-                Name: {selectedLead?.name}
-              </div>
-            </DialogTitle>
-          </DialogHeader>
-          <div className="flex flex-col gap-3 py-4 text-base">
-            <span>Email: {selectedLead?.email}</span>
-            <span>Phone: {selectedLead?.phone}</span>
-            <span>Company: {selectedLead?.company}</span>
-            <span>
-              <Badge variant="outline">Status: {selectedLead?.status}</Badge>
-            </span>
-            <span> Tags: {selectedLead?.tags.join(", ")}</span>
-          </div>
-        </DialogContent>
-      </Dialog>
+      <LeadViewModal lead={selectedLead} onClose={onCloseView} />
     </div>
   );
 }
