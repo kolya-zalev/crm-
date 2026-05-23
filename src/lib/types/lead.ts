@@ -6,7 +6,7 @@ export type Lead = {
   company: string;
   status: "new" | "contacted" | "qualified" | "won" | "lost";
   tags: string[];
-  notes: string;
+  notes?: string;
   source?: string;
 };
 

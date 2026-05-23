@@ -11,5 +11,7 @@ export interface LeadsTableComponentProps {
   onDelete: (id: string) => Promise<void>;
   onView: (id: string) => void;
   onCloseView:() => void
+  onAddClick:() => void
+ 
 
 }

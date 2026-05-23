@@ -3,12 +3,15 @@
 import { useEffect, useState } from "react";
 import { Lead } from "@/lib/types/lead";
 import LeadsTableComponent from "@/components/leads-comp/LeadsTable/LeadsTable.component";
+import { LeadAddModal } from "../LeadsModal/LeadAddModal";
 export default function LeadsTableContainer() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [filter, setFilter] = useState("all");
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
+  const [isAddOpen, setIsAddOpen] = useState(false)
+ 
 
   useEffect(() => {
     fetch("/api/leads")
@@ -44,6 +47,8 @@ export default function LeadsTableContainer() {
     
   };
   return (
+    <>
+    
     <LeadsTableComponent
       leads={filterLeads}
       search={search}
@@ -55,6 +60,11 @@ export default function LeadsTableContainer() {
       onDelete={handleDelete}
       onView={handleView}
       onCloseView={() => setSelectedLead(null)}
+      onAddClick={() => setIsAddOpen(true)}
+     
     />
+    <LeadAddModal  open={isAddOpen} onClose={() => setIsAddOpen(false)} onSubmit={(data) => console.log('submitted', data)}/>
+    
+    </>
   );
 }

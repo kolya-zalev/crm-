@@ -20,7 +20,7 @@ import { LeadsSearch } from "@/components/leads-comp/LeadsSearch";
 import { LeadsTableComponentProps } from "./LeadsTable.types";
 import { LeadsStatusBadge } from "../LeadsStatusBadge";
 import { EmptyState } from "../EmptyState";
-
+import {LeadAddModal} from '@/components/leads-comp/LeadsModal/LeadAddModal'
 export default function LeadsTableComponent({
   leads,
   search,
@@ -32,6 +32,8 @@ export default function LeadsTableComponent({
   selectedLead,
   onView,
   onCloseView,
+  onAddClick,
+ 
 }: LeadsTableComponentProps) {
   return (
     <div className="flex flex-col gap-4">
@@ -41,7 +43,8 @@ export default function LeadsTableComponent({
         <p className="p-2 ml-auto font-medium">Total Leads: {leads.length}</p>
         <Button
           className="rounded-xl bg-blue-300 hover:bg-blue-500 shadow-xl cursor-pointer"
-          onClick={() => console.log("Add Lead")}
+          onClick={onAddClick}
+        
         >
           Add Lead
         </Button>
