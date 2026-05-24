@@ -20,7 +20,6 @@ import { LeadsSearch } from "@/components/leads-comp/LeadsSearch";
 import { LeadsTableComponentProps } from "./LeadsTable.types";
 import { LeadsStatusBadge } from "../LeadsStatusBadge";
 import { EmptyState } from "../EmptyState";
-import {LeadAddModal} from '@/components/leads-comp/LeadsModal/LeadAddModal'
 export default function LeadsTableComponent({
   leads,
   search,

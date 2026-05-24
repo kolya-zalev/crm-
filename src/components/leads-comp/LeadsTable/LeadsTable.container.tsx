@@ -10,8 +10,7 @@ export default function LeadsTableContainer() {
   const [isLoading, setIsLoading] = useState(true);
   const [filter, setFilter] = useState("all");
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
-  const [isAddOpen, setIsAddOpen] = useState(false)
- 
+  const [isAddOpen, setIsAddOpen] = useState(false);
 
   useEffect(() => {
     fetch("/api/leads")
@@ -43,28 +42,27 @@ export default function LeadsTableContainer() {
     if (found) {
       setSelectedLead(found);
     }
-
-    
   };
   return (
     <>
-    
-    <LeadsTableComponent
-      leads={filterLeads}
-      search={search}
-      filter={filter}
-      selectedLead={selectedLead}
-      isLoading={isLoading}
-      onSearchChange={setSearch}
-      onFilterChange={setFilter}
-      onDelete={handleDelete}
-      onView={handleView}
-      onCloseView={() => setSelectedLead(null)}
-      onAddClick={() => setIsAddOpen(true)}
-     
-    />
-    <LeadAddModal  open={isAddOpen} onClose={() => setIsAddOpen(false)} onSubmit={(data) => console.log('submitted', data)}/>
-    
+      <LeadsTableComponent
+        leads={filterLeads}
+        search={search}
+        filter={filter}
+        selectedLead={selectedLead}
+        isLoading={isLoading}
+        onSearchChange={setSearch}
+        onFilterChange={setFilter}
+        onDelete={handleDelete}
+        onView={handleView}
+        onCloseView={() => setSelectedLead(null)}
+        onAddClick={() => setIsAddOpen(true)}
+      />
+      <LeadAddModal
+        open={isAddOpen}
+        onClose={() => setIsAddOpen(false)}
+        onSubmit={(data) => console.log("submitted", data)}
+      />
     </>
   );
 }
