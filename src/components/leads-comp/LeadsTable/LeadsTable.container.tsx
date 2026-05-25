@@ -43,6 +43,20 @@ export default function LeadsTableContainer() {
       setSelectedLead(found);
     }
   };
+
+  const handleCreate = async (data: Omit<Lead, "id">) => {
+    const response = await fetch("/api/leads/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const newLead =  await response.json();
+    setLeads(prev => [...prev, newLead]);
+    setIsAddOpen(false);
+  };
   return (
     <>
       <LeadsTableComponent
@@ -61,7 +75,7 @@ export default function LeadsTableContainer() {
       <LeadAddModal
         open={isAddOpen}
         onClose={() => setIsAddOpen(false)}
-        onSubmit={(data) => console.log("submitted", data)}
+        onSubmit={handleCreate}
       />
     </>
   );

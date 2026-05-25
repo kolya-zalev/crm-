@@ -37,7 +37,12 @@ export const LeadAddModal = ({
       notes: "",
       source: "",
     },
+    
   });
+  const formReset = (data: any) => {
+      onSubmit(data)
+      form.reset()
+  }
 
   return (
     <Dialog onOpenChange={onClose} open={open}>
@@ -46,7 +51,7 @@ export const LeadAddModal = ({
           <DialogTitle>Add New Lead</DialogTitle>
         </DialogHeader>
 
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form onSubmit={form.handleSubmit(formReset)}>
           <label>Enter name</label>
           <Input {...form.register("name")} placeholder="Name" />
           {form.formState.errors.name && (
@@ -72,6 +77,7 @@ export const LeadAddModal = ({
             </p>
           )}
           <label>Status</label>
+          <hr />
           <select {...form.register("status")}>
             <option value="new">New</option>
             <option value="contacted">Contacted</option>
