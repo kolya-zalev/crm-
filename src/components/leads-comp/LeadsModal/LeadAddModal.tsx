@@ -37,23 +37,30 @@ export const LeadAddModal = ({
       notes: "",
       source: "",
     },
-    
   });
   const formReset = (data: any) => {
-      onSubmit(data)
-      form.reset()
-  }
+    onSubmit(data);
+    form.reset();
+  };
 
   return (
     <Dialog onOpenChange={onClose} open={open}>
       <DialogContent aria-describedby={undefined}>
         <DialogHeader>
-          <DialogTitle>Add New Lead</DialogTitle>
+          <DialogTitle className="text-xl flex justify-center">Add New Lead</DialogTitle>
         </DialogHeader>
 
-        <form onSubmit={form.handleSubmit(formReset)}>
-          <label>Enter name</label>
-          <Input {...form.register("name")} placeholder="Name" />
+        <form
+          onSubmit={form.handleSubmit(formReset)}
+          className="flex flex-col gap-3"
+        >
+        
+
+            <label className="text-sm font-medium" > Enter name</label>
+            
+            <Input {...form.register("name")} placeholder="Name" />
+        
+         
           {form.formState.errors.name && (
             <p className="text-red-500 text-sm">
               {form.formState.errors.name.message}
@@ -77,21 +84,21 @@ export const LeadAddModal = ({
             </p>
           )}
           <label>Status</label>
-          <hr />
-          <select {...form.register("status")}>
+
+          <select {...form.register("status")} className="border-2 border-gray-500 rounded-xl p-2 w-full">
             <option value="new">New</option>
             <option value="contacted">Contacted</option>
             <option value="qualified">Qualified</option>
             <option value="won">Won</option>
             <option value="lost">Lost</option>
           </select>
-          <hr />
+          
           {/* <Input {...form.register("tags")} placeholder="Tags" /> */}
           <label>Notes</label>
           <Input {...form.register("notes")} placeholder="Notes" />
           <label>Source</label>
           <Input {...form.register("source")} placeholder="Source" />
-          <Button type="submit">Create</Button>
+          <Button type="submit" className="w-full  border rounded-xl p-4">Create</Button>
         </form>
       </DialogContent>
     </Dialog>
