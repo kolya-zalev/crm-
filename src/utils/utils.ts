@@ -11,7 +11,7 @@ export const brand = {
 
 export const sidebarItems: NavItem[] = [
   { id: "dashboard", href: "/dashboard", label: "Dashboard" },
-  { id: "leads", href: "/leads", label: "Leads" },
+  { id: "leads", href: "/lead", label: "Leads" },
   { id: "settings", href: "/settings", label: "Settings" },
 ];
 

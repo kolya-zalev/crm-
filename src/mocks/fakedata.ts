@@ -1,4 +1,4 @@
-import { Lead } from "@/lib/types/lead";
+import { Lead } from "@/app/_features/leads/types";
 
 export const fakeLeads: Lead[] = [
   {
@@ -50,9 +50,8 @@ export const fakeLeads: Lead[] = [
     phone: "+8777777777",
     company: "Sony",
     status: "lost",
-    tags: ['1'],
+    tags: ["1"],
     notes: "yes",
     source: "no",
   },
-  
 ];

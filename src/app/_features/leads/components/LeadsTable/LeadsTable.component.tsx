@@ -12,11 +12,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { LeadViewModal } from "@/components/leads-comp/LeadsModal/LeadViewModal";
-import { LeadsFilter } from "@/components/leads-comp/LeadsFilter";
+import { LeadViewModal } from "@/app/_features/leads/components/LeadsModal/LeadViewModal";
+import { LeadsFilter } from "@/app/_features/leads/components/LeadsFilter";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { LeadsSearch } from "@/components/leads-comp/LeadsSearch";
+import { LeadsSearch } from "@/app/_features/leads/components/LeadsSearch";
 import { LeadsTableComponentProps } from "./LeadsTable.types";
 import { LeadsStatusBadge } from "../LeadsStatusBadge";
 import { EmptyState } from "../EmptyState";
@@ -32,7 +32,6 @@ export default function LeadsTableComponent({
   onView,
   onCloseView,
   onAddClick,
- 
 }: LeadsTableComponentProps) {
   return (
     <div className="flex flex-col gap-4">
@@ -43,7 +42,6 @@ export default function LeadsTableComponent({
         <Button
           className="rounded-xl bg-blue-300 hover:bg-blue-500 shadow-xl cursor-pointer"
           onClick={onAddClick}
-        
         >
           Add Lead
         </Button>

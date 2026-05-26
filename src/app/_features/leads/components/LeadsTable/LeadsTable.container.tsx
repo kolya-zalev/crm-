@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Lead } from "@/lib/types/lead";
-import LeadsTableComponent from "@/components/leads-comp/LeadsTable/LeadsTable.component";
+import { Lead } from "@/app/_features/leads/types";
+import LeadsTableComponent from "@/app/_features/leads/components/LeadsTable/LeadsTable.component";
 import { LeadAddModal } from "../LeadsModal/LeadAddModal";
 export default function LeadsTableContainer() {
   const [leads, setLeads] = useState<Lead[]>([]);
@@ -53,8 +53,8 @@ export default function LeadsTableContainer() {
       body: JSON.stringify(data),
     });
 
-    const newLead =  await response.json();
-    setLeads(prev => [...prev, newLead]);
+    const newLead = await response.json();
+    setLeads((prev) => [...prev, newLead]);
     setIsAddOpen(false);
   };
   return (

@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { Lead } from "@/lib/types/lead";
+import { Lead } from "@/app/_features/leads/types";
 
 const statusStyle = {
   new: "bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300",

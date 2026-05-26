@@ -1,6 +1,6 @@
 import { delay, http, HttpResponse } from "msw";
 import { fakeLeads } from "@/mocks/fakedata";
-import { Lead } from "@/lib/types/lead";
+import { Lead } from "@/app/_features/leads/types";
 
 type IdParam = { id: string };
 let leadsDb = [...fakeLeads];

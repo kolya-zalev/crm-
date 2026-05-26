@@ -4,13 +4,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Lead } from "@/lib/types/lead";
+import { Lead } from "@/app/_features/leads/types";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   schemaLeadAdd,
   LeadAddFormValues,
-} from "@/components/leads-comp/LeadsFormEditor/LeadsFormEditor.validation";
+} from "@/app/_features/leads/validation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -47,20 +47,19 @@ export const LeadAddModal = ({
     <Dialog onOpenChange={onClose} open={open}>
       <DialogContent aria-describedby={undefined}>
         <DialogHeader>
-          <DialogTitle className="text-xl flex justify-center">Add New Lead</DialogTitle>
+          <DialogTitle className="text-xl flex justify-center">
+            Add New Lead
+          </DialogTitle>
         </DialogHeader>
 
         <form
           onSubmit={form.handleSubmit(formReset)}
           className="flex flex-col gap-3"
         >
-        
+          <label className="text-sm font-medium"> Enter name</label>
 
-            <label className="text-sm font-medium" > Enter name</label>
-            
-            <Input {...form.register("name")} placeholder="Name" />
-        
-         
+          <Input {...form.register("name")} placeholder="Name" />
+
           {form.formState.errors.name && (
             <p className="text-red-500 text-sm">
               {form.formState.errors.name.message}
@@ -85,20 +84,25 @@ export const LeadAddModal = ({
           )}
           <label>Status</label>
 
-          <select {...form.register("status")} className="border-2 border-gray-500 rounded-xl p-2 w-full">
+          <select
+            {...form.register("status")}
+            className="border-2 border-gray-500 rounded-xl p-2 w-full"
+          >
             <option value="new">New</option>
             <option value="contacted">Contacted</option>
             <option value="qualified">Qualified</option>
             <option value="won">Won</option>
             <option value="lost">Lost</option>
           </select>
-          
+
           {/* <Input {...form.register("tags")} placeholder="Tags" /> */}
           <label>Notes</label>
           <Input {...form.register("notes")} placeholder="Notes" />
           <label>Source</label>
           <Input {...form.register("source")} placeholder="Source" />
-          <Button type="submit" className="w-full  border rounded-xl p-4">Create</Button>
+          <Button type="submit" className="w-full  border rounded-xl p-4">
+            Create
+          </Button>
         </form>
       </DialogContent>
     </Dialog>
