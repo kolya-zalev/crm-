@@ -3,7 +3,7 @@
 import { MdDelete } from "react-icons/md";
 import { GrView } from "react-icons/gr";
 import { AiFillEdit } from "react-icons/ai";
-import { Skeleton } from "@/components/ui/skeleton"
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -32,7 +32,7 @@ export default function LeadsTableComponent({
   onView,
   onCloseView,
   onAddClick,
-  onEditClick
+  onEditClick,
 }: LeadsTableComponentProps) {
   return (
     <div className="flex flex-col gap-4">
@@ -54,27 +54,51 @@ export default function LeadsTableComponent({
         <Table className="text-base border-collapse">
           <TableHeader className="bg-gray-100">
             <TableRow>
-              <TableHead className="text-center font-semibold text-gray-700">Name</TableHead>
-              <TableHead className="text-center font-semibold text-gray-700">Email</TableHead>
-              <TableHead className="text-center font-semibold text-gray-700">Phone</TableHead>
-              <TableHead className="text-center font-semibold text-gray-700">Company</TableHead>
-              <TableHead className="text-center font-semibold text-gray-700">Status</TableHead>
-              <TableHead className="text-center font-semibold text-gray-700">Tags</TableHead>
-              <TableHead className="text-center font-semibold text-gray-700">Action</TableHead>
+              <TableHead className="text-center font-semibold text-gray-700">
+                Name
+              </TableHead>
+              <TableHead className="text-center font-semibold text-gray-700">
+                Email
+              </TableHead>
+              <TableHead className="text-center font-semibold text-gray-700">
+                Phone
+              </TableHead>
+              <TableHead className="text-center font-semibold text-gray-700">
+                Company
+              </TableHead>
+              <TableHead className="text-center font-semibold text-gray-700">
+                Status
+              </TableHead>
+              <TableHead className="text-center font-semibold text-gray-700">
+                Tags
+              </TableHead>
+              <TableHead className="text-center font-semibold text-gray-700">
+                Action
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody className="divide-y divide-gray-300 bg-white">
-            
-           
             {isLoading ? (
               Array.from({ length: 5 }).map((_, index) => (
                 <TableRow key={`skeleton-${index}`} className="animate-pulse">
-                  <TableCell className="p-3"><Skeleton className="h-4 w-24 mx-auto rounded" /></TableCell>
-                  <TableCell className="p-3"><Skeleton className="h-4 w-36 mx-auto rounded" /></TableCell>
-                  <TableCell className="p-3"><Skeleton className="h-4 w-28 mx-auto rounded" /></TableCell>
-                  <TableCell className="p-3"><Skeleton className="h-4 w-20 mx-auto rounded" /></TableCell>
-                  <TableCell className="p-3"><Skeleton className="h-6 w-16 mx-auto rounded-full" /></TableCell>
-                  <TableCell className="p-3"><Skeleton className="h-4 w-8 mx-auto rounded" /></TableCell>
+                  <TableCell className="p-3">
+                    <Skeleton className="h-4 w-24 mx-auto rounded" />
+                  </TableCell>
+                  <TableCell className="p-3">
+                    <Skeleton className="h-4 w-36 mx-auto rounded" />
+                  </TableCell>
+                  <TableCell className="p-3">
+                    <Skeleton className="h-4 w-28 mx-auto rounded" />
+                  </TableCell>
+                  <TableCell className="p-3">
+                    <Skeleton className="h-4 w-20 mx-auto rounded" />
+                  </TableCell>
+                  <TableCell className="p-3">
+                    <Skeleton className="h-6 w-16 mx-auto rounded-full" />
+                  </TableCell>
+                  <TableCell className="p-3">
+                    <Skeleton className="h-4 w-8 mx-auto rounded" />
+                  </TableCell>
                   <TableCell className="p-3">
                     <div className="flex flex-row gap-1 justify-center">
                       <Skeleton className="h-8 w-8 rounded-xl" />
@@ -83,19 +107,14 @@ export default function LeadsTableComponent({
                     </div>
                   </TableCell>
                 </TableRow>
-              )) 
-            ) : 
-            
-          
-            leads.length === 0 ? (
+              ))
+            ) : leads.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={7} className="text-center p-0">
                   <EmptyState />
                 </TableCell>
               </TableRow>
             ) : (
-              
-             
               leads.map((lead) => (
                 <TableRow
                   key={lead.id}
@@ -117,14 +136,19 @@ export default function LeadsTableComponent({
                     <LeadsStatusBadge status={lead.status} />
                   </TableCell>
                   <TableCell className="text-center text-gray-600">
-                    {lead.tags && lead.tags.length > 0 ? lead.tags.join(", ") : "—"}
+                    {lead.tags && lead.tags.length > 0
+                      ? lead.tags.join(", ")
+                      : "—"}
                   </TableCell>
                   <TableCell className="text-center">
                     <div className="flex flex-row gap-1 justify-center">
                       <Button
                         variant="ghost"
                         className="cursor-pointer rounded-xl hover:bg-gray-200 text-black h-8 w-8 p-0"
-                        onClick={() => onEditClick()}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onEditClick(lead);
+                        }}
                       >
                         <AiFillEdit size={16} />
                       </Button>

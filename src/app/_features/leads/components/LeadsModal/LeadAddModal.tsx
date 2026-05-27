@@ -28,7 +28,7 @@ interface LeadAddModalProps {
   onSubmit: (data: Omit<Lead, "id">) => void;
   onEdit: (id: string, data: LeadAddFormValues) => void;
   formStatus: FormStatusType;
-  lead?: Lead;
+  lead?: Lead | null;
 }
 
 export const LeadAddModal = ({
@@ -64,6 +64,7 @@ export const LeadAddModal = ({
       onEdit(lead?.id ?? "", data);
     }
   };
+
   const handleReset = () => {
     form.reset();
   };
@@ -179,6 +180,13 @@ export const LeadAddModal = ({
             className="w-full border rounded-xl p-4 mt-2 bg-blue-500 hover:bg-blue-600 text-white transition-colors cursor-pointer"
           >
             {isNew ? "Create" : "Update"}
+          </Button>
+          <Button
+            type="button"
+            onClick={handleReset}
+            className="w-full border rounded-xl p-4 mt-2 bg-blue-500 hover:bg-blue-600 text-white transition-colors cursor-pointer"
+          >
+            Reset
           </Button>
         </form>
       </DialogContent>

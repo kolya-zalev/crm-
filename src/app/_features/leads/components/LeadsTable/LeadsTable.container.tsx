@@ -7,13 +7,17 @@ import { LeadAddModal, FormStatus } from "../LeadsModal/LeadAddModal";
 import { useLeads } from "../../hooks/UseLeads";
 import { LeadAddFormValues } from "../../validation";
 
-
 export default function LeadsTableContainer() {
   const { leads, isLoading, createLead, deleteLead, updateLead } = useLeads();
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [isAddOpen, setIsAddOpen] = useState(false);
+  const [editingLead, setEditingLead] = useState<Lead | null>(null);
+
+  const formStatus = editingLead ? FormStatus.EDIT : FormStatus.NEW;
+
+  const isModal = isAddOpen || editingLead !== null;
 
   const filteredLeads = leads.filter((lead: any) => {
     const q = search.toLowerCase();
@@ -37,6 +41,7 @@ export default function LeadsTableContainer() {
 
   const handleUpdate = async (id: string, data: LeadAddFormValues) => {
     await updateLead(id, data);
+    setEditingLead(null);
   };
 
   const handleView = (id: string) => {
@@ -44,8 +49,11 @@ export default function LeadsTableContainer() {
     if (found) setSelectedLead(found);
   };
 
+  const handleCloseModal = () => {
+    setIsAddOpen(false);
+    setEditingLead(null);
+  };
  
-
   return (
     <>
       <LeadsTableComponent
@@ -60,14 +68,17 @@ export default function LeadsTableContainer() {
         onView={handleView}
         onCloseView={() => setSelectedLead(null)}
         onAddClick={() => setIsAddOpen(true)}
-        onEditClick={() => handleUpdate}
+        onEditClick={setEditingLead}
+       
       />
       <LeadAddModal
-        open={isAddOpen}
-        onClose={() => setIsAddOpen(false)}
+        key={editingLead?.id ?? "new"}
+        open={isModal}
+        onClose={handleCloseModal}
         onSubmit={handleCreate}
         onEdit={handleUpdate}
-        formStatus={FormStatus.NEW}
+        formStatus={formStatus}
+        lead={editingLead}
       />
     </>
   );
