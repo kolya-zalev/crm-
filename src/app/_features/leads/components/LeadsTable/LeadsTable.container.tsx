@@ -1,66 +1,54 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Lead } from "@/app/_features/leads/types";
-import LeadsTableComponent from "@/app/_features/leads/components/LeadsTable/LeadsTable.component";
-import { LeadAddModal } from "../LeadsModal/LeadAddModal";
+import LeadsTableComponent from "./LeadsTable.component";
+import { LeadAddModal, FormStatus } from "../LeadsModal/LeadAddModal";
+import { useLeads } from "../../hooks/UseLeads";
+import { LeadAddFormValues } from "../../validation";
+
 export default function LeadsTableContainer() {
-  const [leads, setLeads] = useState<Lead[]>([]);
+  const { leads, isLoading, createLead, deleteLead, updateLead } = useLeads();
   const [search, setSearch] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
   const [filter, setFilter] = useState("all");
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [isAddOpen, setIsAddOpen] = useState(false);
 
-  useEffect(() => {
-    fetch("/api/leads")
-      .then((r) => r.json())
-      .then((data) => {
-        setLeads(data);
-        setIsLoading(false);
-      })
-      .catch((err) => console.error(err));
-  }, []);
-
-  const filterLeads = leads.filter((lead) => {
+  const filteredLeads = leads.filter((lead: any) => {
+    const q = search.toLowerCase();
     const matchesSearch =
-      lead.name.toLowerCase().includes(search.toLowerCase()) ||
-      lead.email.toLowerCase().includes(search.toLowerCase()) ||
-      lead.company.toLowerCase().includes(search.toLowerCase());
+      lead.name.toLowerCase().includes(q) ||
+      lead.email.toLowerCase().includes(q) ||
+      lead.company.toLowerCase().includes(q);
     const matchesFilter =
       filter === "all" || filter === "" ? true : lead.status === filter;
-
     return matchesSearch && matchesFilter;
   });
 
-  const handleDelete = async (id: string) => {
-    await fetch(`/api/leads/${id}`, { method: "DELETE" });
-    setLeads(leads.filter((item) => item.id !== id));
-  };
-  const handleView = (id: string) => {
-    const found = leads.find((item) => item.id === id);
-    if (found) {
-      setSelectedLead(found);
-    }
-  };
-
   const handleCreate = async (data: Omit<Lead, "id">) => {
-    const response = await fetch("/api/leads/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    const newLead = await response.json();
-    setLeads((prev) => [...prev, newLead]);
+    await createLead(data);
     setIsAddOpen(false);
   };
+
+  const handleDelete = async (id: string) => {
+    await deleteLead(id);
+  };
+
+  const handleUpdate = async (id: string, data: LeadAddFormValues) => {
+    await updateLead(id, data);
+  };
+
+  const handleView = (id: string) => {
+    const found = leads.find((item) => item.id === id);
+    if (found) setSelectedLead(found);
+  };
+
+  if (isLoading) return <div>Loading...</div>;
+
   return (
     <>
       <LeadsTableComponent
-        leads={filterLeads}
+        leads={filteredLeads}
         search={search}
         filter={filter}
         selectedLead={selectedLead}
@@ -71,11 +59,14 @@ export default function LeadsTableContainer() {
         onView={handleView}
         onCloseView={() => setSelectedLead(null)}
         onAddClick={() => setIsAddOpen(true)}
+        onEditClick={() => handleUpdate}
       />
       <LeadAddModal
         open={isAddOpen}
         onClose={() => setIsAddOpen(false)}
         onSubmit={handleCreate}
+        onEdit={handleUpdate}
+        formStatus={FormStatus.NEW}
       />
     </>
   );

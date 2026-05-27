@@ -20,6 +20,7 @@ import { LeadsSearch } from "@/app/_features/leads/components/LeadsSearch";
 import { LeadsTableComponentProps } from "./LeadsTable.types";
 import { LeadsStatusBadge } from "../LeadsStatusBadge";
 import { EmptyState } from "../EmptyState";
+
 export default function LeadsTableComponent({
   leads,
   search,
@@ -32,6 +33,7 @@ export default function LeadsTableComponent({
   onView,
   onCloseView,
   onAddClick,
+  onEditClick
 }: LeadsTableComponentProps) {
   return (
     <div className="flex flex-col gap-4">

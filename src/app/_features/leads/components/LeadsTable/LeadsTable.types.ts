@@ -12,4 +12,5 @@ export interface LeadsTableComponentProps {
   onView: (id: string) => void;
   onCloseView: () => void;
   onAddClick: () => void;
+  onEditClick: () => void
 }
