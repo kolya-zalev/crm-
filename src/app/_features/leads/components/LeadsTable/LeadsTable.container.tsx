@@ -7,6 +7,7 @@ import { LeadAddModal, FormStatus } from "../LeadsModal/LeadAddModal";
 import { useLeads } from "../../hooks/UseLeads";
 import { LeadAddFormValues } from "../../validation";
 
+
 export default function LeadsTableContainer() {
   const { leads, isLoading, createLead, deleteLead, updateLead } = useLeads();
   const [search, setSearch] = useState("");
@@ -43,7 +44,7 @@ export default function LeadsTableContainer() {
     if (found) setSelectedLead(found);
   };
 
-  if (isLoading) return <div>Loading...</div>;
+ 
 
   return (
     <>
