@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
@@ -5,6 +6,9 @@ import { cn } from "@/lib/utils";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/layout/AppSidebar";
 import Navbar from "@/components/layout/Navbar";
+import { MSWProvider } from "@/mocks/MswProvider";
+
+
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -31,6 +35,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html
       lang="en"
@@ -44,6 +49,7 @@ export default function RootLayout({
       )}
     >
       <body className="h-full flex flex-col overflow-hidden">
+        <MSWProvider>
         <Navbar />
         <div className="flex flex-1 overflow-hidden">
           <SidebarProvider>
@@ -51,6 +57,7 @@ export default function RootLayout({
             <main className="flex-1 overflow-y-auto p-6">{children}</main>
           </SidebarProvider>
         </div>
+        </MSWProvider>
       </body>
     </html>
   );
