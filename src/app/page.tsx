@@ -34,7 +34,7 @@ export default function Home() {
             </CardHeader>
             <CardFooter>
               <Link href={item.href} className="w-full">
-                <Button className="w-full bg-purple-8c00 rounded-2xl hover:animate-bounce  hover:scale-110 cursor-pointer">
+                <Button className="w-full bg-purple-800 rounded-2xl hover:animate-bounce  hover:scale-110 cursor-pointer">
                   Open
                 </Button>
               </Link>
