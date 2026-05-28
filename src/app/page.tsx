@@ -12,7 +12,7 @@ import Link from "next/link";
 import { sidebarItems } from "@/utils/utils";
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+    <div className="flex flex-col flex-1 items-center justify-center  font-sans dark:bg-black">
       <h1 className="font-mono mx-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 fill-mode-forwards text-4xl font-bold">
         Welcome to CRM
       </h1>
@@ -25,7 +25,7 @@ export default function Home() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl mt-6 px-5">
         {sidebarItems.map((item) => (
           <Card
-            className="relative w-full pt-0 font-mono mx-auto animate-in fade-in slide-in-from-bottom-8 duration-2000 fill-mode-forwards text-4xl font-bold"
+            className="relative w-full pt-0 font-mono mx-auto animate-in fade-in slide-in-from-bottom-8 duration-2000 fill-mode-forwards text-4xl font-bold rounded-xl"
             key={item.id}
           >
             <CardHeader>
@@ -34,7 +34,7 @@ export default function Home() {
             </CardHeader>
             <CardFooter>
               <Link href={item.href} className="w-full">
-                <Button className="w-full bg-amber-600 rounded-2xl">
+                <Button className="w-full bg-purple-8c00 rounded-2xl hover:animate-bounce  hover:scale-110 cursor-pointer">
                   Open
                 </Button>
               </Link>

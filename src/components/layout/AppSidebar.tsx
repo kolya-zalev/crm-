@@ -44,7 +44,7 @@ export function AppSidebar() {
                   isActive={active}
                   className={cn(
                     "relative w-full h-11 justify-start gap-4 px-4 text-base font-medium rounded-xl text-white/80 transition-all duration-200 ease-in-out",
-                    "hover:bg-white/10 hover:text-white data-[active=true]:hover:bg-white/15 rounded-2xl ",
+                    "hover:bg-white/10 hover:text-white data-[active=true]:hover:bg-white/15 rounded-2xl hover:scale-110",
                     active && [
                       "bg-white/15 text-white font-semibold shadow-sm",
                       "before:absolute before:left-0 before:top-3 before:bottom-3 before:w-1 before:rounded-r-full before:bg-white before:animate-ping",

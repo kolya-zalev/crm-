@@ -17,7 +17,7 @@ export default function Navbar() {
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
-              <Link href={brand.href} className="text-gray-700  ">
+              <Link href={brand.href} className="text-gray-700 hover:scale-110  ">
                 {brand.label}
               </Link>
             </NavigationMenuLink>
