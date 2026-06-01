@@ -3,18 +3,29 @@ import { fakeLeads } from "@/mocks/fakedata";
 import { Lead } from "@/app/_features/leads/types";
 
 type IdParam = { id: string };
-let leadsDb = [...fakeLeads];
+function getLeads(): Lead[] {
+  const data = localStorage.getItem('leads')
+  if(!data){
+    localStorage.setItem('leads', JSON.stringify(fakeLeads))
+    return [...fakeLeads]
+  }
+  return JSON.parse(data)
+}
+
+function saveLeads(leads: Lead[]): void {
+  localStorage.setItem('leads', JSON.stringify(leads))
+}
 
 export const handlers = [
   http.get("/api/leads", async () => {
     await delay(1000);
-    return HttpResponse.json(leadsDb);
+    return HttpResponse.json(getLeads());
   }),
 
   http.get<IdParam>("/api/leads/:id", async ({ params }) => {
     await delay(1000);
     const { id } = params;
-    const foundLead = leadsDb.find((lead) => lead.id === id);
+    const foundLead = getLeads().find((lead) => lead.id === id);
     if (!foundLead) {
       return HttpResponse.json(
         {
@@ -33,7 +44,9 @@ export const handlers = [
     await delay(1000);
     const body = (await request.json()) as Omit<Lead, "id">;
     const newLead: Lead = { ...body, id: crypto.randomUUID() };
-    leadsDb.push(newLead);
+    const leads = getLeads()
+    leads.push(newLead)
+    saveLeads(leads)
     return HttpResponse.json(newLead, { status: 201 });
   }),
 
@@ -41,7 +54,8 @@ export const handlers = [
     await delay(1000);
     const { id } = params;
     const body = (await request.json()) as Partial<Omit<Lead, "id">>;
-    const index = leadsDb.findIndex((l) => l.id === id);
+    const leads = getLeads()
+    const index = leads.findIndex((l) => l.id === id);
     if (index === -1) {
       return HttpResponse.json(
         {
@@ -53,15 +67,17 @@ export const handlers = [
         { status: 404 },
       );
     }
-    const updated = { ...leadsDb[index], ...body, id: leadsDb[index].id };
-    leadsDb[index] = updated;
+    const updated = { ...leads[index], ...body, id: leads[index].id };
+    leads[index] = updated;
+    saveLeads(leads)
     return HttpResponse.json(updated);
   }),
 
   http.delete<IdParam>("/api/leads/:id", async ({ params }) => {
     await delay(1);
     const { id } = params;
-    const index = leadsDb.findIndex((l) => l.id === id);
+    const leads = getLeads()
+    const index = leads.findIndex((l) => l.id === id);
     if (index === -1) {
       return HttpResponse.json(
         {
@@ -74,7 +90,8 @@ export const handlers = [
       );
     }
 
-    leadsDb.splice(index, 1);
+    leads.splice(index, 1);
+    saveLeads(leads)
     return new HttpResponse(null, { status: 204 });
   }),
 ];
