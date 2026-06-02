@@ -1,6 +1,6 @@
 import { delay, http, HttpResponse } from "msw";
 import { fakeLeads } from "@/mocks/fakedata";
-import { Lead } from "@/app/_features/leads/types";
+import { Lead } from "@/hooks/types";
 
 type IdParam = { id: string };
 function getLeads(): Lead[] {

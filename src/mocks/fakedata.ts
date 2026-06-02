@@ -1,4 +1,4 @@
-import { Lead } from "@/app/_features/leads/types";
+import { Lead } from "@/hooks/types"
 
 export const fakeLeads: Lead[] = [
   {
