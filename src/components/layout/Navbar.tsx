@@ -6,37 +6,31 @@ import {
   NavigationMenuList,
   NavigationMenuItem,
   NavigationMenuLink,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
-import { homeRoute } from "@/config/locate";
+import { brand, authRoutes } from "@/utils/utils";
 
 export default function Navbar() {
   return (
     <header className="h-14 border-2 border-gray-400   flex items-center justify-between px-6">
       <NavigationMenu className="max-w-none ">
         <NavigationMenuList>
-          {homeRoute.map((item) => (
-            <NavigationMenuItem key={item.href}>
-              <NavigationMenuLink
-                asChild
-                className={navigationMenuTriggerStyle()}
-              >
-                <Link href={item.href} className="text-gray-700  ">
-                  {item.label}
-                </Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-          ))}
+          <NavigationMenuItem>
+            <NavigationMenuLink asChild>
+              <Link href={brand.href} className="text-gray-700 hover:scale-110  ">
+                {brand.label}
+              </Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
 
       <div className="flex items-center gap-2">
         <Button variant="ghost" asChild className="text-gray-700  ">
-          <Link href="/login">Login</Link>
+          <Link href={authRoutes.login.href}>{authRoutes.login.label}</Link>
         </Button>
         <Button asChild>
-          <Link href="/signup">Sign up</Link>
+          <Link href={authRoutes.signup.href}>{authRoutes.signup.label}</Link>
         </Button>
       </div>
     </header>
