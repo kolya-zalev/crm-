@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Lead } from "@/app/_features/leads/types";
+import { Lead } from "@/hooks/types";
 
 export function useLeads() {
   const [leads, setLeads] = useState<Lead[]>([]);

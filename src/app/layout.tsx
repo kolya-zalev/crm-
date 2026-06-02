@@ -8,7 +8,7 @@ import { AppSidebar } from "@/components/layout/AppSidebar";
 import Navbar from "@/components/layout/Navbar";
 import { MSWProvider } from "@/mocks/MswProvider";
 import { Toaster } from "sonner";
-import { ThemeProvider } from "@/components/ThemeProvider/theme-provider";
+import { ThemeProvider } from "@/components/ThemeProvider/ThemeProvider";
 
 
 const jetbrainsMono = JetBrains_Mono({

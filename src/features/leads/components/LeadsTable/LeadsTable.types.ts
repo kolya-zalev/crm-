@@ -1,4 +1,4 @@
-import { Lead } from "@/app/_features/leads/types";
+import { Lead } from "@/hooks/types";
 
 export interface LeadsTableComponentProps {
   leads: Lead[];
@@ -13,5 +13,4 @@ export interface LeadsTableComponentProps {
   onCloseView: () => void;
   onAddClick: () => void;
   onEditClick: (lead: Lead) => void;
-
 }

@@ -5,7 +5,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { Lead } from "@/app/_features/leads/types";
+import { Lead } from "@/hooks/types";
 
 interface LeadViewModalProps {
   lead: Lead | null;

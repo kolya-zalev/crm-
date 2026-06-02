@@ -8,7 +8,7 @@ interface WelcomeBannerProps {
 
 export function WelcomeBanner({ newLeadsCount }: WelcomeBannerProps) {
   return (
-    <Card className="w-full bg-gradient-to-r from-blue-100 to-indigo-100 animate-in fade-in slide-in-from-bottom-4 duration-2000  fill-mode-forwards  shadow-sm hover:shadow-xl transition-shadow shadow-red-200">
+    <Card className="w-full bg-linear-to-r from-blue-100 to-indigo-100 animate-in fade-in slide-in-from-bottom-4 duration-2000  fill-mode-forwards  shadow-sm hover:shadow-xl transition-shadow shadow-red-200">
       <CardHeader>
         <CardTitle className="text-xl font-semibold text-center">
           Welcome back!

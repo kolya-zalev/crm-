@@ -1,4 +1,3 @@
-
 import {
   Dialog,
   DialogContent,
@@ -6,13 +5,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
-import { Lead } from "@/app/_features/leads/types";
+import { Lead } from "@/hooks/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  schemaLeadAdd,
-  LeadAddFormValues,
-} from "@/app/_features/leads/validation";
+import { schemaLeadAdd, LeadAddFormValues } from "@/hooks/validation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 

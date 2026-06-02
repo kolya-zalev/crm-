@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Lead } from "@/app/_features/leads/types";
+import { Lead } from "@/hooks/types";
 import LeadsTableComponent from "./LeadsTable.component";
 import { LeadAddModal, FormStatus } from "../LeadsModal/LeadAddModal";
-import { useLeads } from "../../hooks/UseLeads";
-import { LeadAddFormValues } from "../../validation";
+import { useLeads } from "@/features/hooks/UseLeads";
+import { LeadAddFormValues } from "@/hooks/validation";
 
 export default function LeadsTableContainer() {
   const { leads, isLoading, createLead, deleteLead, updateLead } = useLeads();
@@ -53,7 +53,7 @@ export default function LeadsTableContainer() {
     setIsAddOpen(false);
     setEditingLead(null);
   };
- 
+
   return (
     <>
       <LeadsTableComponent
@@ -69,7 +69,6 @@ export default function LeadsTableContainer() {
         onCloseView={() => setSelectedLead(null)}
         onAddClick={() => setIsAddOpen(true)}
         onEditClick={setEditingLead}
-       
       />
       <LeadAddModal
         key={editingLead?.id ?? "new"}

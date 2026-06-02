@@ -12,10 +12,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { LeadViewModal } from "@/app/_features/leads/components/LeadsModal/LeadViewModal";
-import { LeadsFilter } from "@/app/_features/leads/components/LeadsFilter";
+import { LeadViewModal } from "@/features/leads/components/LeadsModal/LeadViewModal";
+import { LeadsFilter } from "@/features/leads/components/LeadsFilter";
 import { Button } from "@/components/ui/button";
-import { LeadsSearch } from "@/app/_features/leads/components/LeadsSearch";
+import { LeadsSearch } from "@/features/leads/components/LeadsSearch";
 import { LeadsTableComponentProps } from "./LeadsTable.types";
 import { LeadsStatusBadge } from "../LeadsStatusBadge";
 import { EmptyState } from "../EmptyState";

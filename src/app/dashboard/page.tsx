@@ -1,11 +1,11 @@
 "use client";
 
-import { useLeads } from "../_features/leads/hooks/UseLeads";
+import { useLeads } from "@/features/hooks/UseLeads";
 import { Spinner } from "@/components/ui/spinner";
-import { StatCard } from "../_features/leads/components/Dashboard/StatCard";
-import LeadsByStatus from "../_features/leads/components/Dashboard/LeadsByStatus";
-import { RecentLeads } from "../_features/leads/components/Dashboard/RecentLeads";
-import { WelcomeBanner } from "../_features/leads/components/Dashboard/WelcomeBanner";
+import { StatCard } from "@/features/dashboards/components/StatCard";
+import { LeadsByStatus } from "@/features/dashboards/components/LeadsByStatus";
+import { RecentLeads } from "@/features/dashboards/components/RecentLeads";
+import { WelcomeBanner } from "@/features/dashboards/components/WelcomeBanner";
 
 export default function DashboardPage() {
   const { leads, isLoading } = useLeads();
