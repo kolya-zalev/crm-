@@ -8,7 +8,7 @@ import {
   NavigationMenuLink,
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
-import { brand, authRoutes } from "@/utils/utils";
+import { brand } from "@/utils/utils";
 
 export default function Navbar() {
   return (
@@ -25,14 +25,7 @@ export default function Navbar() {
         </NavigationMenuList>
       </NavigationMenu>
 
-      <div className="flex items-center gap-2">
-        <Button variant="ghost" asChild className="text-gray-700  ">
-          <Link href={authRoutes.login.href}>{authRoutes.login.label}</Link>
-        </Button>
-        <Button asChild>
-          <Link href={authRoutes.signup.href}>{authRoutes.signup.label}</Link>
-        </Button>
-      </div>
+      
     </header>
   );
 }

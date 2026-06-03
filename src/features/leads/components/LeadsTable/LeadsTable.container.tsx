@@ -11,7 +11,6 @@ export default function LeadsTableContainer() {
   const { leads, isLoading, createLead, deleteLead, updateLead } = useLeads();
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
-  const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [editingLead, setEditingLead] = useState<Lead | null>(null);
 
@@ -44,10 +43,6 @@ export default function LeadsTableContainer() {
     setEditingLead(null);
   };
 
-  const handleView = (id: string) => {
-    const found = leads.find((item) => item.id === id);
-    if (found) setSelectedLead(found);
-  };
 
   const handleCloseModal = () => {
     setIsAddOpen(false);
@@ -60,13 +55,10 @@ export default function LeadsTableContainer() {
         leads={filteredLeads}
         search={search}
         filter={filter}
-        selectedLead={selectedLead}
         isLoading={isLoading}
         onSearchChange={setSearch}
         onFilterChange={setFilter}
         onDelete={handleDelete}
-        onView={handleView}
-        onCloseView={() => setSelectedLead(null)}
         onAddClick={() => setIsAddOpen(true)}
         onEditClick={setEditingLead}
       />
