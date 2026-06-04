@@ -1,5 +1,5 @@
 "use client";
-
+import { NoteSection } from "@/features/leads/components/NotesSection";
 import { useLeads } from "@/features/hooks/UseLeads";
 import { use, useState } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -30,6 +30,7 @@ import {
   LeadAddModal,
   FormStatus,
 } from "@/features/leads/components/LeadsModal/LeadAddModal";
+import { ActivityTimeline } from "@/features/leads/components/ActivityTimeline";
 
 export default function LeadDetailPage({
   params,
@@ -65,14 +66,14 @@ export default function LeadDetailPage({
           <Link href="/lead">
             <Button
               variant="ghost"
-              className="text-muted-foreground hover:text-foreground p-0 h-auto font-normal"
+              className="text-muted-foreground hover:text-foreground p-0 h-auto font-normal cursor-pointer"
             >
               ← Back to Leads
             </Button>
           </Link>
           <Button
             variant="ghost"
-            className="text-muted-foreground hover:text-foreground p-0 h-auto font-normal"
+            className="text-muted-foreground hover:text-foreground p-0 h-auto font-normal cursor-pointer"
             onClick={() => setIsEditOpen(true)}
           >
             Edit
@@ -193,6 +194,12 @@ export default function LeadDetailPage({
           </div>
         </CardContent>
       </Card>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 hap-6 mt-6">
+        <NoteSection leadId={leadId}/>
+        <ActivityTimeline leadId={leadId}/>
+
+      </div>
 
       <LeadAddModal
         key={lead.id}

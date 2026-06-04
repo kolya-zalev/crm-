@@ -1,4 +1,4 @@
-import { Lead } from "@/hooks/types"
+import { Lead, Note, Activity } from "@/hooks/types";
 
 export const fakeLeads: Lead[] = [
   {
@@ -53,5 +53,53 @@ export const fakeLeads: Lead[] = [
     tags: ["1"],
     notes: "yes",
     source: "no",
+  },
+];
+
+export const fakeNotes: Note[] = [
+  {
+    id: "note-1",
+    leadId: "1",
+    text: "Initial contact via LinkedIn",
+    createdAt: new Date(Date.now() - 86400000 * 3).toISOString(),
+    updatedAt: new Date(Date.now() - 86400000 * 3).toISOString(),
+  },
+  {
+    id: "note-2",
+    leadId: "2",
+    text: "Sent proposal email",
+    createdAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+    updatedAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+  },
+  {
+    id: "note-3",
+    leadId: "3",
+    text: "Replied, interested",
+    createdAt: new Date(Date.now() - 86400000 * 1).toISOString(),
+    updatedAt: new Date(Date.now() - 86400000 * 1).toISOString(),
+  },
+];
+
+export const fakeActivities: Activity[] = [
+  {
+    id: "activity-1",
+    leadId: "1",
+    type: "lead_created",
+    description: "Lead was created",
+    createdAt: new Date(Date.now() - 86400000 * 3).toISOString(),
+  },
+  {
+    id: "activity-2",
+    leadId: "2",
+    type: "status_changed",
+    description: "new → contacted",
+    createdAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+  },
+  {
+    id: "activity-3",
+    leadId: "3",
+    type: "note_added",
+    description: "Initial contact",
+    createdAt: new Date(Date.now() - 86400000 * 1).toISOString(),
   },
 ];

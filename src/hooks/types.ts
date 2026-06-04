@@ -10,4 +10,23 @@ export type Lead = {
   source?: string;
 };
 
+export type Note = {
+  id: string;
+  leadId: string;
+  text: string;
+  createdAt: string;
+  updatedAt: string;
+};
 
+export type Activity = {
+  id: string;
+  leadId: string;
+  type:
+    | "lead_created"
+    | "status_changed"
+    | "note_added"
+    | "note_deleted"
+    | "lead_updated";
+  description: string;
+  createdAt: string;
+};
