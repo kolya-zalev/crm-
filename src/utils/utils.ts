@@ -24,10 +24,7 @@ export const sidebarItems: NavItem[] = [
   { id: "settings", href: "/settings", label: "Settings", icon: LuSettings, description: 'Configure your workspace, manage team access, and customize preferences'},
 ];
 
-export const authRoutes = {
-  login: { href: "/login", label: "Log in" },
-  signup: { href: "/signup", label: "Sign up" },
-} as const;
+
 
 export function isNavItemActive(pathname: string, href: string): boolean {
   if (href === "/") {

@@ -12,13 +12,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { LeadViewModal } from "@/features/leads/components/LeadsModal/LeadViewModal";
 import { LeadsFilter } from "@/features/leads/components/LeadsFilter";
 import { Button } from "@/components/ui/button";
 import { LeadsSearch } from "@/features/leads/components/LeadsSearch";
 import { LeadsTableComponentProps } from "./LeadsTable.types";
 import { LeadsStatusBadge } from "../LeadsStatusBadge";
 import { EmptyState } from "../EmptyState";
+import Link from "next/link";
 
 export default function LeadsTableComponent({
   leads,
@@ -28,9 +28,6 @@ export default function LeadsTableComponent({
   onSearchChange,
   onFilterChange,
   onDelete,
-  selectedLead,
-  onView,
-  onCloseView,
   onAddClick,
   onEditClick,
 }: LeadsTableComponentProps) {
@@ -148,18 +145,19 @@ export default function LeadsTableComponent({
                         onClick={(e) => {
                           e.stopPropagation();
                           onEditClick(lead);
-                        
                         }}
                       >
                         <AiFillEdit size={16} />
                       </Button>
-                      <Button
-                        variant="ghost"
-                        className="cursor-pointer rounded-xl hover:bg-gray-200 text-black h-8 w-8 p-0"
-                        onClick={() => onView(lead.id)}
-                      >
-                        <GrView size={16} />
-                      </Button>
+                      <Link href={`/lead/${lead.id}`}>
+                        <Button
+                          variant="ghost"
+                          className="cursor-pointer rounded-xl hover:bg-gray-200 text-black h-8 w-8 p-0"
+                      
+                        >
+                          <GrView size={16} />
+                        </Button>
+                      </Link>
                       <Button
                         variant="ghost"
                         className="cursor-pointer rounded-xl hover:bg-red-100 hover:text-red-600 text-black h-8 w-8 p-0"
@@ -178,7 +176,6 @@ export default function LeadsTableComponent({
           </TableBody>
         </Table>
       </div>
-      <LeadViewModal lead={selectedLead} onClose={onCloseView} />
     </div>
   );
 }
