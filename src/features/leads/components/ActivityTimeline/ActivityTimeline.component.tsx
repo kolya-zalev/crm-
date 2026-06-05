@@ -33,7 +33,7 @@ export function ActivityTimelineComponent({
             <p>No activity yet</p>
           ) : (
             activities.map((activity) => {
-              const icon = activityIcons[activity.type] || '"📌"';
+              const icon = activityIcons[activity.type];
               return (
                 <div key={activity.id} className="flex items-start gap-3 py-3">
                   <span className="text-lg">{icon}</span>

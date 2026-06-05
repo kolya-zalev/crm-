@@ -1,10 +1,17 @@
 import { delay, http, HttpResponse } from "msw";
-import { fakeLeads, fakeNotes, fakeActivities } from "@/mocks/fakedata";
-import { Lead, Note, Activity } from "@/hooks/types";
+import {
+  fakeLeads,
+  fakeNotes,
+  fakeActivities,
+  fakeTasks,
+} from "@/mocks/fakedata";
+import { Lead, Note, Activity, Task } from "@/hooks/types";
 
 type IdParam = { id: string };
 type NoteIdParam = { id: string; noteId: string };
+type TaskIdParam = { taskId: string };
 
+//SAVE
 function getLeads(): Lead[] {
   const data = localStorage.getItem("leads");
   if (!data) {
@@ -44,12 +51,26 @@ function saveActivities(activity: Activity[]): void {
   localStorage.setItem("activity", JSON.stringify(activity));
 }
 
+function getTasks(): Task[] {
+  const data = localStorage.getItem("tasks");
+  if (!data) {
+    localStorage.setItem("tasks", JSON.stringify(fakeTasks));
+    return [...fakeTasks];
+  }
+  return JSON.parse(data);
+}
+
+function saveTasks(task: Task[]): void {
+  localStorage.setItem("tasks", JSON.stringify(task));
+}
+
 export const handlers = [
   http.get("/api/leads", async () => {
     await delay(1000);
     return HttpResponse.json(getLeads());
   }),
 
+  //GET
   http.get<IdParam>("/api/leads/:id", async ({ params }) => {
     await delay(1000);
     const { id } = params;
@@ -81,7 +102,19 @@ export const handlers = [
     );
     return HttpResponse.json(foundActivity);
   }),
+  http.get("/api/tasks", async () => {
+    await delay(1000);
+    return HttpResponse.json(getTasks());
+  }),
+  http.get<IdParam>("/api/leads/:id/tasks", async ({ params }) => {
+    await delay(1000);
+    const { id } = params;
+    const foundTask = getTasks().filter((t) => t.leadId === id);
+    return HttpResponse.json(foundTask);
+  }),
+  //
 
+  //POST
   http.post("/api/leads", async ({ request }) => {
     await delay(1000);
     const body = (await request.json()) as Omit<Lead, "id">;
@@ -129,6 +162,30 @@ export const handlers = [
     return HttpResponse.json(newNote, { status: 201 });
   }),
 
+  http.post<IdParam>("/api/leads/:id/tasks", async ({ params, request }) => {
+    await delay(1000);
+    const { id } = params;
+    const body = (await request.json()) as {
+      title: string;
+      description: string;
+      priority: any;
+      dueDate: string;
+    };
+    const newTask: Task = {
+      ...body,
+      id: crypto.randomUUID(),
+      leadId: id,
+      status: "pending",
+      createdAt: new Date().toISOString(),
+    };
+    const tasks = getTasks();
+    tasks.push(newTask);
+    saveTasks(tasks);
+    return HttpResponse.json(newTask, { status: 201 });
+  }),
+  //
+
+  //PUT
   http.put<IdParam>("/api/leads/:id", async ({ request, params }) => {
     await delay(1000);
     const { id } = params;
@@ -174,6 +231,31 @@ export const handlers = [
     return HttpResponse.json(updated);
   }),
 
+  http.put<TaskIdParam>("/api/tasks/:taskId", async ({ request, params }) => {
+    await delay(1000);
+    const { taskId } = params;
+    const body = (await request.json()) as Partial<Omit<Task, "id">>;
+    const tasks = getTasks();
+    const index = tasks.findIndex((t) => t.id === taskId);
+    if (index === -1) {
+      return HttpResponse.json(
+        {
+          error: {
+            message: "Task not found",
+            code: "NOT_FOUND",
+          },
+        },
+        { status: 404 },
+      );
+    }
+    const updated = { ...tasks[index], ...body, id: tasks[index].id };
+    tasks[index] = updated;
+    saveTasks(tasks);
+    return HttpResponse.json(updated);
+  }),
+  //
+
+  //DELETE
   http.delete<IdParam>("/api/leads/:id", async ({ params }) => {
     await delay(1);
     const { id } = params;
@@ -195,6 +277,29 @@ export const handlers = [
     saveLeads(leads);
     return new HttpResponse(null, { status: 204 });
   }),
+
+  http.delete<TaskIdParam>("/api/tasks/:taskId", async ({ params }) => {
+    await delay(1);
+    const { taskId } = params;
+    const tasks = getTasks();
+    const index = tasks.findIndex((t) => t.id === taskId);
+    if (index === -1) {
+      return HttpResponse.json(
+        {
+          error: {
+            message: "Task not found",
+            code: "NOT_FOUND",
+          },
+        },
+        { status: 404 },
+      );
+    }
+
+    tasks.splice(index, 1);
+    saveTasks(tasks);
+    return new HttpResponse(null, { status: 204 });
+  }),
+
   http.delete<NoteIdParam>(
     "/api/leads/:id/notes/:noteId",
     async ({ params }) => {
@@ -229,3 +334,4 @@ export const handlers = [
     },
   ),
 ];
+//

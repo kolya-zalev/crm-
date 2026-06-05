@@ -31,6 +31,7 @@ import {
   FormStatus,
 } from "@/features/leads/components/LeadsModal/LeadAddModal";
 import { ActivityTimeline } from "@/features/leads/components/ActivityTimeline";
+import { TasksSection } from "@/features/leads/components/TasksSection";
 
 export default function LeadDetailPage({
   params,
@@ -198,7 +199,9 @@ export default function LeadDetailPage({
       <div className="grid grid-cols-1 lg:grid-cols-2 hap-6 mt-6">
         <NoteSection leadId={leadId}/>
         <ActivityTimeline leadId={leadId}/>
-
+      </div>
+      <div className="mt-6">
+        <TasksSection leadId={leadId}/>
       </div>
 
       <LeadAddModal
