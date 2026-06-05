@@ -29,7 +29,7 @@ export function NotesSectionComponent({
             onChange={(e) => setText(e.target.value)}
             placeholder="Add a note..."
           />
-          <Button onClick={handleAdd} className="cursor-pointer">Add</Button>
+          <Button onClick={handleAdd}  className="rounded-xl bg-blue-500 hover:bg-blue-600 text-white shadow-md cursor-pointer transition-colors">Add</Button>
         </div>
 
         <div className="flex flex-col divide-y mt-4">
