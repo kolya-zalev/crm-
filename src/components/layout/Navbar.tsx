@@ -7,8 +7,7 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
 } from "@/components/ui/navigation-menu";
-import { Button } from "@/components/ui/button";
-import { brand } from "@/utils/utils";
+import { brand} from "@/utils/utils";
 
 export default function Navbar() {
   return (
@@ -26,6 +25,7 @@ export default function Navbar() {
       </NavigationMenu>
 
       
+
     </header>
   );
 }
