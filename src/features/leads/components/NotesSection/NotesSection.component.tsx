@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Trash } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
 
 export function NotesSectionComponent({
   notes,
@@ -17,6 +18,13 @@ export function NotesSectionComponent({
     onAdd(text);
     setText("");
   };
+
+   if (isLoading)
+    return (
+      <div className="flex items-center justify-center h-full w-full">
+        <Spinner className="size-8" />
+      </div>
+    );
   return (
     <Card>
       <CardHeader>

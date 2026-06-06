@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ActivityTimelineComponentProps } from "./ActivityTimeline.types";
 import { Star, RefreshCw, NotebookPen, Trash, Pencil } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
 
 
 const activityIcons: Record<string, React.ReactNode> = {
@@ -14,13 +15,12 @@ export function ActivityTimelineComponent({
   activities,
   isLoading,
 }: ActivityTimelineComponentProps) {
-  if (isLoading) {
+   if (isLoading)
     return (
-      <div>
-        <h1>Loading...</h1>
+      <div className="flex items-center justify-center h-full w-full">
+        <Spinner className="size-8" />
       </div>
     );
-  }
 
   return (
     <Card>

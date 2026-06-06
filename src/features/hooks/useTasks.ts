@@ -1,19 +1,21 @@
 import { useState, useEffect } from "react";
 import { Task } from "@/hooks/types";
 
-export function useTasks(leadId: string) {
+export function useTasks(leadId?: string) {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    fetch(`/api/leads/${leadId}/tasks`)
-      .then((r) => r.json())
-      .then((data) => {
-        setTasks(data);
-      })
-      .catch((err) => console.error(err))
-      .finally(() => setIsLoading(false));
-  }, [leadId]);
+  const url = leadId
+  ? `/api/leads/${leadId}/tasks`
+  : `/api/tasks`;
+
+useEffect(() => {
+  fetch(url)
+    .then(r => r.json())
+    .then(data => setTasks(data))
+    .catch(err => console.error(err))
+    .finally(() => setIsLoading(false));
+}, [leadId]);
 
   const createTask = async (data: {
     title: string;
