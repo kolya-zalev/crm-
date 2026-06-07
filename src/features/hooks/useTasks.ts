@@ -4,10 +4,10 @@ import { Task } from "@/hooks/types";
 export function useTasks(leadId?: string) {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const BASE = process.env.NEXT_PUBLIC_API_URL ?? '';
   const url = leadId
-  ? `/api/leads/${leadId}/tasks`
-  : `/api/tasks`;
+  ? `${BASE}/api/leads/${leadId}/tasks`
+  : `${BASE}/api/tasks`;
 
 useEffect(() => {
   fetch(url)
@@ -23,7 +23,7 @@ useEffect(() => {
     priority: string;
     dueDate: string;
   }) => {
-    const response = await fetch(`/api/leads/${leadId}/tasks`, {
+    const response = await fetch(`${BASE}/api/leads/${leadId}/tasks`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -34,7 +34,7 @@ useEffect(() => {
   };
 
   const updateTask = async (taskId: string, data: Partial<Task>) => {
-    const response = await fetch(`/api/tasks/${taskId}`, {
+    const response = await fetch(`${BASE}/api/tasks/${taskId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -44,7 +44,7 @@ useEffect(() => {
   };
 
   const deleteTask = async (taskId: string) => {
-    await fetch(`/api/tasks/${taskId}`, { method: "DELETE" });
+    await fetch(`${BASE}/api/tasks/${taskId}`, { method: "DELETE" });
     setTasks((prev) => prev.filter((t) => t.id !== taskId));
   };
 

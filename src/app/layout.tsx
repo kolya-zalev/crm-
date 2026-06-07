@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
@@ -9,7 +8,6 @@ import Navbar from "@/components/layout/Navbar";
 import { MSWProvider } from "@/mocks/MswProvider";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/ThemeProvider/ThemeProvider";
-
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -36,7 +34,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html
       lang="en"
@@ -50,25 +47,33 @@ export default function RootLayout({
         jetbrainsMono.variable,
       )}
     >
-      
       <body className="h-full flex flex-col overflow-hidden">
-        <ThemeProvider attribute='class' defaultTheme="system" enableSystem>
-        <MSWProvider>
-        <Navbar />
-        <div className="flex flex-1 overflow-hidden">
-          <SidebarProvider>
-            <AppSidebar />
-            <main className="flex-1 overflow-y-auto p-6">{children}</main>
-          </SidebarProvider>
-        </div>
-        
-        </MSWProvider>
-        
-        <Toaster position="top-center" richColors />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {process.env.NEXT_PUBLIC_API_URL ? (
+            <>
+              <Navbar />
+              <div className="flex flex-1 overflow-hidden">
+                <SidebarProvider>
+                  <AppSidebar />
+                  <main className="flex-1 overflow-y-auto p-6">{children}</main>
+                </SidebarProvider>
+              </div>
+            </>
+          ) : (
+            <MSWProvider>
+              <Navbar />
+              <div className="flex flex-1 overflow-hidden">
+                <SidebarProvider>
+                  <AppSidebar />
+                  <main className="flex-1 overflow-y-auto p-6">{children}</main>
+                </SidebarProvider>
+              </div>
+            </MSWProvider>
+          )}
+
+          <Toaster position="top-center" richColors />
         </ThemeProvider>
       </body>
-      
-      
     </html>
   );
 }

@@ -4,9 +4,10 @@ import { Lead } from "@/hooks/types";
 export function useLeads() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const BASE = process.env.NEXT_PUBLIC_API_URL ?? '';
+ console.log('BASE:', BASE)
   useEffect(() => {
-    fetch("/api/leads")
+    fetch(`${BASE}/api/leads`)
       .then((r) => r.json())
       .then((data) => {
         setLeads(data);
@@ -16,7 +17,7 @@ export function useLeads() {
   }, []);
 
   const createLead = async (data: Omit<Lead, "id">) => {
-    const response = await fetch("/api/leads", {
+    const response = await fetch(`${BASE}/api/leads`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -27,12 +28,12 @@ export function useLeads() {
   };
 
   const deleteLead = async (id: string) => {
-    await fetch(`/api/leads/${id}`, { method: "DELETE" });
+    await fetch(`${BASE}/api/leads/${id}`, { method: "DELETE" });
     setLeads((prev) => prev.filter((l) => l.id !== id));
   };
 
   const updateLead = async (id: string, data: Partial<Lead>) => {
-    const response = await fetch(`/api/leads/${id}`, {
+    const response = await fetch(`${BASE}/api/leads/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
