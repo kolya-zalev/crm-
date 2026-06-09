@@ -18,11 +18,3 @@ export const schemaLeadAdd = z.object({
 });
 
 export type LeadAddFormValues = z.infer<typeof schemaLeadAdd>;
-
-export const schemaTasksAdd = z.object({
-  title: z.string().min(3, { message: "Invalid title" }),
-  priority: z.enum(["low", "medium", "high"]),
-  dueDate: z.string(),
-});
-
-export type TaskAddFormValues = z.infer<typeof schemaTasksAdd>;

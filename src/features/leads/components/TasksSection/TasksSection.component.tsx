@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import { TaskAddFormValues, schemaTasksAdd } from "@/hooks/validation";
+import { TaskAddFormValues, schemaTasksAdd } from "@/validators";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash, Pencil } from "lucide-react";

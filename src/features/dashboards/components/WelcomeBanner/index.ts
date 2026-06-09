@@ -1,1 +1,0 @@
-export {WelcomeBannerContainer as WelcomeBanner} from '@/features/dashboards/components/WelcomeBanner/WelcomeBanner.container'

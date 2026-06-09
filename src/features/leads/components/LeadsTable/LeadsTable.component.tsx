@@ -20,7 +20,7 @@ import { LeadsStatusBadge } from "../LeadsStatusBadge";
 import { EmptyState } from "../EmptyState";
 import Link from "next/link";
 
-export default function LeadsTableComponent({
+export function LeadsTableComponent({
   leads,
   search,
   filter,

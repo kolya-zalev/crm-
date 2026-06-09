@@ -5,37 +5,24 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
-import { Lead } from "@/hooks/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { schemaLeadAdd, LeadAddFormValues } from "@/hooks/validation";
+import { schemaLeadAdd, LeadAddFormValues } from "@/validators";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  FormStatus,
+  LeadAddModalProps,
+} from "./LeadAddModal.types";
 
-export const FormStatus = {
-  EDIT: "edit",
-  NEW: "new",
-} as const;
-
-export type FormStatusType = (typeof FormStatus)[keyof typeof FormStatus];
-
-interface LeadAddModalProps {
-  open: boolean;
-  onClose: () => void;
-  onSubmit: (data: Omit<Lead, "id">) => void;
-  onEdit: (id: string, data: LeadAddFormValues) => void;
-  formStatus: FormStatusType;
-  lead?: Lead | null;
-}
-
-export const LeadAddModal = ({
+export function LeadAddModalComponent({
   open,
   onClose,
   onSubmit,
   formStatus,
   onEdit,
   lead,
-}: LeadAddModalProps) => {
+}: LeadAddModalProps) {
   const isNew = formStatus === FormStatus.NEW;
 
   const form = useForm({
@@ -189,4 +176,4 @@ export const LeadAddModal = ({
       </DialogContent>
     </Dialog>
   );
-};
+}
