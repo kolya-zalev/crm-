@@ -1,52 +1,56 @@
-import { useState, useEffect } from "react";
 import { Task } from "@/hooks/types";
+import tasksApi from "@/services/tasksApi";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
+type CreateTaskInput = {
+  title: string;
+  description?: string;
+  priority: string;
+  dueDate: string;
+};
 
 export function useTasks(leadId?: string) {
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const BASE = process.env.NEXT_PUBLIC_API_URL ?? "";
-  const url = leadId
-    ? `${BASE}/api/leads/${leadId}/tasks`
-    : `${BASE}/api/tasks`;
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    fetch(url)
-      .then((r) => r.json())
-      .then((data) => setTasks(data))
-      .catch((err) => console.error(err))
-      .finally(() => setIsLoading(false));
-  }, [leadId]);
+  const { data: tasks = [], isPending } = useQuery({
+    queryKey: leadId ? ["leads", leadId, "tasks"] : ["tasks"],
+    queryFn: () =>
+      leadId ? tasksApi.getByLead(leadId) : tasksApi.getAllTasks(),
+  });
 
-  const createTask = async (data: {
-    title: string;
-    description?: string;
-    priority: string;
-    dueDate: string;
-  }) => {
-    const response = await fetch(`${BASE}/api/leads/${leadId}/tasks`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    const newTask = await response.json();
-    setTasks((prev) => [...prev, newTask]);
-    return newTask;
+  const invalidateTasks = () => {
+    void queryClient.invalidateQueries({ queryKey: ["tasks"] });
+    if (leadId) {
+      void queryClient.invalidateQueries({
+        queryKey: ["leads", leadId, "tasks"],
+      });
+    }
   };
 
-  const updateTask = async (taskId: string, data: Partial<Task>) => {
-    const response = await fetch(`${BASE}/api/tasks/${taskId}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    const updated = await response.json();
-    setTasks((prev) => prev.map((t) => (t.id === taskId ? updated : t)));
-  };
+  const createTaskMutation = useMutation({
+    mutationFn: (data: CreateTaskInput) => {
+      if (!leadId) throw new Error("leadId is required to create a task");
+      return tasksApi.createTask(leadId, data);
+    },
+    onSuccess: invalidateTasks,
+  });
 
-  const deleteTask = async (taskId: string) => {
-    await fetch(`${BASE}/api/tasks/${taskId}`, { method: "DELETE" });
-    setTasks((prev) => prev.filter((t) => t.id !== taskId));
-  };
+  const updateTaskMutation = useMutation({
+    mutationFn: ({ taskId, data }: { taskId: string; data: Partial<Task> }) =>
+      tasksApi.updateTask(taskId, data),
+    onSuccess: invalidateTasks,
+  });
 
-  return { tasks, isLoading, createTask, deleteTask, updateTask };
+  const deleteTaskMutation = useMutation({
+    mutationFn: (taskId: string) => tasksApi.deleteTask(taskId),
+    onSuccess: invalidateTasks,
+  });
+
+  const createTask = (data: CreateTaskInput) =>
+    createTaskMutation.mutateAsync(data);
+  const updateTask = (taskId: string, data: Partial<Task>) =>
+    updateTaskMutation.mutateAsync({ taskId, data });
+  const deleteTask = (taskId: string) => deleteTaskMutation.mutateAsync(taskId);
+
+  return { tasks, isLoading: isPending, createTask, updateTask, deleteTask };
 }

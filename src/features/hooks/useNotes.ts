@@ -1,38 +1,29 @@
-import { useState, useEffect } from "react";
-import {  Note } from "@/hooks/types";
+import notesApi from "@/services/notesApi";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 export function useNotes(leadId: string){
- const [notes, setNotes] = useState<Note[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const BASE = process.env.NEXT_PUBLIC_API_URL ?? '';
+  const queryClient = useQueryClient();
+  const {data: notes = [], isPending} = useQuery({
+    queryKey: ["leads", leadId, "notes"],
+    queryFn: () => notesApi.getNotesByLead(leadId),
+  });
 
-  useEffect(() => {
-    fetch(`${BASE}/api/leads/${leadId}/notes`)
-      .then((r) => r.json())
-      .then((data) => {
-        setNotes(data);
-      })
-      .catch((err) => console.error(err))
-      .finally(() => setIsLoading(false));
-  }, [leadId]);
+  const createNoteMutation = useMutation({
+    mutationFn: (data: {text: string}) => notesApi.createNote(leadId, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ["leads", leadId, "notes"]})
+    }
+  })
 
-  const addNote = async (text: string) => {
-    const response = await fetch(`${BASE}/api/leads/${leadId}/notes`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({text}),
-    });
-    const newNote = await response.json();
-    setNotes((prev) => [...prev, newNote]);
-    return newNote;
-  };
+  const deleteNoteMutation = useMutation({
+    mutationFn: (noteId: string) => notesApi.deleteNote(leadId, noteId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ["leads", leadId, "notes"]})
+    }
+  })
 
-  const deleteNote = async (noteId: string) => {
-    await fetch(`${BASE}/api/leads/${leadId}/notes/${noteId}`, { method: "DELETE" });
-    setNotes((prev) => prev.filter((n) => n.id !== noteId));
-  };
+  const createNote = (text: string) => createNoteMutation.mutateAsync({text})
+  const deleteNote = (noteId: string) => deleteNoteMutation.mutateAsync(noteId)
 
-
-  return  {notes, isLoading, addNote, deleteNote };
-
+  return  {notes, isLoading: isPending, createNote, deleteNote };
 }

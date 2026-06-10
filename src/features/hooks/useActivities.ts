@@ -1,24 +1,11 @@
-import { useState, useEffect } from "react";
-import {Activity} from "@/hooks/types";
+import activitiesApi from "@/services/activitiesApi";
+import { useQuery } from "@tanstack/react-query";
 
 export function useActivities(leadId: string) {
-  const [activities, setActivities] = useState<Activity[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const BASE = process.env.NEXT_PUBLIC_API_URL ?? '';
+  const {data: activities = [], isPending} = useQuery({
+    queryKey: ["leads", leadId, "activities"],
+    queryFn: () => activitiesApi.getActivitiesByLead(leadId),
+  });
 
-  useEffect(() => {
-    fetch(`${BASE}/api/leads/${leadId}/activities`)
-      .then((r) => r.json())
-      .then((data) => {
-        setActivities(data);
-      })
-      .catch((err) => console.error(err))
-      
-      .finally(() => setIsLoading(false));
-  }, [leadId]);
-
-  
-
-  return { activities, isLoading }
-;
+  return { activities, isLoading: isPending }
 }

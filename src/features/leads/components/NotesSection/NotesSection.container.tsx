@@ -3,13 +3,13 @@ import { NoteSectionProps} from "./NotesSection.types";
 import { NotesSectionComponent } from "./NotesSection.component";
 
 export function NotesSectionContainer({leadId}: NoteSectionProps){
-    const{notes, isLoading, addNote, deleteNote} = useNotes(leadId)
+    const{notes, isLoading, createNote, deleteNote} = useNotes(leadId)
 
     return(
         <NotesSectionComponent 
         notes={notes}
         isLoading={isLoading}
-        onAdd={addNote}
+        onAdd={createNote}
         onDelete={deleteNote}
         
         />
