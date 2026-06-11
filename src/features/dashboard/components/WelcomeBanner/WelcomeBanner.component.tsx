@@ -18,7 +18,7 @@ export function WelcomeBannerComponents({newLeadsCount}: WelcomeBannerProps){
         </p>
         <Link href="/lead">
           <Button className="cursor-pointer rounded-xl bg-blue-500 hover:bg-blue-600 text-white shadow-md transition-colors">
-            Go to leads
+            Show them
           </Button>
         </Link>
       </CardContent>

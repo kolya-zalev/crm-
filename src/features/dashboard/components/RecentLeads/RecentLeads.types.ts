@@ -1,3 +1,5 @@
+import { Lead } from "@/hooks/types";
+
 export interface RecentLeadsProps {
-  leads: any[]; 
+  leads: Lead[];
 }

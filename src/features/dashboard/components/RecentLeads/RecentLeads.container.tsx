@@ -1,6 +1,10 @@
 import { RecentLeadsProps } from "./RecentLeads.types";
 import { ResentLeadsComponents } from "./RecentLeads.component";
 
-export function ResentLeadsContainer({leads}: RecentLeadsProps){
-    return <ResentLeadsComponents leads={leads} />
+const RecentLeadsLimit= 5;
+
+export function ResentLeadsContainer({ leads }: RecentLeadsProps) {
+  return (
+    <ResentLeadsComponents leads={leads.slice(0, RecentLeadsLimit)} />
+  );
 }
