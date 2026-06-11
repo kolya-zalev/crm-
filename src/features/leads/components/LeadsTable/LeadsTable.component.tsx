@@ -19,6 +19,17 @@ import { LeadsTableComponentProps } from "./LeadsTable.types";
 import { LeadsStatusBadge } from "../LeadsStatusBadge";
 import { EmptyState } from "../EmptyState";
 import Link from "next/link";
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from "@/components/ui/alert-dialog";
 
 export function LeadsTableComponent({
   leads,
@@ -33,22 +44,22 @@ export function LeadsTableComponent({
 }: LeadsTableComponentProps) {
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-row gap-2 items-center">
+      <div className="flex flex-row items-center gap-2">
         <LeadsSearch value={search} onChange={onSearchChange} />
         <LeadsFilter value={filter} onChange={onFilterChange} />
-        <p className="p-2 ml-auto font-medium text-sm text-gray-600">
+        <p className="ml-auto p-2 text-sm font-medium text-gray-600">
           Total Leads: {isLoading ? "..." : leads.length}
         </p>
         <Button
-          className="rounded-xl bg-blue-500 hover:bg-blue-600 text-white shadow-md cursor-pointer transition-colors"
+          className="cursor-pointer rounded-xl bg-blue-500 text-white shadow-md transition-colors hover:bg-blue-600"
           onClick={onAddClick}
         >
           Add Lead
         </Button>
       </div>
 
-      <div className="rounded-xl border border-gray-300 overflow-hidden shadow-sm">
-        <Table className="text-base border-collapse">
+      <div className="overflow-hidden rounded-xl border border-gray-300 shadow-sm">
+        <Table className="border-collapse text-base">
           <TableHeader className="bg-gray-100">
             <TableRow>
               <TableHead className="text-center font-semibold text-gray-700">
@@ -79,25 +90,25 @@ export function LeadsTableComponent({
               Array.from({ length: 5 }).map((_, index) => (
                 <TableRow key={`skeleton-${index}`} className="animate-pulse">
                   <TableCell className="p-3">
-                    <Skeleton className="h-4 w-24 mx-auto rounded" />
+                    <Skeleton className="mx-auto h-4 w-24 rounded" />
                   </TableCell>
                   <TableCell className="p-3">
-                    <Skeleton className="h-4 w-36 mx-auto rounded" />
+                    <Skeleton className="mx-auto h-4 w-36 rounded" />
                   </TableCell>
                   <TableCell className="p-3">
-                    <Skeleton className="h-4 w-28 mx-auto rounded" />
+                    <Skeleton className="mx-auto h-4 w-28 rounded" />
                   </TableCell>
                   <TableCell className="p-3">
-                    <Skeleton className="h-4 w-20 mx-auto rounded" />
+                    <Skeleton className="mx-auto h-4 w-20 rounded" />
                   </TableCell>
                   <TableCell className="p-3">
-                    <Skeleton className="h-6 w-16 mx-auto rounded-full" />
+                    <Skeleton className="mx-auto h-6 w-16 rounded-full" />
                   </TableCell>
                   <TableCell className="p-3">
-                    <Skeleton className="h-4 w-8 mx-auto rounded" />
+                    <Skeleton className="mx-auto h-4 w-8 rounded" />
                   </TableCell>
                   <TableCell className="p-3">
-                    <div className="flex flex-row gap-1 justify-center">
+                    <div className="flex flex-row justify-center gap-1">
                       <Skeleton className="h-8 w-8 rounded-xl" />
                       <Skeleton className="h-8 w-8 rounded-xl" />
                       <Skeleton className="h-8 w-8 rounded-xl" />
@@ -107,7 +118,7 @@ export function LeadsTableComponent({
               ))
             ) : leads.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={7} className="text-center p-0">
+                <TableCell colSpan={7} className="p-0 text-center">
                   <EmptyState />
                 </TableCell>
               </TableRow>
@@ -115,7 +126,7 @@ export function LeadsTableComponent({
               leads.map((lead) => (
                 <TableRow
                   key={lead.id}
-                  className="hover:bg-gray-50/50 transition-colors"
+                  className="transition-colors hover:bg-gray-50/50"
                 >
                   <TableCell className="text-center font-medium text-gray-900">
                     {lead.name}
@@ -138,10 +149,10 @@ export function LeadsTableComponent({
                       : "—"}
                   </TableCell>
                   <TableCell className="text-center">
-                    <div className="flex flex-row gap-1 justify-center">
+                    <div className="flex flex-row justify-center gap-1">
                       <Button
                         variant="ghost"
-                        className="cursor-pointer rounded-xl hover:bg-gray-200 text-black h-8 w-8 p-0"
+                        className="h-8 w-8 cursor-pointer rounded-xl p-0 text-black hover:bg-gray-200"
                         onClick={(e) => {
                           e.stopPropagation();
                           onEditClick(lead);
@@ -152,22 +163,42 @@ export function LeadsTableComponent({
                       <Link href={`/lead/${lead.id}`}>
                         <Button
                           variant="ghost"
-                          className="cursor-pointer rounded-xl hover:bg-gray-200 text-black h-8 w-8 p-0"
-                      
+                          className="h-8 w-8 cursor-pointer rounded-xl p-0 text-black hover:bg-gray-200"
                         >
                           <GrView size={16} />
                         </Button>
                       </Link>
-                      <Button
-                        variant="ghost"
-                        className="cursor-pointer rounded-xl hover:bg-red-100 hover:text-red-600 text-black h-8 w-8 p-0"
-                        onClick={() => {
-                          onDelete(lead.id);
-                          toast.success("Lead has been deleted successfully");
-                        }}
-                      >
-                        <MdDelete size={16} />
-                      </Button>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            className="h-8 w-8 cursor-pointer rounded-xl p-0 text-black hover:bg-red-100 hover:text-red-600"
+                          >
+                            <MdDelete size={16} />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Delete Lead?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              {lead.name} will be permanently removed.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={async () => {
+                                await onDelete(lead.id);
+                                toast.success(
+                                  "Lead has been deleted successfully",
+                                );
+                              }}
+                            >
+                              Delete
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </div>
                   </TableCell>
                 </TableRow>

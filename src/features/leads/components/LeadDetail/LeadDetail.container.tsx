@@ -4,7 +4,7 @@ import { useState } from "react";
 import { LeadAddFormValues } from "@/validators";
 import { Spinner } from "@/components/ui/spinner";
 import { useLeads } from "@/features/leads/hooks/useLeads";
-import { getCurrentStatusIndex } from "./utils/leadStatus";
+import { getCurrentStatusIndex, LeadStatuses } from "./utils/leadStatus";
 import { LeadDetailComponent } from "./LeadDetail.component";
 
 interface LeadDetailContainerProps {
@@ -21,9 +21,19 @@ export function LeadDetailContainer({ leadId }: LeadDetailContainerProps) {
     setIsEditOpen(false);
   };
 
+  const handleStatusChange = async (stepIndex: number) => {
+    const newStatus = LeadStatuses[stepIndex - 1];
+    if (!newStatus || newStatus === lead?.status) return;
+    await updateLead(leadId, { status: newStatus });
+  };
+
+  const handleMarkAsLost = async () => {
+    if (lead?.status === "lost") return;
+    await updateLead(leadId, { status: "lost" });
+  };
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-full w-full">
+      <div className="flex h-full w-full items-center justify-center">
         <Spinner className="size-8" />
       </div>
     );
@@ -42,6 +52,8 @@ export function LeadDetailContainer({ leadId }: LeadDetailContainerProps) {
       onEditOpen={() => setIsEditOpen(true)}
       onEditClose={() => setIsEditOpen(false)}
       onUpdate={handleUpdate}
+      onStatusChange={handleStatusChange}
+      onMarkAsLost={handleMarkAsLost}
     />
   );
 }

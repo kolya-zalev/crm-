@@ -21,7 +21,10 @@ import {
   SquareArrowRightEnter,
   Tags,
 } from "lucide-react";
-import { LeadAddModal, FormStatus } from "@/features/leads/components/LeadAddModal";
+import {
+  LeadAddModal,
+  FormStatus,
+} from "@/features/leads/components/LeadAddModal";
 import { NoteSection } from "@/features/leads/components/NotesSection";
 import { ActivityTimeline } from "@/features/leads/components/ActivityTimeline";
 import { TasksSection } from "@/features/leads/components/TasksSection";
@@ -36,22 +39,24 @@ export function LeadDetailComponent({
   onEditOpen,
   onEditClose,
   onUpdate,
+  onStatusChange,
+  onMarkAsLost,
 }: LeadDetailComponentProps) {
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <Card className="shadow-sm border">
+    <div className="mx-auto max-w-4xl p-4">
+      <Card className="border shadow-sm">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
           <Link href="/lead">
             <Button
               variant="ghost"
-              className="text-muted-foreground hover:text-foreground p-0 h-auto font-normal cursor-pointer"
+              className="text-muted-foreground hover:text-foreground h-auto cursor-pointer p-0 font-normal"
             >
               ← Back to Leads
             </Button>
           </Link>
           <Button
             variant="ghost"
-            className="text-muted-foreground hover:text-foreground p-0 h-auto font-normal cursor-pointer"
+            className="text-muted-foreground hover:text-foreground h-auto cursor-pointer p-0 font-normal"
             onClick={onEditOpen}
           >
             Edit
@@ -59,13 +64,13 @@ export function LeadDetailComponent({
         </CardHeader>
 
         <hr className="border-muted" />
-        <CardContent className="pt-6 flex flex-col gap-8">
+        <CardContent className="flex flex-col gap-8 pt-6">
           <div className="flex items-start justify-between">
             <div className="space-y-1">
               <h1 className="text-2xl font-semibold tracking-tight">
                 {lead.name}
               </h1>
-              <p className="text-sm text-muted-foreground">{lead.email}</p>
+              <p className="text-muted-foreground text-sm">{lead.email}</p>
             </div>
             <LeadsStatusBadge status={lead.status} />
           </div>
@@ -73,6 +78,7 @@ export function LeadDetailComponent({
             <Stepper
               className="w-full"
               value={currentStatusIndex}
+              onValueChange={onStatusChange}
               indicators={{
                 completed: <Check className="size-3.5" />,
                 loading: <Loader className="size-3.5 animate-spin" />,
@@ -83,13 +89,13 @@ export function LeadDetailComponent({
                   <StepperItem
                     key={step}
                     step={index + 1}
-                    className="relative flex-1 items-start "
+                    className="relative flex-1 items-start"
                   >
-                    <StepperTrigger className="flex flex-col gap-2.5 items-center">
+                    <StepperTrigger className="flex flex-col items-center gap-2.5">
                       <StepperIndicator className="rounded-full">
                         {index + 1}
                       </StepperIndicator>
-                      <StepperTitle className="capitalize text-xs md:text-sm">
+                      <StepperTitle className="text-xs capitalize md:text-sm">
                         {step}
                       </StepperTitle>
                     </StepperTrigger>
@@ -102,33 +108,38 @@ export function LeadDetailComponent({
               </StepperNav>
             </Stepper>
           </div>
+          {lead.status !== "lost" && (
+            <Button variant="destructive" size="sm" onClick={onMarkAsLost}>
+              Mark as Lost
+            </Button>
+          )}
           {lead.status === "lost" && (
             <div className="flex flex-col items-center gap-1">
-              <div className="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center text-white text-xs font-bold">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-red-500 text-xs font-bold text-white">
                 X
               </div>
-              <span className="text-xs text-red-500 font-medium">Lost</span>
+              <span className="text-xs font-medium text-red-500">Lost</span>
             </div>
           )}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t pt-6">
+          <div className="grid grid-cols-1 gap-8 border-t pt-6 md:grid-cols-2">
             <div className="space-y-4">
-              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+              <h3 className="text-muted-foreground text-sm font-semibold tracking-wider uppercase">
                 Contact Info
               </h3>
               <div className="space-y-3">
-                <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+                <div className="text-muted-foreground mb-1 flex items-center gap-2 text-xs">
                   <Mail className="size-3.5" />
                   <span className="text-xs">Email</span>
                 </div>
                 <p className="text-sm font-medium">{lead.email}</p>
 
-                <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+                <div className="text-muted-foreground mb-1 flex items-center gap-2 text-xs">
                   <Phone className="size-3.5" />
                   <span className="text-xs">Phone</span>
                 </div>
                 <p className="text-sm font-medium">{lead.phone}</p>
 
-                <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+                <div className="text-muted-foreground mb-1 flex items-center gap-2 text-xs">
                   <Building2 className="size-3.5" />
                   <span className="text-xs">Company</span>
                 </div>
@@ -137,11 +148,11 @@ export function LeadDetailComponent({
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+              <h3 className="text-muted-foreground text-sm font-semibold tracking-wider uppercase">
                 Details
               </h3>
               <div className="space-y-3">
-                <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+                <div className="text-muted-foreground mb-1 flex items-center gap-2 text-xs">
                   <NotebookPen className="size-3.5" />
                   <span>Notes</span>
                 </div>
@@ -151,7 +162,7 @@ export function LeadDetailComponent({
               </div>
 
               <div>
-                <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+                <div className="text-muted-foreground mb-1 flex items-center gap-2 text-xs">
                   <SquareArrowRightEnter className="size-3.5" />
                   <span>Source</span>
                 </div>
@@ -159,7 +170,7 @@ export function LeadDetailComponent({
               </div>
 
               <div>
-                <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+                <div className="text-muted-foreground mb-1 flex items-center gap-2 text-xs">
                   <Tags className="size-3.5" />
                   <span>Tags</span>
                 </div>
@@ -172,7 +183,7 @@ export function LeadDetailComponent({
         </CardContent>
       </Card>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
         <NoteSection leadId={leadId} />
         <ActivityTimeline leadId={leadId} />
       </div>

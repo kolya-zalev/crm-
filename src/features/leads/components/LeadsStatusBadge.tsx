@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Lead } from "@/hooks/types";
 
 const statusStyle = {
-  new: "bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300",
+  new: "bg-lime-50 text-lime-700 dark:bg-lime-950 dark:text-lime-300",
   contacted: "bg-sky-50 text-sky-700 dark:bg-sky-950 dark:text-sky-300",
   qualified:
     "bg-purple-50 text-purple-700 dark:bg-purple-950 dark:text-purple-300",

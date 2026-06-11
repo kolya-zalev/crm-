@@ -8,5 +8,7 @@ export interface LeadDetailComponentProps {
   isEditOpen: boolean;
   onEditOpen: () => void;
   onEditClose: () => void;
+  onStatusChange: (stepIndex: number) => Promise<void>;
   onUpdate: (id: string, data: LeadAddFormValues) => Promise<void>;
+  onMarkAsLost: () => Promise<void>;
 }
