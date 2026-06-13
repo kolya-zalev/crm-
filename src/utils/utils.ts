@@ -1,4 +1,9 @@
-import { LuLayoutDashboard, LuUsersRound, LuSettings } from "react-icons/lu";
+import {
+  LuLayoutDashboard,
+  LuUsersRound,
+  LuSettings,
+  LuArchive,
+} from "react-icons/lu";
 import { FaTasks } from "react-icons/fa";
 import { IconType } from "react-icons";
 
@@ -33,13 +38,22 @@ export const sidebarItems: NavItem[] = [
       "Manage your contacts, track deal progress, and organize your sales pipeline",
   },
   {
-    id: 'tasks',
-    href: '/tasks',
-    label: 'Tasks',
+    id: "tasks",
+    href: "/tasks",
+    label: "Tasks",
     icon: FaTasks,
-    description: 'Manage, track, and control your daily action items for active leads.'
+    description:
+      "Manage, track, and control your daily action items for active leads.",
   },
-   {
+  {
+    id: "archive",
+    href: "/archive",
+    label: "Archive",
+    icon: LuArchive,
+    description:
+      "Archive your leads, tasks, and other data for future reference",
+  },
+  {
     id: "settings",
     href: "/settings",
     label: "Settings",
@@ -48,7 +62,7 @@ export const sidebarItems: NavItem[] = [
       "Configure your workspace, manage team access, and customize preferences",
   },
 ];
- 
+
 export function isNavItemActive(pathname: string, href: string): boolean {
   if (href === "/") {
     return pathname === "/";
