@@ -1,26 +1,19 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ActivityTimelineComponentProps } from "./ActivityTimeline.types";
-import { Star, RefreshCw, NotebookPen, Trash, Pencil } from "lucide-react";
 import { Spinner } from "@/components/ui/spinner";
+import { ActivityItem } from "./components/ActivityItem/ActivityItem.component";
 
-
-const activityIcons: Record<string, React.ReactNode> = {
-  lead_created: <Star className="size-4 text-yellow-500" />,
-  status_changed: <RefreshCw className="size-4 text-blue-500" />,
-  note_added: <NotebookPen className="size-4 text-green-500" />,
-  note_deleted: <Trash className="size-4 text-red-500" />,
-  lead_updated: <Pencil className="size-4 text-purple-500" />,
-};
-export function ActivityTimelineComponent({
+export const ActivityTimelineComponent = ({
   activities,
   isLoading,
-}: ActivityTimelineComponentProps) {
-   if (isLoading)
+}: ActivityTimelineComponentProps) => {
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center h-full w-full">
         <Spinner className="size-8" />
       </div>
     );
+  }
 
   return (
     <Card>
@@ -32,23 +25,12 @@ export function ActivityTimelineComponent({
           {activities.length === 0 ? (
             <p>No activity yet</p>
           ) : (
-            activities.map((activity) => {
-              const icon = activityIcons[activity.type];
-              return (
-                <div key={activity.id} className="flex items-start gap-3 py-3">
-                  <span className="text-lg">{icon}</span>
-                  <div>
-                    <p className="text-sm">{activity.description}</p>
-                    <span className="text-xs text-muted-foreground">
-                      {new Date(activity.createdAt).toLocaleString()}
-                    </span>
-                  </div>
-                </div>
-              );
-            })
+            activities.map((activity) => (
+              <ActivityItem key={activity.id} activity={activity} />
+            ))
           )}
         </div>
       </CardContent>
     </Card>
   );
-}
+};

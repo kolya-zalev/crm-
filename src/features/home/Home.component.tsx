@@ -3,7 +3,7 @@
 import { sidebarItems } from "@/utils/utils";
 import { HomeCards } from "./components/HomeCards";
 
-export function HomeComponent() {
+export const HomeComponent = () => {
   return (
     <div className="flex flex-col flex-1 items-center justify-center font-sans dark:bg-black">
       <h1 className="font-mono mx-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 fill-mode-forwards text-4xl font-bold">

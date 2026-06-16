@@ -1,7 +1,6 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { CiSearch } from "react-icons/ci";
 interface LeadsSearchProps {
   value: string;
   onChange: (value: string) => void;

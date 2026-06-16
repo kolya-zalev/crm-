@@ -1,1 +1,1 @@
-export { ResentLeadsContainer as RecentLeads } from "./RecentLeads.container";
+export { RecentLeadsContainer as RecentLeads } from "./RecentLeads.container";

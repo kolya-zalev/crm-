@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export function ModeToggleComponents({ setTheme }: ModeToggleProps) {
+export const ModeToggleComponents = ({ setTheme }: ModeToggleProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

@@ -8,7 +8,7 @@ import { filterLeads } from "./utils/filterLeads";
 import { FormStatus } from "./components/LeadAddModal";
 import { LeadsComponent } from "./Leads.component";
 
-export function LeadsContainer() {
+export const LeadsContainer = () => {
   const { leads, isLoading, createLead, deleteLead, updateLead } = useLeads();
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
@@ -57,4 +57,4 @@ export function LeadsContainer() {
       onUpdate={handleUpdate}
     />
   );
-}
+};

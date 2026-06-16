@@ -11,7 +11,7 @@ interface LeadDetailContainerProps {
   leadId: string;
 }
 
-export function LeadDetailContainer({ leadId }: LeadDetailContainerProps) {
+export const LeadDetailContainer = ({ leadId }: LeadDetailContainerProps) => {
   const { leads, isLoading, updateLead } = useLeads();
   const lead = leads.find((l) => l.id === leadId);
   const [isEditOpen, setIsEditOpen] = useState(false);

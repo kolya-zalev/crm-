@@ -5,7 +5,7 @@ export const LeadStatuses = [
   "won",
 ] as const;
 
-export function getCurrentStatusIndex(status: string): number {
+export const getCurrentStatusIndex = (status: string): number => {
   const index = LeadStatuses.indexOf(
     status as (typeof LeadStatuses)[number],
   );

@@ -2,7 +2,7 @@ import { useTasks } from "@/features/hooks/useTasks";
 import { TasksSectionProps } from "./TasksSection.types";
 import { TasksSectionComponent } from "./TasksSection.component";
 
-export function TasksSectionContainer({ leadId }: TasksSectionProps) {
+export const TasksSectionContainer = ({ leadId }: TasksSectionProps) => {
   const { tasks, isLoading, createTask, deleteTask, updateTask } =
     useTasks(leadId);
 

@@ -3,7 +3,7 @@ import { Lead } from "@/hooks/types";
 import leadsApi from "@/services/leadsApi";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
-export function useLeads() {
+export const useLeads = () => {
   const queryClient = useQueryClient();
   const {data: leads = [], isPending} = useQuery({
     queryKey: ["leads"],

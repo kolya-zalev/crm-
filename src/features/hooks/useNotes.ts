@@ -1,7 +1,7 @@
 import notesApi from "@/services/notesApi";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
-export function useNotes(leadId: string){
+export const useNotes = (leadId: string) => {
   const queryClient = useQueryClient();
   const {data: notes = [], isPending} = useQuery({
     queryKey: ["leads", leadId, "notes"],

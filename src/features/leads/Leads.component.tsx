@@ -2,7 +2,7 @@ import { LeadsTable } from "./components/LeadsTable";
 import { LeadAddModal } from "./components/LeadAddModal";
 import { LeadsComponentProps } from "./Leads.types";
 
-export function LeadsComponent({
+export const LeadsComponent = ({
   filteredLeads,
   search,
   filter,
@@ -18,7 +18,7 @@ export function LeadsComponent({
   onCloseModal,
   onCreate,
   onUpdate,
-}: LeadsComponentProps) {
+}: LeadsComponentProps) => {
   return (
     <>
       <LeadsTable

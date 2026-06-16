@@ -4,7 +4,7 @@ import { useLeads } from "../leads/hooks/useLeads";
 import { ArchiveComponent } from "./Archive.component";
 import { filterLostLeads } from "./utils/filterLostLeads";
 
-export function ArchiveContainer() {
+export const ArchiveContainer = () => {
   const { leads, isLoading, updateLead } = useLeads();
 
   const lostLeads = filterLostLeads(leads);

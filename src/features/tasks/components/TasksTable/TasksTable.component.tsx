@@ -6,16 +6,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Checkbox } from "@/components/ui/checkbox";
-import { priorityColors } from "../../Tasks.styles";
-import { isTaskOverdue } from "../../utils/filterTasks";
 import { TasksTableProps } from "./TasksTable.types";
+import { TasksTableRow } from "./components/TasksTableRow/TasksTableRow.component";
 
-export function TasksTableComponent({
+export const TasksTableComponent = ({
   tasks,
   getLeadName,
   onToggleComplete,
-}: TasksTableProps) {
+}: TasksTableProps) => {
   return (
     <Table>
       <TableHeader>
@@ -38,59 +36,16 @@ export function TasksTableComponent({
             </TableCell>
           </TableRow>
         ) : (
-          tasks.map((task) => {
-            const overdue = isTaskOverdue(task);
-
-            return (
-              <TableRow key={task.id}>
-                <TableCell>
-                  <Checkbox
-                    className="border border-black"
-                    checked={task.status === "completed"}
-                    onCheckedChange={(checked) =>
-                      onToggleComplete(task.id, checked === true)
-                    }
-                  />
-                </TableCell>
-                <TableCell>
-                  <span
-                    className={
-                      task.status === "completed"
-                        ? "line-through text-muted-foreground"
-                        : ""
-                    }
-                  >
-                    {task.title}
-                  </span>
-                </TableCell>
-                <TableCell>
-                  <span>{getLeadName(task.leadId)}</span>
-                </TableCell>
-                <TableCell>
-                  <span
-                    className={`text-xs px-2 py-1 rounded-full ${priorityColors[task.priority]}`}
-                  >
-                    {task.priority}
-                  </span>
-                </TableCell>
-                <TableCell>
-                  <span
-                    className={
-                      overdue
-                        ? "text-red-500 font-bold"
-                        : "text-muted-foreground"
-                    }
-                  >
-                    {task.status === "completed"
-                      ? "Done"
-                      : new Date(task.dueDate).toLocaleDateString()}
-                  </span>
-                </TableCell>
-              </TableRow>
-            );
-          })
+          tasks.map((task) => (
+            <TasksTableRow
+              key={task.id}
+              task={task}
+              leadName={getLeadName(task.leadId)}
+              onToggleComplete={onToggleComplete}
+            />
+          ))
         )}
       </TableBody>
     </Table>
   );
-}
+};

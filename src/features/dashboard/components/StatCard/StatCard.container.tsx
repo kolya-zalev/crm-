@@ -1,6 +1,6 @@
 import { StatCardComponent } from "./StatCard.component";
 import { StatCardProps } from "./StatCard.types";
 
-export function StatCardContainer({ stats }: StatCardProps) {
+export const StatCardContainer = ({ stats }: StatCardProps) => {
   return <StatCardComponent stats={stats} />;
 }

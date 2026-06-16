@@ -7,7 +7,7 @@ import { filterTasks } from "./utils/filterTasks";
 import { getLeadName as resolveLeadName } from "./utils/getLeadName";
 import { TasksComponent } from "./Tasks.component";
 
-export function TasksContainer() {
+export const TasksContainer = () => {
   const { tasks, isLoading, updateTask } = useTasks();
   const { leads } = useLeads();
   const [statusFilter, setStatusFilter] = useState("all");

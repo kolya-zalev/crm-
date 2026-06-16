@@ -1,10 +1,10 @@
 import { Lead } from "@/hooks/types";
 
-export function filterLeads(
+export const filterLeads = (
   leads: Lead[],
   search: string,
   filter: string,
-): Lead[] {
+): Lead[] => {
   const q = search.toLowerCase();
 
   return (leads ?? []).filter((lead) => {

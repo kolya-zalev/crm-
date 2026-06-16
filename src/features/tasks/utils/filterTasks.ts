@@ -7,7 +7,7 @@ export const TaskStatusFilter = {
   pending: "pending",
 } as const;
 
-export function matchesStatus(task: Task, filter: string): boolean {
+export  const matchesStatus = (task: Task, filter: string): boolean => {
   switch (filter) {
     case TaskStatusFilter.all:
       return true;
@@ -18,21 +18,21 @@ export function matchesStatus(task: Task, filter: string): boolean {
   }
 }
 
-export function matchesPriority(task: Task, filter: string): boolean {
+export const matchesPriority = (task: Task, filter: string): boolean => {
   return filter === "all" ? true : task.priority === filter;
 }
 
-export function filterTasks(
+export const filterTasks = (
   tasks: Task[],
   statusFilter: string,
   priorityFilter: string,
-): Task[] {
+): Task[] => {
   return tasks.filter(
     (task) =>
       matchesStatus(task, statusFilter) && matchesPriority(task, priorityFilter),
   );
 }
 
-export function isTaskOverdue(task: Task): boolean {
+export const isTaskOverdue = (task: Task): boolean => {
   return task.status === "pending" && new Date(task.dueDate) < new Date();
 }

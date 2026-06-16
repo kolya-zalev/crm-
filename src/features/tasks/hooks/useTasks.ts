@@ -9,7 +9,7 @@ type CreateTaskInput = {
   dueDate: string;
 };
 
-export function useTasks(leadId?: string) {
+export const useTasks = (leadId?: string) => {
   const queryClient = useQueryClient();
 
   const { data: tasks = [], isPending } = useQuery({

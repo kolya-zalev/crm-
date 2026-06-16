@@ -5,11 +5,11 @@ import { RecentLeads } from "./components/RecentLeads";
 import { WelcomeBanner } from "./components/WelcomeBanner";
 import { DashboardComponentProps } from "./Dashboard.types";
 
-export function DashboardComponent({
+export const DashboardComponent = ({
   leads,
   stats,
   isLoading,
-}: DashboardComponentProps) {
+}: DashboardComponentProps) => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-full w-full">

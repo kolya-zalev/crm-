@@ -2,7 +2,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { TasksTable } from "./components/TasksTable";
 import { TasksComponentProps } from "./Tasks.types";
 
-export function TasksComponent({
+export const TasksComponent = ({
   filteredTasks,
   isLoading,
   statusFilter,
@@ -11,7 +11,7 @@ export function TasksComponent({
   onStatusFilterChange,
   onPriorityFilterChange,
   onToggleComplete,
-}: TasksComponentProps) {
+}: TasksComponentProps) => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-full w-full">
