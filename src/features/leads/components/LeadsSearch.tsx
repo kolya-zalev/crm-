@@ -12,7 +12,7 @@ export const LeadsSearch = ({ value, onChange }: LeadsSearchProps) => {
       className="rounded-xl w-64 max-w-xs border border-black"
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      placeholder="Search"
+      placeholder="Search name, email, company"
       
     />
     

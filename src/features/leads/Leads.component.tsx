@@ -7,11 +7,26 @@ export const LeadsComponent = ({
   search,
   filter,
   isLoading,
+  total,
+  page,
+  pageCount,
+  pageSize,
   isModalOpen,
   formStatus,
   editingLead,
+  sort,
+  visibleColumns,
+  allViews,
+  activeViewId,
+  applyView,
+  saveCurrentView,
+  deleteView,
+  onToggleColumn,
+  onSortChange,
   onSearchChange,
   onFilterChange,
+  onPageChange,
+  onPageSizeChange,
   onDelete,
   onAddClick,
   onEditClick,
@@ -26,8 +41,23 @@ export const LeadsComponent = ({
         search={search}
         filter={filter}
         isLoading={isLoading}
+        total={total}
+        page={page}
+        pageCount={pageCount}
+        pageSize={pageSize}
+        sort={sort}
+        visibleColumns={visibleColumns}
+        allViews={allViews}
+        activeViewId={activeViewId}
+        applyView={applyView}
+        saveCurrentView={saveCurrentView}
+        deleteView={deleteView}
+        onToggleColumn={onToggleColumn}
+        onSortChange={onSortChange}
         onSearchChange={onSearchChange}
         onFilterChange={onFilterChange}
+        onPageChange={onPageChange}
+        onPageSizeChange={onPageSizeChange}
         onDelete={onDelete}
         onAddClick={onAddClick}
         onEditClick={onEditClick}

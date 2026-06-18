@@ -1,30 +1,24 @@
-import { TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {  TableHeader, TableRow } from "@/components/ui/table";
+import { LeadsTableHeaderProps } from "./LeadsTableHeader.types";
+import { LeadsTableSortableHead } from "./components/LeadsTableSortableHead/LeadsTableSortableHead.component";
+import { LeadColumns } from "../../LeadsTable.constants";
 
-export const LeadsTableHeader = () => {
+export const LeadsTableHeader = ({
+  sort,
+  onSortChange,
+  visibleColumns,
+}: LeadsTableHeaderProps) => {
   return (
     <TableHeader className="bg-gray-100">
       <TableRow>
-        <TableHead className="text-center font-semibold text-gray-700">
-          Name
-        </TableHead>
-        <TableHead className="text-center font-semibold text-gray-700">
-          Email
-        </TableHead>
-        <TableHead className="text-center font-semibold text-gray-700">
-          Phone
-        </TableHead>
-        <TableHead className="text-center font-semibold text-gray-700">
-          Company
-        </TableHead>
-        <TableHead className="text-center font-semibold text-gray-700">
-          Status
-        </TableHead>
-        <TableHead className="text-center font-semibold text-gray-700">
-          Tags
-        </TableHead>
-        <TableHead className="text-center font-semibold text-gray-700">
-          Action
-        </TableHead>
+        {LeadColumns.filter((column) => visibleColumns.includes(column)).map((column) => (
+          <LeadsTableSortableHead 
+          key={column}
+          column={column}
+          sort={sort}
+          onSortChange={onSortChange}
+          />
+        ))}
       </TableRow>
     </TableHeader>
   );
