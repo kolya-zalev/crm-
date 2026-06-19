@@ -11,6 +11,8 @@ export const NotesSectionComponent = ({
   isLoading,
   onAdd,
   onDelete,
+  canCreate = true,
+  canDelete = true,
 }: NotesSectionComponentProps) => {
   const [text, setText] = useState("");
 
@@ -22,7 +24,7 @@ export const NotesSectionComponent = ({
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-full w-full">
+      <div className="flex h-full w-full items-center justify-center">
         <Spinner className="size-8" />
       </div>
     );
@@ -34,26 +36,33 @@ export const NotesSectionComponent = ({
         <CardTitle>Notes ({notes.length})</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="flex gap-2">
-          <Input
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            placeholder="Add a note..."
-          />
-          <Button
-            onClick={handleAdd}
-            className="rounded-xl bg-blue-500 hover:bg-blue-600 text-white shadow-md cursor-pointer transition-colors"
-          >
-            Add
-          </Button>
-        </div>
+        {canCreate && (
+          <div className="flex gap-2">
+            <Input
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              placeholder="Add a note..."
+            />
+            <Button
+              onClick={handleAdd}
+              className="cursor-pointer rounded-xl bg-blue-500 text-white shadow-md transition-colors hover:bg-blue-600"
+            >
+              Add
+            </Button>
+          </div>
+        )}
 
-        <div className="flex flex-col divide-y mt-4">
+        <div className="mt-4 flex flex-col divide-y">
           {notes.length === 0 ? (
             <p>No notes yet</p>
           ) : (
             notes.map((note) => (
-              <NoteItem key={note.id} note={note} onDelete={onDelete} />
+              <NoteItem
+                key={note.id}
+                note={note}
+                onDelete={onDelete}
+                canDelete={canDelete}
+              />
             ))
           )}
         </div>

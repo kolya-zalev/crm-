@@ -1,17 +1,20 @@
 import { Lead } from "@/hooks/types";
 import { Button } from "@/components/ui/button";
-
+import { usePermission } from "@/features/auth/permissions/hooks/usePermission";
 interface LeadLostBannerProps {
   lead: Lead;
   onMarkAsLost: () => Promise<void>;
 }
 
 export const LeadLostBanner = ({ lead, onMarkAsLost }: LeadLostBannerProps) => {
+  const canMarkAsLost = usePermission("leads:edit");
   if (lead.status !== "lost") {
     return (
-      <Button variant="destructive" size="sm" onClick={onMarkAsLost}>
-        Mark as Lost
-      </Button>
+      canMarkAsLost && (
+        <Button variant="destructive" size="sm" onClick={onMarkAsLost}>
+          Mark as Lost
+        </Button>
+      )
     );
   }
 

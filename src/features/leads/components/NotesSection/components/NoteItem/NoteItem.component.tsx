@@ -3,22 +3,28 @@ import { formatDateTime } from "@/utils/formatDate";
 import { Trash } from "lucide-react";
 import { NoteItemProps } from "./NoteItem.types";
 
-export const NoteItem = ({ note, onDelete }: NoteItemProps) => {
+export const NoteItem = ({
+  note,
+  onDelete,
+  canDelete = true,
+}: NoteItemProps) => {
   const handleDelete = () => {
     onDelete(note.id);
   };
 
   return (
-    <div className="flex justify-between items-start py-3">
+    <div className="flex items-start justify-between py-3">
       <div>
         <p className="text-sm">{note.text}</p>
-        <span className="text-xs text-muted-foreground">
+        <span className="text-muted-foreground text-xs">
           {formatDateTime(note.createdAt)}
         </span>
       </div>
-      <Button variant="ghost" onClick={handleDelete}>
-        <Trash />
-      </Button>
+      {canDelete && (
+        <Button variant="ghost" onClick={handleDelete}>
+          <Trash />
+        </Button>
+      )}
     </div>
   );
 };

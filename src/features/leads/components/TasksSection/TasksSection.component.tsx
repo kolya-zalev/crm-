@@ -23,6 +23,9 @@ export const TasksSectionComponent = ({
   onAdd,
   onUpdate,
   onDelete,
+  canCreate = true,
+  canEdit = true,
+  canDelete = true,
 }: ExtendedProps) => {
   const {
     form,
@@ -45,6 +48,8 @@ export const TasksSectionComponent = ({
     handleCancel();
   };
 
+  const canShowForm = showForm && (editingTaskId ? canEdit : canCreate);
+
   if (isLoading) {
     return (
       <div className="text-muted-foreground flex items-center justify-center p-6">
@@ -59,13 +64,15 @@ export const TasksSectionComponent = ({
         <CardTitle className="text-xl font-bold">
           Tasks ({tasks.length})
         </CardTitle>
-        <Button
-          size="sm"
-          onClick={handleToggleForm}
-          className="cursor-pointer rounded-xl bg-blue-500 text-white shadow-md transition-colors hover:bg-blue-600"
-        >
-          {showForm ? "Cancel" : "Add Task"}
-        </Button>
+        {canCreate && (
+          <Button
+            size="sm"
+            onClick={handleToggleForm}
+            className="cursor-pointer rounded-xl bg-blue-500 text-white shadow-md transition-colors hover:bg-blue-600"
+          >
+            {showForm ? "Cancel" : "Add Task"}
+          </Button>
+        )}
       </CardHeader>
 
       <CardContent className="space-y-4">
@@ -74,7 +81,7 @@ export const TasksSectionComponent = ({
           onFilterChange={setActiveFilter}
         />
 
-        {showForm && (
+        {canShowForm && (
           <TaskForm
             form={form}
             editingTaskId={editingTaskId}
@@ -88,6 +95,8 @@ export const TasksSectionComponent = ({
             onToggle={onToggle}
             onEdit={handleEditClick}
             onDelete={onDelete}
+            canEdit={canEdit}
+            canDelete={canDelete}
           />
         </div>
       </CardContent>

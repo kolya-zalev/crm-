@@ -2,6 +2,9 @@ import { Task } from "@/hooks/types";
 
 export interface TasksSectionProps {
   leadId: string;
+  canCreate?: boolean;
+  canEdit?: boolean;
+  canDelete?: boolean;
 }
 
 export interface TasksSectionComponentProps {
@@ -15,4 +18,7 @@ export interface TasksSectionComponentProps {
   }) => void;
   onToggle: (taskId: string, completed: boolean) => void;
   onDelete: (taskId: string) => void;
+  canCreate?: boolean;
+  canEdit?: boolean;
+  canDelete?: boolean;
 }

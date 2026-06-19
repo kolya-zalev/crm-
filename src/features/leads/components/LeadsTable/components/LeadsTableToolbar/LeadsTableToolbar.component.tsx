@@ -1,3 +1,4 @@
+"use client";
 import { LeadsTableComponentProps } from "../../LeadsTable.types";
 import { LeadsSearch } from "@/features/leads/components/LeadsSearch";
 import { LeadsFilter } from "@/features/leads/components/LeadsFilter";
@@ -6,7 +7,7 @@ import { LeadsTableColumnToggle } from "./components/LeadsTableColumnToggle/Lead
 import { LeadsTableViewsSelect } from "./components/LeadsTableViewsSelect";
 import { SaveViewDialog } from "./components/SaveViewDialog";
 import { LeadImportDialog } from "@/features/leads/components/LeadImport/LeadImportDialog";
-
+import { usePermission } from "@/features/auth/permissions/hooks/usePermission";
 type LeadsTableToolbarProps = Pick<
   LeadsTableComponentProps,
   | "search"
@@ -45,7 +46,8 @@ export const LeadsTableToolbar = ({
 }: LeadsTableToolbarProps) => {
   const activeView = allViews.find((view) => view.id === activeViewId);
   const canDeleteView = Boolean(activeView && !activeView.isBuiltIn);
-
+  const canImportLeads = usePermission("leads:import");
+  const canAddLead = usePermission("leads:create");
   const handleDeleteView = () => {
     if (!activeViewId || !canDeleteView) {
       return;
@@ -80,13 +82,15 @@ export const LeadsTableToolbar = ({
       <p className="ml-auto p-2 text-sm font-medium text-gray-600">
         Total Leads: {isLoading ? "..." : total}
       </p>
-      <LeadImportDialog onImportLeads={onImportLeads} />
-      <Button
-        className="cursor-pointer rounded-xl bg-blue-500 text-white shadow-md transition-colors hover:bg-blue-600"
-        onClick={onAddClick}
-      >
-        Add Lead
-      </Button>
+      {canImportLeads && <LeadImportDialog onImportLeads={onImportLeads} />}
+      {canAddLead && (
+        <Button
+          className="cursor-pointer rounded-xl bg-blue-500 text-white shadow-md transition-colors hover:bg-blue-600"
+          onClick={onAddClick}
+        >
+          Add Lead
+        </Button>
+      )}
     </div>
   );
 };

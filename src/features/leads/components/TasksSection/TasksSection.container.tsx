@@ -1,8 +1,14 @@
 import { useTasks } from "@/features/hooks/useTasks";
+import { TaskAddFormValues } from "@/validators";
 import { TasksSectionProps } from "./TasksSection.types";
 import { TasksSectionComponent } from "./TasksSection.component";
 
-export const TasksSectionContainer = ({ leadId }: TasksSectionProps) => {
+export const TasksSectionContainer = ({
+  leadId,
+  canCreate = true,
+  canEdit = true,
+  canDelete = true,
+}: TasksSectionProps) => {
   const { tasks, isLoading, createTask, deleteTask, updateTask } =
     useTasks(leadId);
 
@@ -17,7 +23,10 @@ export const TasksSectionContainer = ({ leadId }: TasksSectionProps) => {
     }
   };
 
-  const handleUpdate = async (taskId: string, data: any) => {
+  const handleUpdate = async (
+    taskId: string,
+    data: Partial<TaskAddFormValues>,
+  ) => {
     await updateTask(taskId, data);
   };
 
@@ -29,6 +38,9 @@ export const TasksSectionContainer = ({ leadId }: TasksSectionProps) => {
       onToggle={handleToggle}
       onUpdate={handleUpdate}
       onDelete={deleteTask}
+      canCreate={canCreate}
+      canEdit={canEdit}
+      canDelete={canDelete}
     />
   );
-}
+};

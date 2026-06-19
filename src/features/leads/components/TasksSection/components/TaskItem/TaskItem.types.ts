@@ -5,4 +5,6 @@ export interface TaskItemProps {
   onToggle: (taskId: string, completed: boolean) => void;
   onEdit: (task: Task) => void;
   onDelete: (taskId: string) => void;
+  canEdit?: boolean;
+  canDelete?: boolean;
 }

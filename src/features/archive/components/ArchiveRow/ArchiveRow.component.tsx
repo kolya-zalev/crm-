@@ -5,17 +5,19 @@ import { TableCell, TableRow } from "@/components/ui/table";
 import { LeadsStatusBadge } from "@/features/leads/components/LeadsStatusBadge/LeadsStatusBadge";
 import { ArchiveRowProps } from "./ArchiveRow.types";
 import { ReopenLeadDialog } from "../ReopenLeadDialog/ReopenLeadDialog.component";
-
+import { usePermission } from "@/features/auth/permissions/hooks/usePermission";
 export const ArchiveRow = ({ lead, onReopen }: ArchiveRowProps) => {
   const handleReopen = () => onReopen(lead.id);
-
+  const canEditLead = usePermission("leads:edit");
   return (
     <TableRow className="transition-colors hover:bg-gray-50/50">
       <TableCell className="text-center font-medium text-gray-900">
         {lead.name}
       </TableCell>
       <TableCell className="text-center text-gray-600">{lead.email}</TableCell>
-      <TableCell className="text-center text-gray-600">{lead.company}</TableCell>
+      <TableCell className="text-center text-gray-600">
+        {lead.company}
+      </TableCell>
       <TableCell className="text-center">
         <LeadsStatusBadge status={lead.status} />
       </TableCell>
@@ -29,7 +31,9 @@ export const ArchiveRow = ({ lead, onReopen }: ArchiveRowProps) => {
               <GrView size={16} />
             </Button>
           </Link>
-          <ReopenLeadDialog leadName={lead.name} onReopen={handleReopen} />
+          {canEditLead && (
+            <ReopenLeadDialog leadName={lead.name} onReopen={handleReopen} />
+          )}
         </div>
       </TableCell>
     </TableRow>

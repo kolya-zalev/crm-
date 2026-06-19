@@ -1,8 +1,11 @@
+"use client";
+
 import { TableCell, TableRow } from "@/components/ui/table";
 import { Checkbox } from "@/components/ui/checkbox";
 import { priorityColors } from "@/features/tasks/Tasks.styles";
 import { isTaskOverdue } from "@/features/tasks/utils/filterTasks";
 import { formatDueDate } from "@/utils/formatDate";
+import { usePermission } from "@/features/auth/permissions/hooks/usePermission";
 import { TasksTableRowProps } from "./TasksTableRow.types";
 
 export const TasksTableRow = ({
@@ -10,6 +13,7 @@ export const TasksTableRow = ({
   leadName,
   onToggleComplete,
 }: TasksTableRowProps) => {
+  const canEdit = usePermission("leads:edit");
   const overdue = isTaskOverdue(task);
 
   const handleToggle = (checked: boolean | "indeterminate") => {
@@ -35,6 +39,7 @@ export const TasksTableRow = ({
           className="border border-black"
           checked={task.status === "completed"}
           onCheckedChange={handleToggle}
+          disabled={!canEdit}
         />
       </TableCell>
       <TableCell>

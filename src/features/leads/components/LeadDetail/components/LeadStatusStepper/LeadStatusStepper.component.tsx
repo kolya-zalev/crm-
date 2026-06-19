@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Stepper,
   StepperIndicator,
@@ -8,7 +10,9 @@ import {
   StepperTrigger,
 } from "@/components/reui/stepper";
 import { Check, Loader } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { LeadStatuses } from "../../utils/leadStatus";
+import { usePermission } from "@/features/auth/permissions/hooks/usePermission";
 
 interface LeadStatusStepperProps {
   currentStatusIndex: number;
@@ -19,6 +23,28 @@ export const LeadStatusStepper = ({
   currentStatusIndex,
   onStatusChange,
 }: LeadStatusStepperProps) => {
+  const canChangeStatus = usePermission("leads:edit");
+
+  if (!canChangeStatus) {
+    return (
+      <div className="flex flex-wrap items-center gap-2">
+        {LeadStatuses.map((step, index) => (
+          <span
+            key={step}
+            className={cn(
+              "rounded-full px-3 py-1 text-xs capitalize",
+              index + 1 <= currentStatusIndex
+                ? "bg-primary text-primary-foreground"
+                : "bg-muted text-muted-foreground",
+            )}
+          >
+            {step}
+          </span>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="flex items-center gap-4">
       <Stepper

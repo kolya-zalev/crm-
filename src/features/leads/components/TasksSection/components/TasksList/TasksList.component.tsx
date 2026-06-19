@@ -6,6 +6,8 @@ export const TasksList = ({
   onToggle,
   onEdit,
   onDelete,
+  canEdit = true,
+  canDelete = true,
 }: TasksListProps) => {
   if (tasks.length === 0) {
     return (
@@ -24,6 +26,8 @@ export const TasksList = ({
           onToggle={onToggle}
           onEdit={onEdit}
           onDelete={onDelete}
+          canEdit={canEdit}
+          canDelete={canDelete}
         />
       ))}
     </>
