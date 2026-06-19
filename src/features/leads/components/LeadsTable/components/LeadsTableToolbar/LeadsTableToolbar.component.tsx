@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { LeadsTableColumnToggle } from "./components/LeadsTableColumnToggle/LeadsTableColumnToggle.components";
 import { LeadsTableViewsSelect } from "./components/LeadsTableViewsSelect";
 import { SaveViewDialog } from "./components/SaveViewDialog";
+import { LeadImportDialog } from "@/features/leads/components/LeadImport/LeadImportDialog";
 
 type LeadsTableToolbarProps = Pick<
   LeadsTableComponentProps,
@@ -20,6 +21,7 @@ type LeadsTableToolbarProps = Pick<
   | "allViews"
   | "activeViewId"
   | "applyView"
+  | "onImportLeads"
   | "saveCurrentView"
   | "deleteView"
 >;
@@ -39,6 +41,7 @@ export const LeadsTableToolbar = ({
   applyView,
   saveCurrentView,
   deleteView,
+  onImportLeads,
 }: LeadsTableToolbarProps) => {
   const activeView = allViews.find((view) => view.id === activeViewId);
   const canDeleteView = Boolean(activeView && !activeView.isBuiltIn);
@@ -77,6 +80,7 @@ export const LeadsTableToolbar = ({
       <p className="ml-auto p-2 text-sm font-medium text-gray-600">
         Total Leads: {isLoading ? "..." : total}
       </p>
+      <LeadImportDialog onImportLeads={onImportLeads} />
       <Button
         className="cursor-pointer rounded-xl bg-blue-500 text-white shadow-md transition-colors hover:bg-blue-600"
         onClick={onAddClick}

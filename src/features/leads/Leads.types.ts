@@ -36,4 +36,5 @@ export interface LeadsComponentProps {
   onCloseModal: () => void;
   onCreate: (data: Omit<Lead, "id">) => Promise<void>;
   onUpdate: (id: string, data: LeadAddFormValues) => Promise<void>;
+  onImportLeads: (rows: LeadAddFormValues[]) => Promise<void>;
 }

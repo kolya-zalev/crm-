@@ -1,6 +1,7 @@
 import { Lead } from "@/hooks/types";
 import { LeadColumn } from "./LeadsTable.constants";
 import { SavedView } from "./SavedView/savedViews.types";
+import { LeadAddFormValues } from "@/validators";
 
 export type SortDirection = "asc" | "desc";
 
@@ -33,6 +34,7 @@ export interface LeadsTableComponentProps {
   activeViewId: string | null;
   applyView: (id: string) => void;
   saveCurrentView: (name: string) => void;
+  onImportLeads: (rows: LeadAddFormValues[]) => Promise<void>;
   deleteView: (id: string) => void;
   onToggleColumn: (column: LeadColumn) => void;
   onSortChange: (column: LeadColumn) => void;

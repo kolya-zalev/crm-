@@ -110,6 +110,23 @@ export const LeadsContainer = () => {
     setTableState((prev) => ({ ...prev, pageSize, page: 1 }));
   };
 
+  const handleImportLeads = async (rows: LeadAddFormValues[]) => {
+    if (rows.length === 0) return;
+  
+    for (const row of rows) {
+      await createLead({
+        name: row.name,
+        email: row.email,
+        company: row.company,
+        status: row.status,
+        tags: row.tags ?? [],
+        phone: row.phone,
+        notes: row.notes,
+        source: row.source,
+      });
+    }
+  };
+
   return (
     <LeadsComponent
       filteredLeads={filteredLeads}
@@ -132,16 +149,8 @@ export const LeadsContainer = () => {
       editingLead={editingLead}
       sort={tableState.sort}
       onSortChange={handleSortChange}
-      onSearchChange={(value) =>
-        setTableState((prev) => ({ ...prev, search: value, page: 1 }))
-      }
-      onFilterChange={(value) =>
-        setTableState((prev) => ({
-          ...prev,
-          statusFilter: value as LeadsTableState["statusFilter"],
-          page: 1,
-        }))
-      }
+      onSearchChange={handleSearchChange}
+      onFilterChange={handleFilterChange}
       onPageChange={(page) => setTableState((prev) => ({ ...prev, page }))}
       onPageSizeChange={handlePageSizeChange}
       onDelete={handleDelete}
@@ -149,6 +158,7 @@ export const LeadsContainer = () => {
       onEditClick={setEditingLead}
       onCloseModal={handleCloseModal}
       onCreate={handleCreate}
+      onImportLeads={handleImportLeads}
       onUpdate={handleUpdate}
     />
   );

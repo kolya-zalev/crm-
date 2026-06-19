@@ -26,6 +26,7 @@ export const LeadsTableComponent = ({
   deleteView,
   onToggleColumn,
   onSortChange,
+  onImportLeads,
   onSearchChange,
   onFilterChange,
   onPageChange,
@@ -51,6 +52,7 @@ export const LeadsTableComponent = ({
         applyView={applyView}
         saveCurrentView={saveCurrentView}
         deleteView={deleteView}
+        onImportLeads={onImportLeads}
       />
 
       <div className="overflow-hidden rounded-xl border border-gray-300 shadow-sm">

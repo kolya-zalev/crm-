@@ -23,6 +23,7 @@ export const LeadsComponent = ({
   deleteView,
   onToggleColumn,
   onSortChange,
+  onImportLeads,
   onSearchChange,
   onFilterChange,
   onPageChange,
@@ -61,6 +62,7 @@ export const LeadsComponent = ({
         onDelete={onDelete}
         onAddClick={onAddClick}
         onEditClick={onEditClick}
+        onImportLeads={onImportLeads}
       />
       <LeadAddModal
         key={editingLead?.id ?? "new"}
