@@ -5,6 +5,7 @@ import {
   LuArchive,
 } from "react-icons/lu";
 import { FaTasks } from "react-icons/fa";
+import { TbUsersGroup } from "react-icons/tb";
 import { IconType } from "react-icons";
 
 export type NavItem = {
@@ -44,6 +45,14 @@ export const sidebarItems: NavItem[] = [
     icon: FaTasks,
     description:
       "Manage, track, and control your daily action items for active leads.",
+  },
+  {
+    id: "teams",
+    href: "/teams",
+    label: "Teams",
+    icon: TbUsersGroup,
+    description:
+      "Manage your teams, add members, and assign tasks to team members.",
   },
   {
     id: "archive",

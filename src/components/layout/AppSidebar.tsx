@@ -9,9 +9,19 @@ import {
 } from "@/components/ui/sidebar";
 import { sidebarItems } from "@/utils/utils";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { useAuth } from "@/features/auth/hooks/useAuth";
+import { can } from "@/features/auth/permissions/utils/permissions.utils";
 import { SidebarNav } from "./SidebarNav";
 
 export function AppSidebar() {
+  const { user } = useAuth();
+  const visibleItems = sidebarItems.filter((item) => {
+    if (item.id === "teams") {
+      return can(user, "team:read");
+    }
+    return true;
+  });
+
   return (
     <Sidebar>
       <SidebarHeader className="items-center py-8">
@@ -25,7 +35,7 @@ export function AppSidebar() {
       </SidebarHeader>
 
       <SidebarContent className="px-4 mt-4 ">
-        <SidebarNav items={sidebarItems} />
+        <SidebarNav items={visibleItems} />
         <SidebarGroup />
         <SidebarGroup />
       </SidebarContent>

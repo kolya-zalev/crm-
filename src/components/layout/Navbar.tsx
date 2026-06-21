@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { brand } from "@/utils/utils";
 import { useAuth } from "@/features/auth/hooks/useAuth";
+import { NotificationsBell } from "@/features/notifications";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -36,6 +37,7 @@ export default function Navbar() {
       <div className="flex items-center gap-3">
         {user ? (
           <>
+            <NotificationsBell />
             <span className="text-sm">{user.name}</span>
             <span className="text-muted-foreground text-xs capitalize">
               {user.role}

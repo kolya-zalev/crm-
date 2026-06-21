@@ -36,13 +36,16 @@ api.interceptors.response.use(
     }
 
     if (status === 403) {
-      toast.error(
-        err.response?.data?.message || "You don't have permission for this action",
-      );
+      if (!isAuthPage) {
+        toast.error(
+          err.response?.data?.message ||
+            "You don't have permission for this action",
+        );
+      }
       return Promise.reject(err);
     }
 
-    if (status) {
+    if (status && !isAuthPage) {
       toast.error(err.response?.data?.message || "An error occurred");
     }
 

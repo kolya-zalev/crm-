@@ -7,7 +7,11 @@ export type Permission =
   | "leads:edit"
   | "leads:delete"
   | "leads:import"
-  | "leads:export";
+  | "leads:export"
+  | 'team:read'
+  | 'team:invite'
+  | 'team:change-role'
+  | 'team:disable-user';
 
 export const RolePermissions: Record<Role, Permission[]> = {
     admin: [
@@ -18,6 +22,10 @@ export const RolePermissions: Record<Role, Permission[]> = {
         "leads:delete",
         "leads:import",
         "leads:export",
+        'team:read',
+        'team:invite',
+        'team:change-role',
+        'team:disable-user',
     ],
     manager: [
         "leads:read",
@@ -27,6 +35,9 @@ export const RolePermissions: Record<Role, Permission[]> = {
         "leads:delete",
         "leads:import",
         "leads:export",
+        'team:read',
+        'team:invite',
+       
     ],
     sales: [
         "leads:read",
