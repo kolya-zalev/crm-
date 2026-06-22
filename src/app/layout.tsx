@@ -31,6 +31,20 @@ export const metadata: Metadata = {
   description: "CRM",
 };
 
+function AppShell({ children }: { children: React.ReactNode }) {
+  return (
+    <>
+      <Navbar />
+      <div className="flex flex-1 overflow-hidden">
+        <SidebarProvider>
+          <AppSidebar />
+          <main className="flex-1 overflow-y-auto p-6">{children}</main>
+        </SidebarProvider>
+      </div>
+    </>
+  );
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{

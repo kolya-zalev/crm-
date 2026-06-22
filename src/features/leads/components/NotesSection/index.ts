@@ -1,0 +1,1 @@
+export {NotesSectionContainer as NoteSection} from './NotesSection.container'
