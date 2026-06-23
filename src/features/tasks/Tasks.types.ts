@@ -1,4 +1,4 @@
-import { Task } from "@/hooks/types";
+import { Task } from "@/types";
 
 export interface TasksComponentProps {
   filteredTasks: Task[];

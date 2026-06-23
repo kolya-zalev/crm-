@@ -1,4 +1,4 @@
-import { Lead } from "@/hooks/types";
+import { Lead } from "@/types";
 
 export function filterLeads(
   leads: Lead[],

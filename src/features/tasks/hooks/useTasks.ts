@@ -1,5 +1,5 @@
-import { Task } from "@/hooks/types";
-import tasksApi from "@/services/tasksApi";
+import type { Task } from "@/types";
+import tasksApi from "@/features/tasks/api/tasksApi";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 type CreateTaskInput = {
@@ -18,13 +18,11 @@ export function useTasks(leadId?: string) {
       leadId ? tasksApi.getByLead(leadId) : tasksApi.getAllTasks(),
   });
 
-  const invalidateTasks = () => {
-    void queryClient.invalidateQueries({ queryKey: ["tasks"] });
+  const invalidate = () => {
     if (leadId) {
-      void queryClient.invalidateQueries({
-        queryKey: ["leads", leadId, "tasks"],
-      });
+      queryClient.invalidateQueries({ queryKey: ["leads", leadId, "tasks"] });
     }
+    queryClient.invalidateQueries({ queryKey: ["tasks"] });
   };
 
   const createTaskMutation = useMutation({
@@ -32,18 +30,23 @@ export function useTasks(leadId?: string) {
       if (!leadId) throw new Error("leadId is required to create a task");
       return tasksApi.createTask(leadId, data);
     },
-    onSuccess: invalidateTasks,
+    onSuccess: invalidate,
   });
 
   const updateTaskMutation = useMutation({
-    mutationFn: ({ taskId, data }: { taskId: string; data: Partial<Task> }) =>
-      tasksApi.updateTask(taskId, data),
-    onSuccess: invalidateTasks,
+    mutationFn: ({
+      taskId,
+      data,
+    }: {
+      taskId: string;
+      data: Partial<Task>;
+    }) => tasksApi.updateTask(taskId, data),
+    onSuccess: invalidate,
   });
 
   const deleteTaskMutation = useMutation({
     mutationFn: (taskId: string) => tasksApi.deleteTask(taskId),
-    onSuccess: invalidateTasks,
+    onSuccess: invalidate,
   });
 
   const createTask = (data: CreateTaskInput) =>
@@ -52,5 +55,11 @@ export function useTasks(leadId?: string) {
     updateTaskMutation.mutateAsync({ taskId, data });
   const deleteTask = (taskId: string) => deleteTaskMutation.mutateAsync(taskId);
 
-  return { tasks, isLoading: isPending, createTask, updateTask, deleteTask };
+  return {
+    tasks,
+    isLoading: isPending,
+    createTask,
+    updateTask,
+    deleteTask,
+  };
 }

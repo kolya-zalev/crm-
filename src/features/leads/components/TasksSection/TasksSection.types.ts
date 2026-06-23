@@ -1,4 +1,5 @@
-import { Task } from "@/hooks/types";
+import { Task } from "@/types";
+import { TaskAddFormValues } from "@/validators";
 
 export interface TasksSectionProps {
   leadId: string;
@@ -7,12 +8,11 @@ export interface TasksSectionProps {
 export interface TasksSectionComponentProps {
   tasks: Task[];
   isLoading: boolean;
-  onAdd: (data: {
-    title: string;
-    description?: string;
-    priority: string;
-    dueDate: string;
-  }) => void;
+  onAdd: (data: TaskAddFormValues) => void;
   onToggle: (taskId: string, completed: boolean) => void;
+  onUpdate: (
+    taskId: string,
+    data: Partial<TaskAddFormValues>,
+  ) => Promise<void> | void;
   onDelete: (taskId: string) => void;
 }

@@ -1,4 +1,6 @@
-import { useActivities } from "@/features/hooks/useActivities";
+"use client";
+
+import { useActivities } from "@/features/leads/hooks/useActivities";
 import { ActivityTimelineProps } from "./ActivityTimeline.types";
 import { ActivityTimelineComponent } from "./ActivityTimeline.component";
 

@@ -8,7 +8,7 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
-import { isNavItemActive, NavItem } from "@/utils/utils";
+import { isNavItemActive, NavItem } from "@/config/navigation";
 import { cn } from "@/lib/utils";
 import { SidebarNavProps } from "./SidebarNav.types";
 

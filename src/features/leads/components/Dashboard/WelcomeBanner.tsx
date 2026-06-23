@@ -1,10 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
-interface WelcomeBannerProps {
-  newLeadsCount: number;
-}
+import { WelcomeBannerProps } from './utils/WelcomeBanner.utils'
 
 export function WelcomeBanner({ newLeadsCount }: WelcomeBannerProps) {
   return (

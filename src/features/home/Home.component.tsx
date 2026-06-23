@@ -1,6 +1,6 @@
 "use client";
 
-import { sidebarItems } from "@/utils/utils";
+import { sidebarItems } from "@/config/navigation";
 import { HomeCards } from "./components/HomeCards";
 
 export function HomeComponent() {

@@ -1,4 +1,4 @@
-import { Lead } from "@/hooks/types";
+import { Lead } from "@/types";
 import { LeadStats } from "./utils/calculateLeadStats";
 
 export interface DashboardComponentProps {

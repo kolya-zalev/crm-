@@ -1,4 +1,4 @@
-import { useTasks } from "@/features/hooks/useTasks";
+import { useTasks } from "@/features/tasks/hooks/useTasks";
 import { TasksSectionProps } from "./TasksSection.types";
 import { TasksSectionComponent } from "./TasksSection.component";
 
