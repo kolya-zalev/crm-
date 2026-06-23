@@ -8,7 +8,7 @@ import {
   NavigationMenuLink,
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
-import { brand, authRoutes } from "@/utils/utils";
+import { brand, authRoutes } from "@/config/navigation";
 
 export default function Navbar() {
   return (

@@ -1,4 +1,4 @@
-import { NavItem } from "@/utils/utils";
+import { NavItem } from "@/config/navigation";
 
 export interface HomeCardsProps {
   items: NavItem[];

@@ -6,9 +6,10 @@ import { cn } from "@/lib/utils";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/layout/AppSidebar";
 import Navbar from "@/components/layout/Navbar";
-import { MSWProvider } from "@/mocks/MswProvider";
+import { MSWProvider } from "@/providers/MswProvider";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/ThemeProvider/ThemeProvider";
+import QueryProvider from "@/providers/QueryProvider";
 
 
 const jetbrainsMono = JetBrains_Mono({
@@ -66,6 +67,8 @@ export default function RootLayout({
     >
       
       <body className="h-full flex flex-col overflow-hidden">
+        <QueryProvider>
+
         <ThemeProvider attribute='class' defaultTheme="system" enableSystem>
         <MSWProvider>
         <Navbar />
@@ -80,6 +83,7 @@ export default function RootLayout({
         
         <Toaster position="top-center" richColors />
         </ThemeProvider>
+        </QueryProvider>
       </body>
       
       

@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
-import { sidebarItems } from "@/utils/utils";
+import { sidebarItems } from "@/config/navigation";
 export default function Home() {
   return (
     <div className="flex flex-col flex-1 items-center justify-center  font-sans dark:bg-black">

@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { NavItem } from "@/utils/utils";
+import { NavItem } from "@/config/navigation";
 import { HomeCardsProps } from "./HomeCards.types";
 
 export function HomeCardsComponent({ items }: HomeCardsProps) {

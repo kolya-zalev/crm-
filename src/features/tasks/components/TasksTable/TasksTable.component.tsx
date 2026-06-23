@@ -7,7 +7,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Checkbox } from "@/components/ui/checkbox";
-import { priorityColors } from "../../Tasks.styles";
+import { priorityColors } from "../../utils/Tasks.styles";
 import { isTaskOverdue } from "../../utils/filterTasks";
 import { TasksTableProps } from "./TasksTable.types";
 

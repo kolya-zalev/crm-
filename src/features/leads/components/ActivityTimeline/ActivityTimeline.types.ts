@@ -1,4 +1,4 @@
-import {Activity} from "@/hooks/types"
+import {Activity} from "@/types"
 
 export interface ActivityTimelineProps{
     leadId: string

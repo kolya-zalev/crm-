@@ -1,16 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ActivityTimelineComponentProps } from "./ActivityTimeline.types";
-import { Star, RefreshCw, NotebookPen, Trash, Pencil } from "lucide-react";
 import { Spinner } from "@/components/ui/spinner";
+import { activityIcons } from "./utils/activityIcons.utils";
+import { ActivityTimelineComponentProps } from "./ActivityTimeline.types";
 
-
-const activityIcons: Record<string, React.ReactNode> = {
-  lead_created: <Star className="size-4 text-yellow-500" />,
-  status_changed: <RefreshCw className="size-4 text-blue-500" />,
-  note_added: <NotebookPen className="size-4 text-green-500" />,
-  note_deleted: <Trash className="size-4 text-red-500" />,
-  lead_updated: <Pencil className="size-4 text-purple-500" />,
-};
 export function ActivityTimelineComponent({
   activities,
   isLoading,

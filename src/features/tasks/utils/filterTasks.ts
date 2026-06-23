@@ -1,4 +1,4 @@
-import { Task } from "@/hooks/types";
+import { Task } from "@/types";
 
 export const TaskStatusFilter = {
   all: "all",

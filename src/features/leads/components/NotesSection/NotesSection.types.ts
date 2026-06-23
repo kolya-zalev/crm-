@@ -1,4 +1,4 @@
-import { Note } from "@/hooks/types";
+import { Note } from "@/types";
 
 export interface NoteSectionProps{
     leadId: string
