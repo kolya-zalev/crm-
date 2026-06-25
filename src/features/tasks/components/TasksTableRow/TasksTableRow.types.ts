@@ -1,8 +1,9 @@
-import type { Task } from "@/types";
+import { Task } from "@/types";
 
-export interface TaskItemProps {
+export type TasksTableRowProps = {
   task: Task;
+  leadName: string;
   onToggle: (taskId: string, completed: boolean) => void;
   onEdit: (task: Task) => void;
   onDelete: (taskId: string) => void;
-}
+};

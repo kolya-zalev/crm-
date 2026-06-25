@@ -1,7 +1,7 @@
-import type { TaskAddFormValues } from "@/validators";
+import { TaskAddFormValues } from "@/validators";
 
-export interface TaskFormProps {
+export type TaskFormProps = {
   isEditing: boolean;
   defaultValues: TaskAddFormValues;
   onSubmit: (data: TaskAddFormValues) => void;
-}
+};

@@ -155,7 +155,7 @@ export const fakeTasks: Task[] = [
     leadId: "3",
     title: "Issue Invoice for Down Payment",
     description: "Generate and send the invoice for the 50% upfront payment.",
-    status: "pending",
+    status: "completed",
     priority: "high",
     dueDate: new Date(Date.now() + 86400000 * 4).toISOString(),
     createdAt: new Date(Date.now()).toISOString(),

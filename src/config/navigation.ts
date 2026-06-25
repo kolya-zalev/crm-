@@ -1,4 +1,4 @@
-import { LuLayoutDashboard, LuUsersRound, LuSettings } from "react-icons/lu";
+import { LuLayoutDashboard, LuUsersRound, LuSettings, LuTags } from "react-icons/lu";
 import { IconType } from "react-icons";
 
 export type NavItem = {
@@ -30,6 +30,14 @@ export const sidebarItems: NavItem[] = [
     icon: LuUsersRound,
     description:
       "Manage your contacts, track deal progress, and organize your sales pipeline",
+  },
+  {
+    id: "tasks",
+    href: "/tasks",
+    label: "Tasks",
+    icon: LuTags,
+    description:
+      "Manage your tasks, track your progress, and organize your work",
   },
   {
     id: "settings",

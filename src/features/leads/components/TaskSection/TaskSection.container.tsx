@@ -1,40 +1,43 @@
 "use client";
 
 import { useState } from "react";
-import { useLeads } from "@/features/leads/hooks/useLeads";
+import { useTasks } from "@/features/tasks/hooks/useTasks";
 import { Task } from "@/types";
 import { TaskAddFormValues } from "@/validators";
-import { useTasks } from "./hooks/useTasks";
-import { TasksComponent } from "./Tasks.component";
-import { filterTasks, TaskFilterValue } from "./utils/filterTasks";
-import { createLeadNameLookup } from "./utils/getLeadName";
-import { getToggleTaskUpdate } from "./utils/getToggleTaskUpdate";
+import { filterTasks, TaskFilterValue } from "@/features/tasks/utils/filterTasks";
+import { getToggleTaskUpdate } from "@/features/tasks/utils/getToggleTaskUpdate";
+import { TaskSectionComponent } from "./TaskSection.component";
+import { TaskSectionProps } from "./TaskSection.types";
 
-export const TasksContainer = () => {
-  const {
-    tasks,
-    isLoading: tasksLoading,
-    updateTask,
-    deleteTask,
-  } = useTasks();
-  const { leads, isLoading: leadsLoading } = useLeads();
+export const TaskSectionContainer = ({ leadId }: TaskSectionProps) => {
+  const { tasks, isLoading, createTask, updateTask, deleteTask } =
+    useTasks(leadId);
+
   const [activeFilter, setActiveFilter] = useState<TaskFilterValue>("all");
   const [showForm, setShowForm] = useState(false);
   const [editingTaskId, setEditingTaskId] = useState<string | null>(null);
 
   const filteredTasks = filterTasks(tasks, activeFilter);
-  const getLeadName = createLeadNameLookup(leads);
 
   const handleToggle = (taskId: string, completed: boolean) => {
     updateTask(taskId, getToggleTaskUpdate(completed));
+  };
+
+  const handleCreate = (data: TaskAddFormValues) => {
+    createTask(data);
+  };
+
+  const handleUpdate = (taskId: string, data: TaskAddFormValues) => {
+    updateTask(taskId, data);
   };
 
   const handleDelete = (taskId: string) => {
     deleteTask(taskId);
   };
 
-  const handleUpdate = (taskId: string, data: TaskAddFormValues) => {
-    updateTask(taskId, data);
+  const handleOpenCreate = () => {
+    setEditingTaskId(null);
+    setShowForm(true);
   };
 
   const handleEditClick = (task: Task) => {
@@ -50,25 +53,27 @@ export const TasksContainer = () => {
   const handleFormSubmit = (data: TaskAddFormValues) => {
     if (editingTaskId !== null) {
       handleUpdate(editingTaskId, data);
+    } else {
+      handleCreate(data);
     }
     handleCancelForm();
   };
 
   return (
-    <TasksComponent
+    <TaskSectionComponent
       tasks={filteredTasks}
-      isLoading={tasksLoading || leadsLoading}
-      getLeadName={getLeadName}
+      allTasks={tasks}
+      isLoading={isLoading}
+      activeFilter={activeFilter}
       showForm={showForm}
       editingTaskId={editingTaskId}
-      allTasks={tasks}
-      activeFilter={activeFilter}
       onFilterChange={setActiveFilter}
+      onOpenCreate={handleOpenCreate}
+      onCancelForm={handleCancelForm}
+      onFormSubmit={handleFormSubmit}
       onToggle={handleToggle}
       onDelete={handleDelete}
       onEditClick={handleEditClick}
-      onFormSubmit={handleFormSubmit}
-      onCancelForm={handleCancelForm}
     />
   );
 };

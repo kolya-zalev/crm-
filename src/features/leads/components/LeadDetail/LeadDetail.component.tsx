@@ -1,8 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { LeadAddModal, FormStatus } from "@/features/leads/components/LeadAddModal";
+import {
+  LeadAddModal,
+  FormStatus,
+} from "@/features/leads/components/LeadAddModal";
 import { NoteSection } from "@/features/leads/components/NotesSection";
 import { ActivityTimeline } from "@/features/leads/components/ActivityTimeline";
-import { TasksSection } from "@/features/leads/components/TasksSection";
 import { LeadDetailComponentProps } from "./LeadDetail.types";
 import { LeadDetailHeader } from "./components/LeadDetailHeader/LeadDetailHeader.component";
 import { LeadDetailTitle } from "./components/LeadDetailTitle/LeadDetailTitle.component";
@@ -10,6 +12,7 @@ import { LeadStatusStepper } from "./components/LeadStatusStepper/LeadStatusStep
 import { LeadLostBanner } from "./components/LeadLostBanner/LeadLostBanner.component";
 import { LeadContactInfo } from "./components/LeadContactInfo/LeadContactInfo.component";
 import { LeadDetailsInfo } from "./components/LeadDetailsInfo/LeadDetailsInfo.component";
+import { TaskSectionContainer } from "../TaskSection/TaskSection.container";
 
 export function LeadDetailComponent({
   leadId,
@@ -42,8 +45,9 @@ export function LeadDetailComponent({
         <NoteSection leadId={leadId} />
         <ActivityTimeline leadId={leadId} />
       </div>
+      
       <div className="mt-6">
-        <TasksSection leadId={leadId} />
+        <TaskSectionContainer leadId={leadId} />
       </div>
 
       <LeadAddModal
