@@ -1,29 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useLeads } from "@/features/leads/hooks/useLeads";
 import { Task } from "@/types";
 import { TaskAddFormValues } from "@/validators";
 import { useTasks } from "./hooks/useTasks";
 import { TasksComponent } from "./Tasks.component";
 import { filterTasks, TaskFilterValue } from "./utils/filterTasks";
-import { createLeadNameLookup } from "./utils/getLeadName";
 import { getToggleTaskUpdate } from "./utils/getToggleTaskUpdate";
 
 export const TasksContainer = () => {
-  const {
-    tasks,
-    isLoading: tasksLoading,
-    updateTask,
-    deleteTask,
-  } = useTasks();
+  const { tasks, isLoading: tasksLoading, updateTask, deleteTask } = useTasks();
   const { leads, isLoading: leadsLoading } = useLeads();
   const [activeFilter, setActiveFilter] = useState<TaskFilterValue>("all");
   const [showForm, setShowForm] = useState(false);
   const [editingTaskId, setEditingTaskId] = useState<string | null>(null);
 
   const filteredTasks = filterTasks(tasks, activeFilter);
-  const getLeadName = createLeadNameLookup(leads);
+  
+  const leadNameById = useMemo(() => {
+    const map = new Map(leads.map(({ id, name }) => [id, name]));
+    return (leadId: string) => map.get(leadId) ?? "Lead not found";
+  }, [leads]);
 
   const handleToggle = (taskId: string, completed: boolean) => {
     updateTask(taskId, getToggleTaskUpdate(completed));
@@ -58,7 +56,7 @@ export const TasksContainer = () => {
     <TasksComponent
       tasks={filteredTasks}
       isLoading={tasksLoading || leadsLoading}
-      getLeadName={getLeadName}
+      getLeadName={leadNameById}
       showForm={showForm}
       editingTaskId={editingTaskId}
       allTasks={tasks}
