@@ -1,38 +1,24 @@
-import { Task } from "@/hooks/types";
+import { TaskFilters } from "./tasksColors";
+import { Task } from "@/types";
 
-export const TaskStatusFilter = {
-  all: "all",
-  overdue: "overdue",
-  completed: "completed",
-  pending: "pending",
-} as const;
+export type TaskFilterValue = (typeof TaskFilters)[number];
 
-export function matchesStatus(task: Task, filter: string): boolean {
+const todayDay = () => new Date().toISOString().split("T", 1)[0];
+
+export const isTaskOverdue = (task: Task) => {
+  if (task.status !== "pending") return false;
+  return task.dueDate.split("T", 1)[0] < todayDay();
+};
+
+export const filterTasks = (tasks: Task[], filter: TaskFilterValue) => {
   switch (filter) {
-    case TaskStatusFilter.all:
-      return true;
-    case TaskStatusFilter.overdue:
-      return task.status === "pending" && new Date(task.dueDate) < new Date();
-    default:
-      return task.status === filter;
+    case "all":
+      return tasks;
+    case "completed":
+      return tasks.filter((task) => task.status === "completed");
+    case "high":
+      return tasks.filter((task) => task.priority === "high");
+    case "overdue":
+      return tasks.filter((task) => isTaskOverdue(task));
   }
-}
-
-export function matchesPriority(task: Task, filter: string): boolean {
-  return filter === "all" ? true : task.priority === filter;
-}
-
-export function filterTasks(
-  tasks: Task[],
-  statusFilter: string,
-  priorityFilter: string,
-): Task[] {
-  return tasks.filter(
-    (task) =>
-      matchesStatus(task, statusFilter) && matchesPriority(task, priorityFilter),
-  );
-}
-
-export function isTaskOverdue(task: Task): boolean {
-  return task.status === "pending" && new Date(task.dueDate) < new Date();
-}
+};

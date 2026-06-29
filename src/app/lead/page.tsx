@@ -1,5 +1,5 @@
-import LeadsTableContainer from "@/features/leads/components/LeadsTable/LeadsTable.container";
+import { Leads } from "@/features/leads";
 
 export default function LeadsPage() {
-  return <LeadsTableContainer />;
+  return <Leads />;
 }

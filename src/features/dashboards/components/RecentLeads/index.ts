@@ -1,1 +1,0 @@
-export {ResentLeadsContainer as RecentLeads} from '@/features/dashboards/components/RecentLeads/RecentLeads.container'

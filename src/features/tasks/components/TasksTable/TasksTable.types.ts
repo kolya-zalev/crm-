@@ -1,7 +1,9 @@
-import { Task } from "@/hooks/types";
+import { Task } from "@/types";
 
-export interface TasksTableProps {
+export type TasksTableComponentProps = {
   tasks: Task[];
   getLeadName: (leadId: string) => string;
-  onToggleComplete: (taskId: string, completed: boolean) => void;
-}
+  onToggle: (taskId: string, completed: boolean) => void;
+  onEditClick: (task: Task) => void;
+  onDelete: (taskId: string) => void;
+};

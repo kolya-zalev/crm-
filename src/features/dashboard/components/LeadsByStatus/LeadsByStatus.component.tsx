@@ -1,13 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LeadsByStatusProps } from "./LeadsByStatus.types";
+import { StatusBars } from "./utils/StatusBars/StatusBars.utils";
 
-export const statusBars  = [
-  { status: "new", label: "New", color: "bg-blue-500" },
-  { status: "contacted", label: "Contacted", color: "bg-sky-500" },
-  { status: "qualified", label: "Qualified", color: "bg-purple-500" },
-  { status: "won", label: "Won", color: "bg-green-500" },
-  { status: "lost", label: "Lost", color: "bg-red-500" },
-];
 
 export function LeadsByStatusComponent({stats}: LeadsByStatusProps){
     return(
@@ -20,7 +14,7 @@ export function LeadsByStatusComponent({stats}: LeadsByStatusProps){
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-col gap-3">
-                    {statusBars.map((bar) => {
+                    {StatusBars.map((bar) => {
                       const count = stats[bar.status];
                       const percent =
                         stats.total === 0 ? 0 : Math.round((count / stats.total) * 100);

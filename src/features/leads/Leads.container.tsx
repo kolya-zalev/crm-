@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Lead } from "@/hooks/types";
+import { Lead } from "@/types";
 import { LeadAddFormValues } from "@/validators";
 import { useLeads } from "./hooks/useLeads";
 import { filterLeads } from "./utils/filterLeads";

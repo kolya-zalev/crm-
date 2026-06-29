@@ -1,4 +1,4 @@
-import { useNotes } from "@/features/hooks/useNotes";
+import { useNotes } from "@/features/leads/hooks/useNotes";
 import { NoteSectionProps} from "./NotesSection.types";
 import { NotesSectionComponent } from "./NotesSection.component";
 
