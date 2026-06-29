@@ -1,10 +1,7 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-interface LeadsSearchProps {
-  value: string;
-  onChange: (value: string) => void;
-}
+import { LeadsSearchProps } from "./LeadsSearch.types";
 
 export const LeadsSearch = ({ value, onChange }: LeadsSearchProps) => {
   return (
@@ -13,8 +10,6 @@ export const LeadsSearch = ({ value, onChange }: LeadsSearchProps) => {
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder="Search"
-      
     />
-    
   );
 };

@@ -13,6 +13,7 @@ import { LeadLostBanner } from "./components/LeadLostBanner/LeadLostBanner.compo
 import { LeadContactInfo } from "./components/LeadContactInfo/LeadContactInfo.component";
 import { LeadDetailsInfo } from "./components/LeadDetailsInfo/LeadDetailsInfo.component";
 import { TaskSectionContainer } from "../TaskSection/TaskSection.container";
+import { Button } from "@/components/ui/button";
 
 export function LeadDetailComponent({
   leadId,
@@ -22,6 +23,8 @@ export function LeadDetailComponent({
   onEditOpen,
   onEditClose,
   onUpdate,
+  onStatusStepChange,
+  onMarkAsLost,
 }: LeadDetailComponentProps) {
   return (
     <div className="mx-auto max-w-4xl p-4">
@@ -31,7 +34,13 @@ export function LeadDetailComponent({
         <hr className="border-muted" />
         <CardContent className="flex flex-col gap-8 pt-6">
           <LeadDetailTitle lead={lead} />
-          <LeadStatusStepper currentStatusIndex={currentStatusIndex} />
+          <Button variant="destructive" size="sm" onClick={onMarkAsLost}>
+            Mark as Lost
+          </Button>
+          <LeadStatusStepper
+            currentStatusIndex={currentStatusIndex}
+            onStatusStepChange={onStatusStepChange}
+          />
           {lead.status === "lost" && <LeadLostBanner />}
 
           <div className="grid grid-cols-1 gap-8 border-t pt-6 md:grid-cols-2">
@@ -45,7 +54,7 @@ export function LeadDetailComponent({
         <NoteSection leadId={leadId} />
         <ActivityTimeline leadId={leadId} />
       </div>
-      
+
       <div className="mt-6">
         <TaskSectionContainer leadId={leadId} />
       </div>

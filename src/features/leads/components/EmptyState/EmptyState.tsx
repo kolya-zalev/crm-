@@ -1,8 +1,5 @@
 import { TableCell, TableRow } from "@/components/ui/table";
-
-interface EmptyStateProps {
-  message?: string;
-}
+import { EmptyStateProps } from "./EmptyState.types";
 
 export const EmptyState = ({ message = "No leads found" }: EmptyStateProps) => {
   return (

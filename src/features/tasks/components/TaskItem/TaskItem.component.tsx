@@ -36,7 +36,7 @@ export const TaskItemComponent = ({
           </div>
         </div>
       </div>
-      <TaskRowActions task={task} onEdit={onEdit} onDelete={onDelete} />
+      <TaskRowActions task={task} onEdit={onEdit} onDelete={onDelete} onDeleteConfirm={() => {}} />
     </div>
   );
 };

@@ -1,3 +1,5 @@
+import { Lead } from "@/types/lead.types";
+
 export const LeadStatuses = [
   "new",
   "contacted",
@@ -11,3 +13,5 @@ export function getCurrentStatusIndex(status: string): number {
   );
   return index >= 0 ? index + 1 : 1;
 }
+
+

@@ -1,9 +1,9 @@
 "use client";
 
 import { TaskForm } from "../TaskForm";
-import { findTask } from "../../utils/findTask";
 import { getTaskFormDefaultValues } from "../../utils/getTaskFormDefaultValues";
 import { TaskEditFormPanelProps } from "./TaskEditFormPanel.types";
+import { editingTask } from "./utils/editingTask";
 
 export const TaskEditFormPanel = ({
   showForm,
@@ -13,14 +13,14 @@ export const TaskEditFormPanel = ({
 }: TaskEditFormPanelProps) => {
   if (!showForm) return null;
 
-  const editingTask = findTask(allTasks, editingTaskId ?? "");
-
   return (
     <div className="rounded-lg border bg-muted/30 p-4">
       <TaskForm
         key={editingTaskId ?? "new"}
         isEditing={editingTaskId !== null}
-        defaultValues={getTaskFormDefaultValues(editingTask)}
+        defaultValues={getTaskFormDefaultValues(
+          editingTask(allTasks, editingTaskId),
+        )}
         onSubmit={onSubmit}
       />
     </div>

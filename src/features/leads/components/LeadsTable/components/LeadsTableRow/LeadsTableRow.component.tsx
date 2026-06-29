@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { LeadsStatusBadge } from "@/features/leads/components/LeadsStatusBadge";
-import { formatLeadTags } from "../../LeadsTable.utils";
+import { formatLeadTags } from "../../utils/LeadsTable.utils";
 import { LeadsTableRowProps } from "./LeadsTableRow.types";
-import { LeadsTableRowActions } from "../LeadsTableRowActions/LeadsTableRowActions.component";
+import { LeadsTableRowActions } from "../LeadsTableRowActions";
 
 export const LeadsTableRow = ({
   lead,
@@ -24,7 +24,9 @@ export const LeadsTableRow = ({
       </TableCell>
       <TableCell className="text-center text-gray-600">{lead.email}</TableCell>
       <TableCell className="text-center text-gray-600">{lead.phone}</TableCell>
-      <TableCell className="text-center text-gray-600">{lead.company}</TableCell>
+      <TableCell className="text-center text-gray-600">
+        {lead.company}
+      </TableCell>
       <TableCell className="text-center">
         <LeadsStatusBadge status={lead.status} />
       </TableCell>

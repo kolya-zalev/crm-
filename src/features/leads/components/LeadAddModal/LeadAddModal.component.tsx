@@ -7,17 +7,8 @@ import {
 import { LeadAddFormValues } from "@/validators";
 import { FormStatus, LeadAddModalProps } from "./LeadAddModal.types";
 import { LeadAddForm } from "./components/LeadAddForm/LeadAddForm.component";
+import { emptyLeadValues } from "./utils/emptyLeadValues";
 
-const emptyLeadValues: LeadAddFormValues = {
-  name: "",
-  email: "",
-  phone: "",
-  company: "",
-  status: "new",
-  tags: [],
-  notes: "",
-  source: "",
-};
 
 export function LeadAddModalComponent({
   open,

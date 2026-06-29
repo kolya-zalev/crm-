@@ -1,17 +1,16 @@
 import { useNotes } from "@/features/leads/hooks/useNotes";
-import { NoteSectionProps} from "./NotesSection.types";
+import { NoteSectionProps } from "./NotesSection.types";
 import { NotesSectionComponent } from "./NotesSection.component";
 
-export function NotesSectionContainer({leadId}: NoteSectionProps){
-    const{notes, isLoading, createNote, deleteNote} = useNotes(leadId)
+export function NotesSectionContainer({ leadId }: NoteSectionProps) {
+  const { notes, isLoading, createNote, deleteNote } = useNotes(leadId);
 
-    return(
-        <NotesSectionComponent 
-        notes={notes}
-        isLoading={isLoading}
-        onAdd={createNote}
-        onDelete={deleteNote}
-        
-        />
-    )
+  return (
+    <NotesSectionComponent
+      notes={notes}
+      isLoading={isLoading}
+      onAdd={createNote}
+      onDelete={deleteNote}
+    />
+  );
 }

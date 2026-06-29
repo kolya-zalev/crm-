@@ -5,7 +5,7 @@ import { LeadAddFormValues } from "@/validators";
 import { Spinner } from "@/components/ui/spinner";
 import { useLead } from "@/features/leads/hooks/useLead";
 import { useLeads } from "@/features/leads/hooks/useLeads";
-import { getCurrentStatusIndex } from "./utils/leadStatus";
+import { getCurrentStatusIndex, LeadStatuses } from "./utils/leadStatus";
 import { LeadDetailComponent } from "./LeadDetail.component";
 
 interface LeadDetailContainerProps {
@@ -20,6 +20,21 @@ export function LeadDetailContainer({ leadId }: LeadDetailContainerProps) {
   const handleUpdate = async (id: string, data: LeadAddFormValues) => {
     await updateLead(id, data);
     setIsEditOpen(false);
+  };
+
+  const handleStatusStepChange = (step: number) => {
+    const newStatus = LeadStatuses[step - 1];
+    if (newStatus === lead?.status) return;
+    if (newStatus) {
+      updateLead(leadId, { status: newStatus });
+    }
+  };
+
+  const handleMarkAsLost = () => {
+    if (lead?.status === "lost") return;
+    {
+      updateLead(leadId, { status: "lost" });
+    }
   };
 
   if (isLoading) {
@@ -38,8 +53,10 @@ export function LeadDetailContainer({ leadId }: LeadDetailContainerProps) {
     <LeadDetailComponent
       leadId={leadId}
       lead={lead}
+      onStatusStepChange={handleStatusStepChange}
       currentStatusIndex={getCurrentStatusIndex(lead.status)}
       isEditOpen={isEditOpen}
+      onMarkAsLost={handleMarkAsLost}
       onEditOpen={() => setIsEditOpen(true)}
       onEditClose={() => setIsEditOpen(false)}
       onUpdate={handleUpdate}

@@ -2,7 +2,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
 import { TaskItem } from "@/features/tasks/components/TaskItem";
 import { TaskFiltersBar } from "@/features/tasks/components/TaskFiltersBar";
 import { TaskEditFormPanel } from "@/features/tasks/components/TaskEditFormPanel";
@@ -11,7 +10,6 @@ import { TaskSectionComponentProps } from "./TaskSection.types";
 export const TaskSectionComponent = ({
   tasks,
   allTasks,
-  isLoading,
   activeFilter,
   showForm,
   editingTaskId,
@@ -23,14 +21,6 @@ export const TaskSectionComponent = ({
   onDelete,
   onEditClick,
 }: TaskSectionComponentProps) => {
-  if (isLoading) {
-    return (
-      <div className="flex h-full w-full items-center justify-center">
-        <Spinner className="size-8" />
-      </div>
-    );
-  }
-
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">

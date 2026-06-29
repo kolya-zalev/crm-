@@ -1,11 +1,6 @@
-import { Task } from "@/types";
 import { cn } from "@/lib/utils";
 import { isTaskOverdue } from "../../utils/filterTasks";
-
-type TaskTitleProps = {
-  task: Task;
-  className?: string;
-};
+import { TaskTitleProps } from "./TaskTitile.types";
 
 export const TaskTitle = ({ task, className }: TaskTitleProps) => {
   return (

@@ -50,7 +50,7 @@ export const TasksTableRow = ({
         <TaskDueText task={task} />
       </TableCell>
       <TableCell className="text-center">
-        <TaskRowActions task={task} onEdit={onEdit} onDelete={onDelete} />
+        <TaskRowActions task={task} onEdit={onEdit} onDelete={onDelete} onDeleteConfirm={() => {}} />
       </TableCell>
     </TableRow>
   );
