@@ -10,4 +10,5 @@ export interface LeadsTableComponentProps {
   onDelete: (id: string) => Promise<void>;
   onAddClick: () => void;
   onEditClick: (lead: Lead) => void;
+  onImportClick: () => void;
 }

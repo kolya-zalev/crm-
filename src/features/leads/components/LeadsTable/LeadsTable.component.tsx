@@ -23,6 +23,7 @@ export function LeadsTableComponent({
   onDelete,
   onAddClick,
   onEditClick,
+  onImportClick,
 }: LeadsTableComponentProps) {
   const columns = useMemo(
     () => getLeadsDataTableColumns({ onEditClick, onDelete }),
@@ -33,6 +34,9 @@ export function LeadsTableComponent({
       <div className="flex flex-row flex-wrap items-center gap-2">
         <LeadsSearch value={search} onChange={onSearchChange} />
         <LeadsFilter value={filter} onChange={onFilterChange} />
+        <Button className="rounded-2xl cursor-pointer bg-white text-black" onClick={onImportClick}>
+          Import CSV
+        </Button>
         <p className="ml-auto p-2 text-sm font-medium text-gray-600">
           Total Leads: {leadsLoading(isLoading, leads)}
         </p>
