@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
@@ -10,7 +9,7 @@ import { MSWProvider } from "@/providers/MswProvider";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/ThemeProvider/ThemeProvider";
 import QueryProvider from "@/providers/QueryProvider";
-
+import SessionProvider from "@/providers/SessionProvider";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -32,26 +31,12 @@ export const metadata: Metadata = {
   description: "CRM",
 };
 
-function AppShell({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <Navbar />
-      <div className="flex flex-1 overflow-hidden">
-        <SidebarProvider>
-          <AppSidebar />
-          <main className="flex-1 overflow-y-auto p-6">{children}</main>
-        </SidebarProvider>
-      </div>
-    </>
-  );
-}
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html
       lang="en"
@@ -65,28 +50,17 @@ export default function RootLayout({
         jetbrainsMono.variable,
       )}
     >
-      
       <body className="h-full flex flex-col overflow-hidden">
-        <QueryProvider>
+        <SessionProvider>
+          <QueryProvider>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <MSWProvider>{children}</MSWProvider>
 
-        <ThemeProvider attribute='class' defaultTheme="system" enableSystem>
-        <MSWProvider>
-        <Navbar />
-        <div className="flex flex-1 overflow-hidden">
-          <SidebarProvider>
-            <AppSidebar />
-            <main className="flex-1 overflow-y-auto p-6">{children}</main>
-          </SidebarProvider>
-        </div>
-        
-        </MSWProvider>
-        
-        <Toaster position="top-center" richColors />
-        </ThemeProvider>
-        </QueryProvider>
+              <Toaster position="top-center" richColors />
+            </ThemeProvider>
+          </QueryProvider>
+        </SessionProvider>
       </body>
-      
-      
     </html>
   );
 }

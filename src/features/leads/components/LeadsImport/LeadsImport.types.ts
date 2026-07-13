@@ -15,11 +15,18 @@ export type LeadImportValidationResult = {
 export type LeadImportComponentProps = {
   open: boolean;
   fileName: string | null;
-  validationResult: LeadImportValidationResult | null;
   isImporting: boolean;
-  onFileSelect: (file: File) => void;
+  showEmptyState: boolean;
+  showErrors: boolean;
+  canImport: boolean;
+  totalRows: number;
+  validCount: number;
+  errorCount: number;
+  errors: LeadImportRowError[];
+  importButton: string;
   onClose: () => void;
   onChooseFile: () => void;
+  onFileInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onImportConfirm: () => void;
   fileInput: React.RefObject<HTMLInputElement | null>;
 };

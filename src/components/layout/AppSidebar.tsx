@@ -8,7 +8,7 @@ import {
   SidebarHeader,
   SidebarMenu,
   SidebarMenuItem,
-  SidebarMenuButton
+  SidebarMenuButton,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -49,7 +49,7 @@ export function AppSidebar() {
                       "bg-white/15 text-white font-semibold shadow-sm",
                       "before:absolute before:left-0 before:top-3 before:bottom-3 before:w-1 before:rounded-r-full before:bg-white before:animate-ping",
                     ],
-                  )}  
+                  )}
                 >
                   <Link
                     href={item.href}
@@ -73,9 +73,7 @@ export function AppSidebar() {
         <SidebarGroup />
       </SidebarContent>
 
-      <SidebarFooter >
-        
-      </SidebarFooter>
+      <SidebarFooter></SidebarFooter>
     </Sidebar>
   );
 }

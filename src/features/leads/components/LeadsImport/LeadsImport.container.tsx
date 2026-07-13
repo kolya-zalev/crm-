@@ -20,8 +20,31 @@ export const LeadsImportContainer = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { createLead } = useLeads();
 
+  const showEmptyState = validationResult === null;
+  const showErrors = (validationResult?.errors.length ?? 0) > 0;
+  const canImport =
+    validationResult !== null &&
+    validationResult.errors.length === 0 &&
+    validationResult.validRows.length > 0 &&
+    !isImporting;
+
+  const totalRows = validationResult?.totalRows ?? 0;
+  const validCount = validationResult?.validRows.length ?? 0;
+  const errorCount = validationResult?.errors.length ?? 0;
+  const errors = validationResult?.errors ?? [];
+
+  const importButton =
+    validationResult && validCount > 0
+      ? `Import ${validCount} leads`
+      : "Import";
+
   const handleChooseFile = () => {
     fileInputRef.current?.click();
+  };
+  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) handleFileSelect(file);
+    e.target.value = "";
   };
 
   const handleFileSelect = async (file: File) => {
@@ -79,12 +102,19 @@ export const LeadsImportContainer = ({
     <LeadsImportComponent
       open={open}
       fileName={fileName}
-      validationResult={validationResult}
       isImporting={isImporting}
-      onFileSelect={handleFileSelect}
+      showEmptyState={showEmptyState}
+      showErrors={showErrors}
+      canImport={canImport}
+      totalRows={totalRows}
+      validCount={validCount}
+      errorCount={errorCount}
+      errors={errors}
+      importButton={importButton}
       onClose={handleCloseModal}
       onChooseFile={handleChooseFile}
       onImportConfirm={handleImportConfirm}
+      onFileInputChange={handleFileInputChange}
       fileInput={fileInputRef}
     />
   );
