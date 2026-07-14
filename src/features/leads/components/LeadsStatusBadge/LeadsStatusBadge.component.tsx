@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { LeadStatusStyles } from "./utils/LeadsStatusStyles";
+import { LeadStatusStyles } from "./LeadsStatusBadge.constants";
 import { LeadsStatusBadgeProps } from "./LeadsStatusBadge.types";
 
 export const LeadsStatusBadge = ({ status }: LeadsStatusBadgeProps) => {

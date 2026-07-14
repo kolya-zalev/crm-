@@ -10,21 +10,18 @@ export const TaskFiltersBar = ({
 }: TaskFiltersBarProps) => {
   return (
     <div className="flex flex-wrap gap-2">
-      {TaskFilters.map((filter) => {
-        const variantFilter = activeFilter === filter ? "default" : "outline";
-        return (
-          <Button
-            key={filter}
-            type="button"
-            variant={variantFilter}
-            size="sm"
-            className="cursor-pointer capitalize"
-            onClick={() => onFilterChange(filter)}
-          >
-            {filter}
-          </Button>
-        );
-      })}
+      {TaskFilters.map((filter) => (
+        <Button
+          key={filter}
+          type="button"
+          variant={activeFilter === filter ? "default" : "outline"}
+          size="sm"
+          className="cursor-pointer capitalize"
+          onClick={() => onFilterChange(filter)}
+        >
+          {filter}
+        </Button>
+      ))}
     </div>
   );
 };

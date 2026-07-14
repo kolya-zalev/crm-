@@ -9,7 +9,6 @@ type TaskRowActionsProps = {
   task: Task;
   onEdit: (task: Task) => void;
   onDelete: (taskId: string) => void;
-  onDeleteConfirm: () => void;
 };
 
 export const TaskRowActions = ({
