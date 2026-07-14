@@ -18,4 +18,4 @@ declare module "next-auth/jwt" {
   }
 }
 
-//this is for the extended types for the next-auth cause typescript cant understand the types of the seesion adn user
+//this is for the extended types for the next-auth cause typescript cant understand the types of the seesion and user
