@@ -7,12 +7,12 @@ import { useLeads } from "./hooks/useLeads";
 import { filterLeads } from "./utils/filterLeads";
 import { FormStatus } from "./components/LeadAddModal";
 import { LeadsComponent } from "./Leads.component";
-
 export function LeadsContainer() {
   const { leads, isLoading, createLead, deleteLead, updateLead } = useLeads();
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
   const [isAddOpen, setIsAddOpen] = useState(false);
+  const [isImportOpen, setIsImportOpen] = useState(false);
   const [editingLead, setEditingLead] = useState<Lead | null>(null);
 
   const formStatus = editingLead ? FormStatus.EDIT : FormStatus.NEW;
@@ -37,8 +37,10 @@ export function LeadsContainer() {
     setIsAddOpen(false);
     setEditingLead(null);
   };
+  
 
   return (
+    
     <LeadsComponent
       filteredLeads={filteredLeads}
       search={search}
@@ -47,6 +49,9 @@ export function LeadsContainer() {
       isModalOpen={isModalOpen}
       formStatus={formStatus}
       editingLead={editingLead}
+      isImportOpen={isImportOpen}
+      onImportClick={() => setIsImportOpen(true)}
+      onImportClose={() => setIsImportOpen(false)}
       onSearchChange={setSearch}
       onFilterChange={setFilter}
       onDelete={handleDelete}

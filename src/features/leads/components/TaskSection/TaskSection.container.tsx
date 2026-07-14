@@ -4,10 +4,14 @@ import { useState } from "react";
 import { useTasks } from "@/features/tasks/hooks/useTasks";
 import { Task } from "@/types";
 import { TaskAddFormValues } from "@/validators";
-import { filterTasks, TaskFilterValue } from "@/features/tasks/utils/filterTasks";
+import {
+  filterTasks,
+  TaskFilterValue,
+} from "@/features/tasks/utils/filterTasks";
 import { getToggleTaskUpdate } from "@/features/tasks/utils/getToggleTaskUpdate";
 import { TaskSectionComponent } from "./TaskSection.component";
 import { TaskSectionProps } from "./TaskSection.types";
+import { Spinner } from "@/components/ui/spinner";
 
 export const TaskSectionContainer = ({ leadId }: TaskSectionProps) => {
   const { tasks, isLoading, createTask, updateTask, deleteTask } =
@@ -58,7 +62,12 @@ export const TaskSectionContainer = ({ leadId }: TaskSectionProps) => {
     }
     handleCancelForm();
   };
-
+  if (isLoading)
+    return (
+      <div className="flex items-center justify-center h-full w-full">
+        <Spinner className="size-8" />
+      </div>
+    );
   return (
     <TaskSectionComponent
       tasks={filteredTasks}

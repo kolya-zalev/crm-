@@ -1,13 +1,10 @@
-import { Task } from "@/types";
+import {TaskDueTextProps} from './TaskDue.types'
 import { cn } from "@/lib/utils";
 import { isTaskOverdue } from "../../utils/filterTasks";
-
-type TaskDueTextProps = {
-  task: Task;
-  className?: string;
-};
+import { dueLabel } from "./utils/formatTaskDueDate";
 
 export const TaskDueText = ({ task, className }: TaskDueTextProps) => {
+
   return (
     <span
       className={cn(
@@ -17,9 +14,7 @@ export const TaskDueText = ({ task, className }: TaskDueTextProps) => {
         className,
       )}
     >
-      {task.status === "completed"
-        ? "Done"
-        : new Date(task.dueDate).toLocaleDateString()}
+      {dueLabel(task)}
     </span>
   );
 };

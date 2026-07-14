@@ -10,6 +10,7 @@ export interface LeadsComponentProps {
   isModalOpen: boolean;
   formStatus: FormStatusType;
   editingLead: Lead | null;
+  isImportOpen: boolean;
   onSearchChange: (value: string) => void;
   onFilterChange: (value: string) => void;
   onDelete: (id: string) => Promise<void>;
@@ -18,4 +19,6 @@ export interface LeadsComponentProps {
   onCloseModal: () => void;
   onCreate: (data: Omit<Lead, "id">) => Promise<void>;
   onUpdate: (id: string, data: LeadAddFormValues) => Promise<void>;
+  onImportClick: () => void;
+  onImportClose: () => void;
 }

@@ -1,6 +1,7 @@
 import { LeadsTable } from "./components/LeadsTable";
 import { LeadAddModal } from "./components/LeadAddModal";
 import { LeadsComponentProps } from "./Leads.types";
+import { LeadsImport } from "./components/LeadsImport";
 
 export function LeadsComponent({
   filteredLeads,
@@ -18,6 +19,9 @@ export function LeadsComponent({
   onCloseModal,
   onCreate,
   onUpdate,
+  onImportClick,
+  onImportClose,
+  isImportOpen,
 }: LeadsComponentProps) {
   return (
     <>
@@ -31,6 +35,7 @@ export function LeadsComponent({
         onDelete={onDelete}
         onAddClick={onAddClick}
         onEditClick={onEditClick}
+        onImportClick={onImportClick}
       />
       <LeadAddModal
         key={editingLead?.id ?? "new"}
@@ -41,6 +46,7 @@ export function LeadsComponent({
         formStatus={formStatus}
         lead={editingLead}
       />
+      <LeadsImport open={isImportOpen} onClose={onImportClose} />
     </>
   );
 }

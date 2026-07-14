@@ -1,0 +1,3 @@
+name,email,company,status,phone,tags,notes,source
+John Doe,john1@example.com,Acme Inc,new,111,vip;partner,note,web
+Jane Smith,jane@example.com,Tech Corp,qualified, +0000000000, none, note,,

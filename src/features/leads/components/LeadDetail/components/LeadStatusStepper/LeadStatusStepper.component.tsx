@@ -13,12 +13,14 @@ import { LeadStatusStepperProps } from "./LeadStatusStepper.types";
 
 export const LeadStatusStepper = ({
   currentStatusIndex,
+  onStatusStepChange,
 }: LeadStatusStepperProps) => {
   return (
     <div className="flex items-center gap-4">
       <Stepper
         className="w-full"
         value={currentStatusIndex}
+        onValueChange={onStatusStepChange}
         indicators={{
           completed: <Check className="size-3.5" />,
           loading: <Loader className="size-3.5 animate-spin" />,

@@ -1,5 +1,6 @@
 import { NotebookPen, SquareArrowRightEnter, Tags } from "lucide-react";
 import { LeadDetailsInfoProps } from "./LeadDetailsInfo.types";
+import { leadsTags } from "./utils/leadsTags";
 
 export const LeadDetailsInfo = ({ lead }: LeadDetailsInfoProps) => {
   return (
@@ -31,9 +32,7 @@ export const LeadDetailsInfo = ({ lead }: LeadDetailsInfoProps) => {
             <Tags className="size-3.5" />
             <span>Tags</span>
           </div>
-          <p className="text-sm font-medium">
-            {lead.tags?.length > 0 ? lead.tags.join(", ") : "—"}
-          </p>
+          <p className="text-sm font-medium">{leadsTags(lead.tags)}</p>
         </div>
       </div>
     </div>
