@@ -1,5 +1,11 @@
-import { LuLayoutDashboard, LuUsersRound, LuSettings, LuTags } from "react-icons/lu";
+import {
+  LuLayoutDashboard,
+  LuUsersRound,
+  LuSettings,
+  LuTags,
+} from "react-icons/lu";
 import { IconType } from "react-icons";
+import { PiMicrosoftTeamsLogoDuotone } from "react-icons/pi";
 
 export type NavItem = {
   id: string;
@@ -38,6 +44,13 @@ export const sidebarItems: NavItem[] = [
     icon: LuTags,
     description:
       "Manage your tasks, track your progress, and organize your work",
+  },
+  {
+    id: "team",
+    href: "/team",
+    label: "Team",
+    icon: PiMicrosoftTeamsLogoDuotone,
+    description: "Manage your team, add members, and assign tasks",
   },
   {
     id: "settings",

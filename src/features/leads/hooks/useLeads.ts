@@ -6,7 +6,7 @@ type UseLeadsOptions = {
   enabled?: boolean;
 };
 
-export function useLeads(options?: UseLeadsOptions) {
+export const useLeads = (options?: UseLeadsOptions) => {
   const queryClient = useQueryClient();
   const { data: leads = [], isPending } = useQuery({
     queryKey: ["leads"],
@@ -44,4 +44,4 @@ export function useLeads(options?: UseLeadsOptions) {
     updateLeadMutation.mutateAsync({ id, data });
 
   return { leads, isLoading: isPending, createLead, deleteLead, updateLead };
-}
+};

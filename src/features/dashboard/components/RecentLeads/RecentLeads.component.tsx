@@ -16,7 +16,7 @@ export function ResentLeadsComponents({ leads }: RecentLeadsProps) {
           {leads.length === 0 ? (
             <p>No leads yet</p>
           ) : (
-            leads.map((lead: any) => (
+            leads.slice(0, 5).map((lead: any) => (
               <div
                 key={lead.id}
                 className="flex items-center justify-between py-3"
