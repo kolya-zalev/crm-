@@ -2,7 +2,7 @@ import { Lead } from "@/types";
 
 export type LeadStats = Record<string, number>;
 
-export function calculateLeadStats(leads: Lead[]): LeadStats {
+export const calculateLeadStats = (leads: Lead[]): LeadStats => {
   return {
     total: leads.length,
     new: leads.filter((l) => l.status === "new").length,

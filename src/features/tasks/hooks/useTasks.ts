@@ -3,7 +3,7 @@ import type { Task } from "@/types";
 import type { TaskAddFormValues } from "@/validators";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-export function useTasks(leadId?: string) {
+export const useTasks = (leadId?: string) => {
   const queryClient = useQueryClient();
 
   const { data: tasks = [], isPending } = useQuery({

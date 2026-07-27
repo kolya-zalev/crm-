@@ -2,6 +2,10 @@ import type { Note } from "@/types";
 import { api } from "@/lib/api";
 
 const notesApi = {
+  getNotes: async () => {
+    const response = await api.get<Note[]>("/api/notes");
+    return response.data;
+  },
   getNotesByLead: async (leadId: string) => {
     const response = await api.get<Note[]>(`/api/leads/${leadId}/notes`);
     return response.data;
@@ -11,9 +15,7 @@ const notesApi = {
     return response.data;
   },
   deleteNote: async (leadId: string, noteId: string) => {
-    const response = await api.delete(
-      `/api/leads/${leadId}/notes/${noteId}`,
-    );
+    const response = await api.delete(`/api/leads/${leadId}/notes/${noteId}`);
     return response.data;
   },
 };
