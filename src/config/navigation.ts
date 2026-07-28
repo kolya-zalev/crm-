@@ -1,6 +1,12 @@
-import { LuLayoutDashboard, LuUsersRound, LuSettings, LuTags } from "react-icons/lu";
+import {
+  LuLayoutDashboard,
+  LuUsersRound,
+  LuSettings,
+  LuTags,
+} from "react-icons/lu";
 import { IconType } from "react-icons";
 
+import { CiCalendar } from "react-icons/ci";
 export type NavItem = {
   id: string;
   href: string;
@@ -38,6 +44,14 @@ export const sidebarItems: NavItem[] = [
     icon: LuTags,
     description:
       "Manage your tasks, track your progress, and organize your work",
+  },
+  {
+    id: "calendar",
+    href: "/calendar",
+    label: "Calendar",
+    icon: CiCalendar,
+    description:
+      "Manage your calendar, track your events, and organize your schedule",
   },
   {
     id: "settings",
