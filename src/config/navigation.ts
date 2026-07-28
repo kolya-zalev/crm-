@@ -6,6 +6,7 @@ import {
 } from "react-icons/lu";
 import { IconType } from "react-icons";
 import { PiMicrosoftTeamsLogoDuotone } from "react-icons/pi";
+import { CiCalendar } from "react-icons/ci";
 
 export type NavItem = {
   id: string;
@@ -44,6 +45,13 @@ export const sidebarItems: NavItem[] = [
     icon: LuTags,
     description:
       "Manage your tasks, track your progress, and organize your work",
+  },
+  {
+    id: "calendar",
+    href: "/calendar",
+    label: "Calendar",
+    icon: CiCalendar,
+    description: "Manage your calendar, add events, and track your progress",
   },
   {
     id: "team",

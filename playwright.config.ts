@@ -28,7 +28,7 @@ export default defineConfig({
     },
     {
       name: "chromium",
-      testMatch: /\/(team|leads|tasks|dashboard)\.spec\.ts$/,
+      testMatch: /\/(team|leads|tasks|dashboard|calendar)\.spec\.ts$/,
       use: {
         ...devices["Desktop Chrome"],
         storageState: "e2e/.auth/user.json",
