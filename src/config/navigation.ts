@@ -4,7 +4,10 @@ import {
   LuSettings,
   LuTags,
 } from "react-icons/lu";
+import { MdGroups2 } from "react-icons/md";
+
 import { IconType } from "react-icons";
+import { CiChat2 } from "react-icons/ci";
 
 import { CiCalendar } from "react-icons/ci";
 export type NavItem = {
@@ -44,6 +47,22 @@ export const sidebarItems: NavItem[] = [
     icon: LuTags,
     description:
       "Manage your tasks, track your progress, and organize your work",
+  },
+  {
+    id: "team",
+    href: "/team",
+    label: "Team",
+    icon: MdGroups2,
+    description:
+      "Manage your teams, track your progress, and organize your work",
+  },
+  {
+    id: "chat",
+    href: "/chat",
+    label: "Chat",
+    icon: CiChat2,
+    description:
+      "Manage your chats, track your conversations, and organize your messages",
   },
   {
     id: "calendar",
