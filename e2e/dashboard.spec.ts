@@ -24,7 +24,8 @@ test.describe("Dashboard", () => {
     await expect(page.getByText("Welcome back!")).toBeVisible();
   });
   test("click go to leads button", async ({ page }) => {
-    await page.getByRole("button", { name: "Go to Leads" }).click();
-    await page.goto("/lead");
+    await page.getByRole("link", { name: "Go to leads" }).click();
+    await expect(page).toHaveURL(/\/lead$/);
+    await expect(page.getByRole("button", { name: "Add Lead" })).toBeVisible();
   });
 });

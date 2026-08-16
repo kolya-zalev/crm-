@@ -45,4 +45,12 @@ test.describe("Auth", () => {
     await expect(page.getByText("Email already in use")).toBeVisible();
     await expect(page).toHaveURL(/signup/);
   });
+  test("empty login form", async ({ page }) => {
+    await page.goto("/login");
+    await page.getByRole("button", { name: "Log in" }).click();
+    await expect(page.getByText("Email is required")).toBeVisible();
+    await expect(
+      page.getByText("Password must be at least 8 characters long"),
+    ).toBeVisible();
+  });
 });
