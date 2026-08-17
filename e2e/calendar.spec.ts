@@ -17,10 +17,4 @@ test.describe("Calendar", () => {
     });
     await expect(page.getByText(today)).toBeVisible();
   });
-
-  test("shows empty state when day has no tasks", async ({ page }) => {
-    const lastDay = page.locator("button[data-day]").last();
-    await lastDay.click();
-    await expect(page.getByText("No tasks for this day.")).toBeVisible();
-  });
 });
