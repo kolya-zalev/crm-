@@ -132,6 +132,28 @@ export const getLeadsDataTableColumns = ({
     enableHiding: true,
   },
   {
+    accessorKey: "assigned",
+    id: "assigned",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Assigned
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="text-sm text-gray-500">
+          {row.original.assignedTo?.name ?? "Unassigned"}
+        </div>
+      );
+    },
+    enableSorting: true,
+    enableHiding: true,
+  },
+  {
     id: "actions",
     header: "Action",
     cell: ({ row }) => {

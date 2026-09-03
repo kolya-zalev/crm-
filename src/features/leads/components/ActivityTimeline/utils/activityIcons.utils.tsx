@@ -2,7 +2,14 @@
 
 import type { ReactNode } from "react";
 import type { Activity } from "@/types";
-import { Star, RefreshCw, NotebookPen, Trash, Pencil } from "lucide-react";
+import {
+  Star,
+  RefreshCw,
+  NotebookPen,
+  Trash,
+  Pencil,
+  User,
+} from "lucide-react";
 
 export const activityIcons: Record<Activity["type"], ReactNode> = {
   lead_created: <Star className="size-4 text-yellow-500" />,
@@ -10,4 +17,5 @@ export const activityIcons: Record<Activity["type"], ReactNode> = {
   note_added: <NotebookPen className="size-4 text-green-500" />,
   note_deleted: <Trash className="size-4 text-red-500" />,
   lead_updated: <Pencil className="size-4 text-purple-500" />,
+  assigned: <User className="size-4 text-sky-500" />,
 };

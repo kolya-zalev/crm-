@@ -1,4 +1,4 @@
-import type { TeamMember } from "@/types";
+import type { TeamMember } from "@/types/team.types";
 import teamApi from "@/features/team/api/teamApi";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 

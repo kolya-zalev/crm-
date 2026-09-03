@@ -1,4 +1,4 @@
-import type { Lead } from "@/types";
+import type { Lead } from "@/types/lead.types";
 import { api } from "@/lib/api";
 
 const leadsApi = {
@@ -14,7 +14,10 @@ const leadsApi = {
     const response = await api.post<Lead>("/api/leads", data);
     return response.data;
   },
-  updateLead: async (id: string, data: Partial<Lead>) => {
+  updateLead: async (
+    id: string,
+    data: Partial<Lead> & { assignedToId?: string | null },
+  ) => {
     const response = await api.put<Lead>(`/api/leads/${id}`, data);
     return response.data;
   },

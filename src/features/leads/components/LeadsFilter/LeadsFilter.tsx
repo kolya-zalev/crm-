@@ -17,6 +17,8 @@ export const LeadsFilter = ({ value, onChange }: LeadsFilterProps) => {
       <SelectContent>
         <SelectGroup>
           <SelectItem value="all">All</SelectItem>
+          <SelectItem value="my">My</SelectItem>
+          <SelectItem value="unassigned">Unassigned</SelectItem>
           <SelectItem value="new">New</SelectItem>
           <SelectItem value="contacted">Contacted</SelectItem>
           <SelectItem value="qualified">Qualified</SelectItem>

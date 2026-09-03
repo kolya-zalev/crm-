@@ -1,2 +1,2 @@
 export { LeadsDataTableContainer } from "./LeadsDataTable.container";
-export { getLeadsDataTableColumns } from "./utils/LeadsDataTable.columns";
+export { getLeadsDataTableColumns } from "./LeadsDataTableColumns/LeadsDataTable.columns";

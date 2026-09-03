@@ -11,7 +11,7 @@ import {
 import { useState } from "react";
 import { LeadsDataTableComponent } from "./LeadsDataTable.component";
 import { LeadsDataTableContainerProps } from "./LeadsDataTable.types";
-import { LeadsDataTablePageSizeOptions } from "./utils/LeadsDataTable.constants";
+import { LeadsDataTablePageSizeOptions } from "./LeadsDataTableColumns/utils/LeadsDataTable.constants";
 
 export const LeadsDataTableContainer = ({
   data,

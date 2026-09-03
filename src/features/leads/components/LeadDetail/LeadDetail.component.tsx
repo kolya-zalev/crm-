@@ -14,6 +14,7 @@ import { LeadContactInfo } from "./components/LeadContactInfo/LeadContactInfo.co
 import { LeadDetailsInfo } from "./components/LeadDetailsInfo/LeadDetailsInfo.component";
 import { TaskSectionContainer } from "../TaskSection/TaskSection.container";
 import { Button } from "@/components/ui/button";
+import { LeadsSelectAssigneeContainer } from "../LeadsSelectAssignee";
 
 export function LeadDetailComponent({
   leadId,
@@ -46,6 +47,10 @@ export function LeadDetailComponent({
           <div className="grid grid-cols-1 gap-8 border-t pt-6 md:grid-cols-2">
             <LeadContactInfo lead={lead} />
             <LeadDetailsInfo lead={lead} />
+            <LeadsSelectAssigneeContainer
+              leadId={leadId}
+              assignedTo={lead.assignedTo}
+            />
           </div>
         </CardContent>
       </Card>

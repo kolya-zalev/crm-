@@ -15,10 +15,15 @@ import { usePathname } from "next/navigation";
 import { sidebarItems, isNavItemActive } from "@/config/navigation";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { useSession } from "next-auth/react";
 
 export function AppSidebar() {
   const pathname = usePathname();
-
+  const { data: session } = useSession();
+  const userRole = session?.user?.role;
+  const visibleItems = sidebarItems.filter(
+    (item) => !item.roles || (userRole && item.roles.includes(userRole)),
+  );
   return (
     <Sidebar>
       <SidebarHeader className="items-center py-8">
@@ -33,8 +38,8 @@ export function AppSidebar() {
 
       <SidebarContent className="px-4 mt-4 ">
         <SidebarMenu>
-          {sidebarItems.map((item) => {
-            const active = isNavItemActive(pathname, item.href);
+          {visibleItems.map((item) => {
+            const active = isNavItemActive(pathname, item.href, item.exact);
             const Icon = item.icon;
 
             return (

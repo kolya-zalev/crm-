@@ -1,18 +1,18 @@
+import { AnalyticsCardTotals } from "./utils/AnalyticsTotals.utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { statCard } from "./utils/StatCard/StatCard.utils";
-import { StatCardProps } from "./StatCard.types";
+import { AnalyticsTotalsProps } from "./AnalyticsTotals.types";
 
-export const StatCardComponent = ({ stats }: StatCardProps) => {
+export const AnalyticsTotalsComponent = ({ totals }: AnalyticsTotalsProps) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 animate-in fade-in slide-in-from-bottom-8 duration-3000 fill-mode-forwards">
-      {statCard.map((card) => {
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 animate-in fade-in slide-in-from-bottom-8 duration-3000 fill-mode-forwards">
+      {AnalyticsCardTotals.map((card) => {
         const Icon = card.icon;
-        const value = stats[card.key];
+        const value = totals[card.key];
 
         return (
           <Card
             key={card.key}
-            className="shadow-sm hover:shadow-xl transition-shadow shadow-blue-200 "
+            className="shadow-sm hover:shadow-xl transition-shadow shadow-blue-200"
           >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-2xl font-medium text-muted-foreground uppercase tracking-wider">
@@ -23,7 +23,10 @@ export const StatCardComponent = ({ stats }: StatCardProps) => {
               </div>
             </CardHeader>
             <CardContent className="pt-2">
-              <div className="text-4xl font-bold tracking-tight">{value}</div>
+              <div className="text-4xl font-bold tracking-tight">
+                {value}
+                {card.suffix}
+              </div>
             </CardContent>
           </Card>
         );

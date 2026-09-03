@@ -1,21 +1,23 @@
 import {
+  LuChartBar,
   LuLayoutDashboard,
   LuUsersRound,
   LuSettings,
   LuTags,
 } from "react-icons/lu";
 import { MdGroups2 } from "react-icons/md";
-
 import { IconType } from "react-icons";
 import { CiChat2 } from "react-icons/ci";
-
 import { CiCalendar } from "react-icons/ci";
+
 export type NavItem = {
   id: string;
   href: string;
   label: string;
   icon: IconType;
   description: string;
+  roles?: string[];
+  exact?: boolean;
 };
 
 export const brand = {
@@ -29,9 +31,20 @@ export const sidebarItems: NavItem[] = [
     href: "/dashboard",
     label: "Dashboard",
     icon: LuLayoutDashboard,
+    exact: true,
     description:
       "Track performance metrics, monitor sales pipeline, and view real-time analytics",
   },
+  {
+    id: "analytics",
+    href: "/analytics",
+    label: "Analytics",
+    icon: LuChartBar,
+    roles: ["admin"],
+    description:
+      "Track performance metrics, monitor sales pipeline, and view real-time analytics",
+  },
+
   {
     id: "leads",
     href: "/lead",
@@ -87,9 +100,16 @@ export const authRoutes = {
   signup: { href: "/signup", label: "Sign up" },
 } as const;
 
-export function isNavItemActive(pathname: string, href: string): boolean {
+export function isNavItemActive(
+  pathname: string,
+  href: string,
+  exact?: boolean,
+): boolean {
   if (href === "/") {
     return pathname === "/";
+  }
+  if (exact) {
+    return pathname === href;
   }
   return pathname === href || pathname.startsWith(`${href}/`);
 }

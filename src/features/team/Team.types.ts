@@ -1,4 +1,4 @@
-import type { TeamMember } from "@/types";
+import type { TeamMember } from "@/types/team.types";
 import type { TeamInvite } from "@/validators";
 
 export interface TeamComponentProps {

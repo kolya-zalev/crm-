@@ -1,4 +1,4 @@
-import { TeamMember } from "@/types";
+import { TeamMember } from "@/types/team.types";
 import { api } from "@/lib/api";
 
 const teamApi = {
