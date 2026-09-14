@@ -28,6 +28,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           id: data.user.id,
           email: data.user.email,
           name: data.user.name,
+          role: data.user.role,
           accessToken: data.accessToken, //from next-auth.d.ts file
         };
       },
@@ -40,12 +41,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (user) {
         token.accessToken = user.accessToken;
         token.id = user.id;
+        token.role = user.role;
       }
       return token;
     },
     session({ session, token }) {
       session.user.id = token.id as string;
       session.accessToken = token.accessToken as string;
+      session.user.role = token.role as string;
       return session; //session is like form of login/registration
     },
   },

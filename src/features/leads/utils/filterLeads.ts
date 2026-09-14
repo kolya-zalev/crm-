@@ -1,10 +1,11 @@
 import { Lead } from "@/types";
 
-export function filterLeads(
+export const filterLeads = (
   leads: Lead[],
   search: string,
   filter: string,
-): Lead[] {
+  currentUserId?: string,
+): Lead[] => {
   const q = search.toLowerCase();
 
   return (leads ?? []).filter((lead) => {
@@ -13,9 +14,24 @@ export function filterLeads(
       (lead.email?.toLowerCase()?.includes(q) ?? false) ||
       (lead.company?.toLowerCase()?.includes(q) ?? false);
 
-    const matchesFilter =
-      filter === "all" || filter === "" ? true : lead.status === filter;
+    let matchesFilter = true;
+    switch (filter) {
+      case "my":
+        matchesFilter = lead.assignedTo?.id === currentUserId;
+        break;
+      case "unassigned":
+        matchesFilter = lead.assignedTo === null;
+        break;
+      case "all":
+      case "":
+        matchesFilter = true;
+        break;
+
+      default:
+        matchesFilter = lead.status === filter;
+        break;
+    }
 
     return matchesSearch && matchesFilter;
   });
-}
+};

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { MSWProvider } from "@/providers/MswProvider";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/ThemeProvider/ThemeProvider";
 import QueryProvider from "@/providers/QueryProvider";
@@ -28,7 +27,6 @@ export const metadata: Metadata = {
   description: "CRM",
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -51,8 +49,7 @@ export default function RootLayout({
         <SessionProvider>
           <QueryProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <MSWProvider>{children}</MSWProvider>
-
+              {children}
               <Toaster position="top-center" richColors />
             </ThemeProvider>
           </QueryProvider>

@@ -24,7 +24,7 @@ services:
 
   web:
     build:
-      context: ./crm-
+      context: ../../crm-server
       args:
         NEXT_PUBLIC_API_URL: http://localhost:3001
     ports:

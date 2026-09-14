@@ -6,7 +6,8 @@ export type Activity = {
     | "status_changed"
     | "note_added"
     | "note_deleted"
-    | "lead_updated";
+    | "lead_updated"
+    | "assigned";
   description: string;
   createdAt: string;
 };

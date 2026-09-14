@@ -7,8 +7,11 @@ import { useLeads } from "./hooks/useLeads";
 import { filterLeads } from "./utils/filterLeads";
 import { FormStatus } from "./components/LeadAddModal";
 import { LeadsComponent } from "./Leads.component";
+import { useSession } from "next-auth/react";
+
 export function LeadsContainer() {
   const { leads, isLoading, createLead, deleteLead, updateLead } = useLeads();
+  const { data: session } = useSession();
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
   const [isAddOpen, setIsAddOpen] = useState(false);
@@ -17,7 +20,7 @@ export function LeadsContainer() {
 
   const formStatus = editingLead ? FormStatus.EDIT : FormStatus.NEW;
   const isModalOpen = isAddOpen || editingLead !== null;
-  const filteredLeads = filterLeads(leads, search, filter);
+  const filteredLeads = filterLeads(leads, search, filter, session?.user?.id);
 
   const handleCreate = async (data: Omit<Lead, "id">) => {
     await createLead(data);
@@ -37,10 +40,8 @@ export function LeadsContainer() {
     setIsAddOpen(false);
     setEditingLead(null);
   };
-  
 
   return (
-    
     <LeadsComponent
       filteredLeads={filteredLeads}
       search={search}
