@@ -10,6 +10,7 @@ import { IconType } from "react-icons";
 import { CiChat2 } from "react-icons/ci";
 import { CiCalendar } from "react-icons/ci";
 
+import { CiCalendar } from "react-icons/ci";
 export type NavItem = {
   id: string;
   href: string;
