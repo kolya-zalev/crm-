@@ -1,11 +1,11 @@
 import { type ChartConfig } from "@/components/ui/chart";
 
 export const barColors = [
-  "oklch(0.72 0.12 240)",
-  "oklch(0.62 0.17 250)",
-  "oklch(0.55 0.16 25)",
-  "oklch(0.58 0.15 145)",
-  "oklch(0.60 0.14 300)",
+  "#b8860b",
+  "#556b2f",
+  "#8b0000",
+  "#8fbc8f",
+  "#b0e0e6",
 ];
 
 export const chartConfig = {
