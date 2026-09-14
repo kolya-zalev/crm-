@@ -14,6 +14,12 @@ export type ClosedByUserRow = {
   total: number;
 };
 
+export type UnassignedLead = {
+  id: string;
+  name: string;
+  company: string;
+  status: string;
+};
 export type Analytics = {
   totals: {
     open: number;
@@ -33,4 +39,8 @@ export type Analytics = {
   };
   closedBy: ClosedByUserRow[];
   closedBeforeTracking: number;
+  unassigned: {
+    total: number;
+    leads: UnassignedLead[];
+  };
 };

@@ -12,7 +12,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { brand, authRoutes } from "@/config/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { IoMdExit } from "react-icons/io";
-
+import { NotificationBell } from "@/features/notifications/components/NotificationBell";
 export default function Navbar() {
   const { data: session, status } = useSession();
   return (
@@ -40,6 +40,7 @@ export default function Navbar() {
           <div className="h-8 w-24" />
         ) : status === "authenticated" ? (
           <>
+            <NotificationBell />
             <span className="text-sm text-gray-700">
               {`Welcome, ${session.user.name} (${session.user.email})`}
             </span>

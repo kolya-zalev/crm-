@@ -1,9 +1,10 @@
 "use client";
 
 import { AnalyticsTotals } from "./components/AnalyticsTotals";
-import { StuckLeads } from "./components/StuckLeads/index";
-import { ClosedByTable } from "./components/ClosedByTable/index";
+import { ClosedByChart } from "./components/ClosedByChart";
+import { StuckChart } from "./components/StuckChart";
 import { AnalyticsComponentProps } from "./Analytics.types";
+import { UnassignedLeads } from "./components/UnassignedLeads";
 
 export const AnalyticsComponent = ({ analytics }: AnalyticsComponentProps) => {
   if (!analytics) return null;
@@ -15,12 +16,11 @@ export const AnalyticsComponent = ({ analytics }: AnalyticsComponentProps) => {
       <AnalyticsTotals totals={analytics.totals} />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <StuckLeads stuck={analytics.stuck} />
-        <ClosedByTable
-          closedBy={analytics.closedBy}
-          closedBeforeTracking={analytics.closedBeforeTracking}
-        />
+        <ClosedByChart closedBy={analytics.closedBy} />
+        <StuckChart stuck={analytics.stuck} />
       </div>
+
+      <UnassignedLeads unassigned={analytics.unassigned} />
     </div>
   );
 };

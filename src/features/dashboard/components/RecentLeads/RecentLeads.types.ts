@@ -1,3 +1,3 @@
 export interface RecentLeadsProps {
-  leads: any[]; 
+  leads: any[];
 }
