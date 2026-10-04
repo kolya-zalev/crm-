@@ -4,6 +4,7 @@ import { ColumnDef, Row, Table } from "@tanstack/react-table";
 export type GetLeadsDataTableColumnsParams = {
   onEditClick: (lead: Lead) => void;
   onDelete: (id: string) => Promise<void>;
+  canMutateLead: boolean;
 };
 
 export type LeadsDataTableContainerProps = {

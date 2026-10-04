@@ -11,6 +11,7 @@ export interface LeadsComponentProps {
   formStatus: FormStatusType;
   editingLead: Lead | null;
   isImportOpen: boolean;
+  canMutate: boolean;
   onSearchChange: (value: string) => void;
   onFilterChange: (value: string) => void;
   onDelete: (id: string) => Promise<void>;

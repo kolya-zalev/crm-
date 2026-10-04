@@ -63,10 +63,8 @@ describe("TaskForm", () => {
     );
 
     await user.type(screen.getByLabelText("Title"), validData.title);
-    await user.selectOptions(
-      screen.getByLabelText("Priority"),
-      validData.priority,
-    );
+    await user.click(screen.getByRole("combobox", { name: "Priority" }));
+    await user.click(screen.getByRole("option", { name: "Low" }));
     await user.type(screen.getByLabelText("Due Date"), validData.dueDate);
     await user.click(screen.getByRole("button", { name: "Create Task" }));
 

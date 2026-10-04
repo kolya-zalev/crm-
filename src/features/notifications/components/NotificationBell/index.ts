@@ -1,1 +1,0 @@
-export { NotificationBellContainer as NotificationBell } from "./NotificationBell.container";

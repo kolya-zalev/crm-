@@ -8,8 +8,8 @@ import { filterLeads } from "./utils/filterLeads";
 import { FormStatus } from "./components/LeadAddModal";
 import { LeadsComponent } from "./Leads.component";
 import { useSession } from "next-auth/react";
-
-export function LeadsContainer() {
+import { canMutateLeads } from "./utils/canMutate";
+export const LeadsContainer = () => {
   const { leads, isLoading, createLead, deleteLead, updateLead } = useLeads();
   const { data: session } = useSession();
   const [search, setSearch] = useState("");
@@ -17,7 +17,7 @@ export function LeadsContainer() {
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [isImportOpen, setIsImportOpen] = useState(false);
   const [editingLead, setEditingLead] = useState<Lead | null>(null);
-
+  const canMutate = canMutateLeads(session?.user?.role);
   const formStatus = editingLead ? FormStatus.EDIT : FormStatus.NEW;
   const isModalOpen = isAddOpen || editingLead !== null;
   const filteredLeads = filterLeads(leads, search, filter, session?.user?.id);
@@ -51,16 +51,17 @@ export function LeadsContainer() {
       formStatus={formStatus}
       editingLead={editingLead}
       isImportOpen={isImportOpen}
+      canMutate={canMutate}
       onImportClick={() => setIsImportOpen(true)}
       onImportClose={() => setIsImportOpen(false)}
       onSearchChange={setSearch}
       onFilterChange={setFilter}
       onDelete={handleDelete}
       onAddClick={() => setIsAddOpen(true)}
-      onEditClick={setEditingLead}
+      onEditClick={canMutate ? setEditingLead : () => {}}
       onCloseModal={handleCloseModal}
       onCreate={handleCreate}
       onUpdate={handleUpdate}
     />
   );
-}
+};

@@ -34,10 +34,8 @@ describe("TeamContainer", () => {
       screen.getByRole("textbox", { name: "Email" }),
       "test@gmail.com",
     );
-    await user.selectOptions(
-      screen.getByRole("combobox", { name: "Role" }),
-      "manager",
-    );
+    await user.click(screen.getByRole("combobox", { name: "Role" }));
+    await user.click(screen.getByRole("option", { name: "Manager" }));
     await user.click(screen.getByRole("button", { name: "Send invite" }));
 
     expect(inviteMember).toHaveBeenCalledWith("test@gmail.com", "manager");

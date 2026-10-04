@@ -7,6 +7,7 @@ import { LeadsTableRowActionsContainerProps } from "./LeadsTableRowActions.types
 
 export const LeadsTableRowActionsContainer = ({
   lead,
+  canMutateLeads,
   onEditClick,
   onDelete,
 }: LeadsTableRowActionsContainerProps) => {
@@ -47,6 +48,7 @@ export const LeadsTableRowActionsContainer = ({
       deleteDialogDescription={`Are you sure you want to delete the lead ${lead.name}?`}
       isDeleteDialogOpen={isDeleteDialogOpen}
       isDeleting={isDeleting}
+      canMutateLeads={canMutateLeads}
       onEditClick={handleEditClick}
       onViewClick={handleViewClick}
       onDeleteClick={handleDeleteClick}

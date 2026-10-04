@@ -13,8 +13,8 @@ export const LeadsTableRow = ({
   onDelete,
 }: LeadsTableRowProps) => {
   return (
-    <TableRow className="transition-colors hover:bg-gray-50/50">
-      <TableCell className="text-center font-medium text-gray-900">
+    <TableRow className="transition-colors hover:bg-muted/50">
+      <TableCell className="text-center font-medium text-muted-foreground">
         <Link
           href={`/lead/${lead.id}`}
           className="hover:text-blue-600 hover:underline"

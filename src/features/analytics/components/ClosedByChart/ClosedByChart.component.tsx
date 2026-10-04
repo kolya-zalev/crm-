@@ -19,7 +19,7 @@ export const ClosedByChartComponent = ({
   closedBy,
 }: ClosedByChartComponentProps) => {
   return (
-    <Card className="shadow-sm hover:shadow-xl transition-shadow shadow-blue-200">
+    <Card>
       <CardHeader>
         <CardDescription>Leads closed per person</CardDescription>
       </CardHeader>

@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { teamInviteSchema, type TeamInvite } from "@/validators";
 import {
@@ -18,6 +17,13 @@ import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { InviteUserModalProps } from "./InviteUserModal.types";
 import { defaultValues } from "./utils/InviteModalValues/inviteModalValues";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export const InviteUserModalComponent = ({
   open,
@@ -75,16 +81,26 @@ export const InviteUserModalComponent = ({
             <FieldLabel htmlFor="invite-role" className="text-sm font-medium">
               Role
             </FieldLabel>
-            <select
-              id="invite-role"
-              {...form.register("role")}
-              className="w-full rounded-xl border border-input bg-transparent p-2 text-sm outline-none transition-colors focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring/50 dark:bg-zinc-900"
-              aria-invalid={!!form.formState.errors.role}
-            >
-              <option value="admin">Admin</option>
-              <option value="manager">Manager</option>
-              <option value="member">Member</option>
-            </select>
+            <Controller
+              control={form.control}
+              name="role"
+              render={({ field }) => (
+                <Select value={field.value} onValueChange={field.onChange}>
+                  <SelectTrigger
+                    id="invite-role"
+                    className="w-full"
+                    aria-invalid={!!form.formState.errors.role}
+                  >
+                    <SelectValue placeholder="Role" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="admin">Admin</SelectItem>
+                    <SelectItem value="manager">Manager</SelectItem>
+                    <SelectItem value="member">Member</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
+            />
             {form.formState.errors.role?.message && (
               <FieldDescription className="text-sm text-red-500">
                 {form.formState.errors.role.message}
@@ -96,17 +112,12 @@ export const InviteUserModalComponent = ({
             <Button
               type="button"
               variant="outline"
-              className="rounded-2xl px-6 py-3 bg-red-400 hover:bg-red-500 transition-colors duration-300"
               onClick={onClose}
               disabled={isLoading}
             >
               Cancel
             </Button>
-            <Button
-              type="submit"
-              disabled={isLoading}
-              className="rounded-2xl px-6 py-3 bg-green-400 hover:bg-green-500 transition-colors duration-300"
-            >
+            <Button type="submit" disabled={isLoading}>
               {isLoading ? <Spinner className="size-4" /> : "Send invite"}
             </Button>
           </DialogFooter>

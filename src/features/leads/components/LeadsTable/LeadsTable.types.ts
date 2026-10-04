@@ -5,6 +5,7 @@ export interface LeadsTableComponentProps {
   search: string;
   filter: string;
   isLoading: boolean;
+  canMutateLead: boolean;
   onSearchChange: (value: string) => void;
   onFilterChange: (value: string) => void;
   onDelete: (id: string) => Promise<void>;

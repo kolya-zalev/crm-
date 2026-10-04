@@ -21,7 +21,7 @@ export const TasksTableComponent = ({
         Total tasks: {tasks.length}
       </p>
       <div className="overflow-hidden rounded-xl border border-gray-300 shadow-sm">
-        <Table className="border-collapse text-base">
+        <Table className="border-collapse">
           <TableHeader>
             <TableRow>
               <TableHead></TableHead>

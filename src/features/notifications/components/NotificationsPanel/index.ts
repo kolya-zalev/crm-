@@ -1,0 +1,1 @@
+export { NotificationsPanelContainer as NotificationsPanel } from "./NotificationsPanel.container";

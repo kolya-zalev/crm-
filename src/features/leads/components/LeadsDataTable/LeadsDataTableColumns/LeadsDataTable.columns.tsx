@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 export const getLeadsDataTableColumns = ({
   onEditClick,
   onDelete,
+  canMutateLead,
 }: GetLeadsDataTableColumnsParams): ColumnDef<Lead>[] => [
   {
     accessorKey: "name",
@@ -44,7 +45,11 @@ export const getLeadsDataTableColumns = ({
       </Button>
     ),
     cell: ({ row }) => {
-      return <div className="text-sm text-gray-500">{row.original.email}</div>;
+      return (
+        <div className="text-sm text-muted-foreground">
+          {row.original.email}
+        </div>
+      );
     },
     enableSorting: true,
     enableHiding: true,
@@ -62,7 +67,11 @@ export const getLeadsDataTableColumns = ({
       </Button>
     ),
     cell: ({ row }) => {
-      return <div className="text-sm text-gray-500">{row.original.phone}</div>;
+      return (
+        <div className="text-sm text-muted-foreground">
+          {row.original.phone}
+        </div>
+      );
     },
     enableSorting: true,
     enableHiding: true,
@@ -81,7 +90,9 @@ export const getLeadsDataTableColumns = ({
     ),
     cell: ({ row }) => {
       return (
-        <div className="text-sm text-gray-500">{row.original.company}</div>
+        <div className="text-sm text-muted-foreground">
+          {row.original.company}
+        </div>
       );
     },
     enableSorting: true,
@@ -101,7 +112,7 @@ export const getLeadsDataTableColumns = ({
     ),
     cell: ({ row }) => {
       return (
-        <div className="text-sm text-gray-500">
+        <div className="text-sm text-muted-foreground">
           <LeadsStatusBadge status={row.original.status} />
         </div>
       );
@@ -123,7 +134,7 @@ export const getLeadsDataTableColumns = ({
     ),
     cell: ({ row }) => {
       return (
-        <div className="text-sm text-gray-500">
+        <div className="text-sm text-muted-foreground">
           {formatLeadTags(row.original.tags)}
         </div>
       );
@@ -145,7 +156,7 @@ export const getLeadsDataTableColumns = ({
     ),
     cell: ({ row }) => {
       return (
-        <div className="text-sm text-gray-500">
+        <div className="text-sm text-muted-foreground">
           {row.original.assignedTo?.name ?? "Unassigned"}
         </div>
       );
@@ -160,6 +171,7 @@ export const getLeadsDataTableColumns = ({
       return (
         <LeadsTableRowActions
           lead={row.original}
+          canMutateLeads={canMutateLead}
           onEditClick={onEditClick}
           onDelete={onDelete}
         />

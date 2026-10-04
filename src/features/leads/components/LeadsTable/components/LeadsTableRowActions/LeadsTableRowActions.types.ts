@@ -2,6 +2,7 @@ import { Lead } from "@/types";
 
 export type LeadsTableRowActionsContainerProps = {
   lead: Lead;
+  canMutateLeads: boolean;
   onEditClick: (lead: Lead) => void;
   onDelete: (id: string) => Promise<void>;
 };
@@ -12,6 +13,7 @@ export type LeadsTableRowActionsComponentProps = {
   deleteDialogDescription: string;
   isDeleteDialogOpen: boolean;
   isDeleting: boolean;
+  canMutateLeads: boolean;
   onEditClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onViewClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onDeleteClick: (event: React.MouseEvent<HTMLButtonElement>) => void;

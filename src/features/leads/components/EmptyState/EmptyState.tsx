@@ -6,7 +6,7 @@ export const EmptyState = ({ message = "No leads found" }: EmptyStateProps) => {
     <TableRow>
       <TableCell
         colSpan={7}
-        className="py-8 text-center text-gray-500 font-medium"
+        className="py-8 text-center text-muted-foreground font-medium"
       >
         {message}
       </TableCell>

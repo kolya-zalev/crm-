@@ -4,29 +4,24 @@ import { AnalyticsTotalsProps } from "./AnalyticsTotals.types";
 
 export const AnalyticsTotalsComponent = ({ totals }: AnalyticsTotalsProps) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 animate-in fade-in slide-in-from-bottom-8 duration-3000 fill-mode-forwards">
+    <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-5">
       {AnalyticsCardTotals.map((card) => {
         const Icon = card.icon;
         const value = totals[card.key];
 
         return (
-          <Card
-            key={card.key}
-            className="shadow-sm hover:shadow-xl transition-shadow shadow-blue-200"
-          >
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-2xl font-medium text-muted-foreground uppercase tracking-wider">
+          <Card key={card.key} className="gap-2 py-4 rounded-2xl ">
+            <CardHeader className="flex flex-row items-center justify-between gap-2 px-4">
+              <CardTitle className="text-xs font-medium text-muted-foreground">
                 {card.title}
               </CardTitle>
-              <div className="p-2 rounded-md bg-slate-50">
-                <Icon className={`h-5 w-5 ${card.color}`} />
-              </div>
+              <Icon className={`size-4 shrink-0 ${card.color}`} />
             </CardHeader>
-            <CardContent className="pt-2">
-              <div className="text-4xl font-bold tracking-tight">
+            <CardContent className="px-4">
+              <p className="text-2xl font-semibold tabular-nums tracking-tight">
                 {value}
                 {card.suffix}
-              </div>
+              </p>
             </CardContent>
           </Card>
         );

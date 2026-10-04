@@ -15,7 +15,6 @@ import { LeadDetailsInfo } from "./components/LeadDetailsInfo/LeadDetailsInfo.co
 import { TaskSectionContainer } from "../TaskSection/TaskSection.container";
 import { Button } from "@/components/ui/button";
 import { LeadsSelectAssigneeContainer } from "../LeadsSelectAssignee";
-
 export function LeadDetailComponent({
   leadId,
   lead,
@@ -26,21 +25,27 @@ export function LeadDetailComponent({
   onUpdate,
   onStatusStepChange,
   onMarkAsLost,
+  canMutateLeads,
 }: LeadDetailComponentProps) {
   return (
     <div className="mx-auto max-w-4xl p-4">
       <Card className="border shadow-sm">
-        <LeadDetailHeader onEditOpen={onEditOpen} />
+        <LeadDetailHeader
+          onEditOpen={onEditOpen}
+          canMutateLeads={canMutateLeads}
+        />
 
         <hr className="border-muted" />
         <CardContent className="flex flex-col gap-8 pt-6">
           <LeadDetailTitle lead={lead} />
-          <Button variant="destructive" size="sm" onClick={onMarkAsLost}>
-            Mark as Lost
-          </Button>
+          {canMutateLeads ? (
+            <Button variant="destructive" size="sm" onClick={onMarkAsLost}>
+              Mark as Lost
+            </Button>
+          ) : null}
           <LeadStatusStepper
             currentStatusIndex={currentStatusIndex}
-            onStatusStepChange={onStatusStepChange}
+            onStatusStepChange={canMutateLeads ? onStatusStepChange : undefined}
           />
           {lead.status === "lost" && <LeadLostBanner />}
 

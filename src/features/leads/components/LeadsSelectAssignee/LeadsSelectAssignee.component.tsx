@@ -16,7 +16,7 @@ export const LeadsSelectAssigneeComponent = ({
 }: LeadsSelectAssigneeComponentProps) => {
   return (
     <Select value={assigneeToId ?? "unassigned"} onValueChange={onChange}>
-      <SelectTrigger className="w-full max-w-48 rounded-xl border border-black">
+      <SelectTrigger className="w-full max-w-48 rounded-lg border ">
         <SelectValue placeholder="Assignee" />
       </SelectTrigger>
       <SelectContent>

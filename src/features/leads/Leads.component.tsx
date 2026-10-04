@@ -11,6 +11,7 @@ export function LeadsComponent({
   isModalOpen,
   formStatus,
   editingLead,
+  canMutate,
   onSearchChange,
   onFilterChange,
   onDelete,
@@ -30,6 +31,7 @@ export function LeadsComponent({
         search={search}
         filter={filter}
         isLoading={isLoading}
+        canMutateLead={canMutate}
         onSearchChange={onSearchChange}
         onFilterChange={onFilterChange}
         onDelete={onDelete}

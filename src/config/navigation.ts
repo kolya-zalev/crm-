@@ -1,23 +1,23 @@
-import {
-  LuChartBar,
-  LuLayoutDashboard,
-  LuUsersRound,
-  LuSettings,
-  LuTags,
-} from "react-icons/lu";
-import { MdGroups2 } from "react-icons/md";
+"use client";
 import { IconType } from "react-icons";
-import { CiChat2 } from "react-icons/ci";
-import { CiCalendar } from "react-icons/ci";
+import {
+  ChalkboardIcon,
+  ChartBarIcon,
+  UsersIcon,
+  CheckSquareIcon,
+  UsersThreeIcon,
+  ChatCenteredTextIcon,
+  CalendarIcon,
+} from "@phosphor-icons/react";
 
 export type NavItem = {
   id: string;
   href: string;
   label: string;
   icon: IconType;
-  description: string;
   roles?: string[];
   exact?: boolean;
+  size?: number;
 };
 
 export const brand = {
@@ -30,68 +30,46 @@ export const sidebarItems: NavItem[] = [
     id: "dashboard",
     href: "/dashboard",
     label: "Dashboard",
-    icon: LuLayoutDashboard,
+    icon: ChalkboardIcon,
     exact: true,
-    description:
-      "Track performance metrics, monitor sales pipeline, and view real-time analytics",
   },
   {
     id: "analytics",
     href: "/analytics",
     label: "Analytics",
-    icon: LuChartBar,
+    icon: ChartBarIcon,
     roles: ["admin"],
-    description:
-      "Track performance metrics, monitor sales pipeline, and view real-time analytics",
   },
 
   {
     id: "leads",
     href: "/lead",
     label: "Leads",
-    icon: LuUsersRound,
-    description:
-      "Manage your contacts, track deal progress, and organize your sales pipeline",
+    icon: UsersIcon,
   },
   {
     id: "tasks",
     href: "/tasks",
     label: "Tasks",
-    icon: LuTags,
-    description:
-      "Manage your tasks, track your progress, and organize your work",
+    icon: CheckSquareIcon,
   },
   {
     id: "team",
     href: "/team",
     label: "Team",
-    icon: MdGroups2,
-    description:
-      "Manage your teams, track your progress, and organize your work",
+    icon: UsersThreeIcon,
   },
   {
     id: "chat",
     href: "/chat",
     label: "Chat",
-    icon: CiChat2,
-    description:
-      "Manage your chats, track your conversations, and organize your messages",
+    icon: ChatCenteredTextIcon,
   },
   {
     id: "calendar",
     href: "/calendar",
     label: "Calendar",
-    icon: CiCalendar,
-    description:
-      "Manage your calendar, track your events, and organize your schedule",
-  },
-  {
-    id: "settings",
-    href: "/settings",
-    label: "Settings",
-    icon: LuSettings,
-    description:
-      "Configure your workspace, manage team access, and customize preferences",
+    icon: CalendarIcon,
   },
 ];
 

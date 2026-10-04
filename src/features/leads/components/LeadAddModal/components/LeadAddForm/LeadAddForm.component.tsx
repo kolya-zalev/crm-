@@ -1,12 +1,19 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { schemaLeadAdd, LeadAddFormValues } from "@/validators";
 import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { LeadAddFormProps } from "./LeadAddForm.types";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export const LeadAddForm = ({
   isNew,
@@ -93,17 +100,27 @@ export const LeadAddForm = ({
       </Field>
 
       <Field>
-        <FieldLabel className="text-sm font-medium">Status</FieldLabel>
-        <select
-          {...form.register("status")}
-          className="w-full rounded-none border border-input bg-transparent p-2 text-xs outline-none transition-colors focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring/50 dark:bg-zinc-900"
-        >
-          <option value="new">New</option>
-          <option value="contacted">Contacted</option>
-          <option value="qualified">Qualified</option>
-          <option value="won">Won</option>
-          <option value="lost">Lost</option>
-        </select>
+        <FieldLabel htmlFor="lead-status" className="text-sm font-medium">
+          Status
+        </FieldLabel>
+        <Controller
+          control={form.control}
+          name="status"
+          render={({ field }) => (
+            <Select value={field.value} onValueChange={field.onChange}>
+              <SelectTrigger id="lead-status" className="w-full">
+                <SelectValue placeholder="Status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="new">New</SelectItem>
+                <SelectItem value="contacted">Contacted</SelectItem>
+                <SelectItem value="qualified">Qualified</SelectItem>
+                <SelectItem value="won">Won</SelectItem>
+                <SelectItem value="lost">Lost</SelectItem>
+              </SelectContent>
+            </Select>
+          )}
+        />
       </Field>
 
       <Field>
@@ -116,19 +133,17 @@ export const LeadAddForm = ({
         <Input {...form.register("source")} placeholder="Source" />
       </Field>
 
-      <Button
-        type="submit"
-        className="mt-2 w-full cursor-pointer rounded-xl border bg-green-800 p-4"
-      >
+      <Button type="submit" className="mt-2 w-full">
         {isNew ? "Create" : "Update"}
       </Button>
       <Button
         type="button"
+        variant="outline"
+        className="mt-2 w-full"
         onClick={() => {
           form.reset();
           onReset();
         }}
-        className="mx-auto mt-2 flex w-50 cursor-pointer justify-center rounded-xl border bg-red-800 p-4"
       >
         Reset
       </Button>

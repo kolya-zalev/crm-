@@ -11,7 +11,7 @@ import { LeadsFilterProps } from "./LeadsFilter.types";
 export const LeadsFilter = ({ value, onChange }: LeadsFilterProps) => {
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className="w-full max-w-48 rounded-xl border border-black">
+      <SelectTrigger className="w-full max-w-48 rounded-lg border ">
         <SelectValue placeholder="Filter" />
       </SelectTrigger>
       <SelectContent>

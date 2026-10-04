@@ -1,6 +1,6 @@
 import { expect, type Page } from "@playwright/test";
 
-export async function createLead(page: Page, name: string) {
+export const createLead = async (page: Page, name: string) => {
   await page.getByRole("button", { name: "Add Lead" }).click();
   await page.getByPlaceholder("Name").fill(name);
   await page.getByPlaceholder("Email").fill(`${Date.now()}@e2e.test`);
@@ -12,4 +12,4 @@ export async function createLead(page: Page, name: string) {
   await expect(
     page.locator("table tbody").getByText(name, { exact: true }),
   ).toBeVisible();
-}
+};

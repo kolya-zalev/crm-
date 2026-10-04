@@ -18,6 +18,7 @@ export function LeadsTableComponent({
   search,
   filter,
   isLoading,
+  canMutateLead,
   onSearchChange,
   onFilterChange,
   onDelete,
@@ -26,26 +27,26 @@ export function LeadsTableComponent({
   onImportClick,
 }: LeadsTableComponentProps) {
   const columns = useMemo(
-    () => getLeadsDataTableColumns({ onEditClick, onDelete }),
-    [onEditClick, onDelete],
+    () => getLeadsDataTableColumns({ onEditClick, onDelete, canMutateLead }),
+    [onEditClick, onDelete, canMutateLead],
   );
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-row flex-wrap items-center gap-2">
         <LeadsSearch value={search} onChange={onSearchChange} />
         <LeadsFilter value={filter} onChange={onFilterChange} />
-        <Button className="rounded-2xl cursor-pointer bg-white text-black" onClick={onImportClick}>
-          Import CSV
-        </Button>
-        <p className="ml-auto p-2 text-sm font-medium text-gray-600">
+
+        {canMutateLead ? (
+          <Button variant="outline" onClick={onImportClick}>
+            Import CSV
+          </Button>
+        ) : null}
+
+        <p className="ml-auto p-2 text-sm font-medium text-muted-foreground">
           Total Leads: {leadsLoading(isLoading, leads)}
         </p>
-        <Button
-          className="cursor-pointer rounded-xl bg-blue-500 text-white shadow-md transition-colors hover:bg-blue-600"
-          onClick={onAddClick}
-        >
-          Add Lead
-        </Button>
+
+        <Button onClick={onAddClick}>+ Create</Button>
       </div>
 
       {isLoading ? (

@@ -22,14 +22,14 @@ export const UnassignedLeadsComponent = ({
   const leads = unassigned.leads;
 
   return (
-    <Card className="shadow-sm hover:shadow-xl transition-shadow shadow-blue-200">
+    <Card>
       <CardHeader>
         <CardTitle className="text-lg font-medium">
           Unassigned leads - {leads.length}
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="overflow-hidden rounded-xl border border-gray-200">
+        <div className="overflow-hidden rounded-xl border text-foreground">
           <Table>
             <TableHeader>
               <TableRow className="bg-muted/40 hover:bg-muted/40">
@@ -56,7 +56,7 @@ export const UnassignedLeadsComponent = ({
                     className="cursor-pointer"
                     onClick={() => router.push(`/lead/${lead.id}`)}
                   >
-                    <TableCell className="font-medium text-slate-900 hover:underline">
+                    <TableCell className="font-medium text-foreground hover:underline">
                       {lead.name}
                     </TableCell>
                     <TableCell className="text-muted-foreground">

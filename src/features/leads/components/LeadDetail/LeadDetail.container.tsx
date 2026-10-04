@@ -7,16 +7,19 @@ import { useLead } from "@/features/leads/hooks/useLead";
 import { useLeads } from "@/features/leads/hooks/useLeads";
 import { getCurrentStatusIndex, LeadStatuses } from "./utils/leadStatus";
 import { LeadDetailComponent } from "./LeadDetail.component";
-
+import { canMutateLeads } from "@/features/leads/utils/canMutate";
+import { useSession } from "next-auth/react";
 interface LeadDetailContainerProps {
   leadId: string;
+  canMutateLeads: boolean;
 }
 
 export function LeadDetailContainer({ leadId }: LeadDetailContainerProps) {
   const { lead, isLoading, isError } = useLead(leadId);
   const { updateLead } = useLeads({ enabled: false });
   const [isEditOpen, setIsEditOpen] = useState(false);
-
+  const { data: session } = useSession();
+  const canMutateLead = canMutateLeads(session?.user?.role);
   const handleUpdate = async (id: string, data: LeadAddFormValues) => {
     await updateLead(id, data);
     setIsEditOpen(false);
@@ -24,6 +27,7 @@ export function LeadDetailContainer({ leadId }: LeadDetailContainerProps) {
 
   const handleStatusStepChange = (step: number) => {
     const newStatus = LeadStatuses[step - 1];
+    if (!canMutateLead) return null;
     if (newStatus === lead?.status) return;
     if (newStatus) {
       updateLead(leadId, { status: newStatus });
@@ -31,6 +35,7 @@ export function LeadDetailContainer({ leadId }: LeadDetailContainerProps) {
   };
 
   const handleMarkAsLost = () => {
+    if (!canMutateLead) return null;
     if (lead?.status === "lost") return;
     {
       updateLead(leadId, { status: "lost" });
@@ -60,6 +65,7 @@ export function LeadDetailContainer({ leadId }: LeadDetailContainerProps) {
       onEditOpen={() => setIsEditOpen(true)}
       onEditClose={() => setIsEditOpen(false)}
       onUpdate={handleUpdate}
+      canMutateLeads={canMutateLead}
     />
   );
 }

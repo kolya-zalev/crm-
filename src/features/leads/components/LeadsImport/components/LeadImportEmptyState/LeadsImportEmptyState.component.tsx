@@ -7,11 +7,7 @@ export const LeadsImportEmptyStateComponent = ({
 }) => {
   return (
     <div className="flex flex-col items-center gap-3 rounded-md border-2 border-dashed p-8 text-center">
-      <Button
-        type="button"
-        onClick={onChooseFile}
-        className="cursor-pointer rounded-xl bg-blue-500 text-white"
-      >
+      <Button type="button" variant="outline" onClick={onChooseFile}>
         Choose CSV
       </Button>
     </div>

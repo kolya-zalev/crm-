@@ -71,16 +71,16 @@ export const LeadsImportComponent = ({
 
         <DialogFooter className="justify-center sm:justify-center">
           <Button
-            className="bg-red-800 text-white rounded-xl cursor-pointer justify-center"
             type="button"
+            variant="outline"
             onClick={onClose}
             disabled={isImporting}
           >
             Cancel
           </Button>
           <Button
-            className="cursor-pointer rounded-xl bg-blue-500 text-white justify-center"
             type="button"
+            variant="default"
             onClick={onImportConfirm}
             disabled={!canImport}
           >

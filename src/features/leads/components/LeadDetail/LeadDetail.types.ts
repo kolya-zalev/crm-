@@ -6,6 +6,7 @@ export interface LeadDetailComponentProps {
   lead: Lead;
   currentStatusIndex: number;
   isEditOpen: boolean;
+  canMutateLeads: boolean;
   onEditOpen: () => void;
   onEditClose: () => void;
   onUpdate: (id: string, data: LeadAddFormValues) => Promise<void>;

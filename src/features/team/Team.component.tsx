@@ -21,13 +21,7 @@ export const TeamComponent = ({
         <div>
           <h1 className="text-2xl font-semibold">Team</h1>
         </div>
-        <Button
-          onClick={onInviteOpen}
-          className="rounded-2xl px-6 py-3 bg-blue-400 hover:bg-blue-500 transition-colors duration-300"
-          variant="default"
-        >
-          Invite user
-        </Button>
+        <Button onClick={onInviteOpen}>Invite user</Button>
       </div>
 
       <TeamTable

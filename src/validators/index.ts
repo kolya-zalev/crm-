@@ -10,3 +10,6 @@ export {
   type LogSign,
 } from "./LogSign";
 export { teamInviteSchema, type TeamInvite } from "./teamInvite";
+export { updateNameSchema, type UpdateNameFormValues } from "./profile";
+export { updateEmailSchema, type UpdateEmailFormValues } from "./profile";
+export { changePasswordSchema, type ChangePasswordFormValues } from "./profile";

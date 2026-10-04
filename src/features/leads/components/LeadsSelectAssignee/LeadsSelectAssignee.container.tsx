@@ -5,6 +5,7 @@ import { useLeads } from "../../hooks/useLeads";
 import { useAssignable } from "../../hooks/useAssignable";
 import { LeadsSelectAssigneeComponent } from "./LeadsSelectAssignee.component";
 import { LeadsSelectAssigneeContainerProps } from "./LeadsSelectAssignee.types";
+import { canMutateLeads } from "../../utils/canMutate";
 
 export const LeadsSelectAssigneeContainer = ({
   leadId,
@@ -16,7 +17,7 @@ export const LeadsSelectAssigneeContainer = ({
 
   const role = session?.user?.role;
   const canUnassign = role === "admin";
-  const canAssign = role === "admin" || role === "member";
+  const canAssign = canMutateLeads(session?.user?.role);
 
   if (!canAssign) {
     return (

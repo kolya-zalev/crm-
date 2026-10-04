@@ -24,7 +24,7 @@ export const StuckChartComponent = ({
   thresholdDays,
 }: StuckChartComponentProps) => {
   return (
-    <Card className="shadow-sm hover:shadow-xl transition-shadow shadow-blue-200">
+    <Card>
       <CardHeader>
         <CardTitle className="text-lg font-medium">Stuck leads</CardTitle>
         <CardDescription>

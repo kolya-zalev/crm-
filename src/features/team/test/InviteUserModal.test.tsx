@@ -48,10 +48,8 @@ describe("InviteUserModal", () => {
       screen.getByRole("textbox", { name: "Email" }),
       "test@test.com",
     );
-    await user.selectOptions(
-      screen.getByRole("combobox", { name: "Role" }),
-      "Admin",
-    );
+    await user.click(screen.getByRole("combobox", { name: "Role" }));
+    await user.click(screen.getByRole("option", { name: "Admin" }));
     await user.click(screen.getByRole("button", { name: "Send invite" }));
     expect(onInvite).toHaveBeenCalledWith({
       email: "test@test.com",

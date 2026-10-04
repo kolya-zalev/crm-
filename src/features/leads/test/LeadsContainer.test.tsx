@@ -2,6 +2,12 @@ jest.mock("../hooks/useLeads", () => ({
   useLeads: jest.fn(),
 }));
 
+jest.mock("next-auth/react", () => ({
+  useSession: jest.fn(() => ({
+    data: { user: { id: "user-1", role: "admin" } },
+  })),
+}));
+
 import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useLeads } from "../hooks/useLeads";

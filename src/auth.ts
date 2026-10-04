@@ -37,11 +37,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   session: { strategy: "jwt" },
   pages: { signIn: "/login" },
   callbacks: {
-    jwt({ token, user }) {
+    jwt({ token, user, trigger, session }) {
       if (user) {
         token.accessToken = user.accessToken;
         token.id = user.id;
         token.role = user.role;
+        token.name = user.name;
+        token.email = user.email;
+      }
+      if (trigger === "update" && session) {
+        if (session.name) token.name = session.name;
+        if (session.email) token.email = session.email;
       }
       return token;
     },
@@ -49,6 +55,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       session.user.id = token.id as string;
       session.accessToken = token.accessToken as string;
       session.user.role = token.role as string;
+      if (token.name) session.user.name = token.name;
+      if (typeof token.email === "string") session.user.email = token.email;
       return session; //session is like form of login/registration
     },
   },

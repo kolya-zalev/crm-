@@ -16,9 +16,7 @@ export function WelcomeBanner({ newLeadsCount }: WelcomeBannerProps) {
           You have {newLeadsCount} new leads waiting for review
         </p>
         <Link href="/lead">
-          <Button className="cursor-pointer rounded-xl bg-blue-500 hover:bg-blue-600 text-white shadow-md transition-colors">
-            Go to leads
-          </Button>
+          <Button>Go to leads</Button>
         </Link>
       </CardContent>
     </Card>

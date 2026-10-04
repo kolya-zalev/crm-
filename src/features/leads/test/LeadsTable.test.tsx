@@ -24,6 +24,7 @@ const tableProps: LeadsTableComponentProps = {
   onAddClick: jest.fn(),
   onEditClick: jest.fn(),
   onImportClick: jest.fn(),
+  canMutateLead: true,
 };
 
 describe("LeadsTable", () => {
@@ -53,5 +54,12 @@ describe("LeadsTable", () => {
     render(<LeadsTable {...tableProps} leads={[fakeLead]} />);
     expect(screen.getByText("John")).toBeInTheDocument();
     expect(screen.getByText("Total Leads: 1")).toBeInTheDocument();
+  });
+
+  it("hides Import CSV for members and keeps Add Lead", () => {
+    render(<LeadsTable {...tableProps} canMutateLead={false} />);
+
+    expect(screen.queryByRole("button", { name: "Import CSV" })).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Add Lead" })).toBeInTheDocument();
   });
 });

@@ -14,7 +14,8 @@ test.describe("Team", () => {
     const email = `e2e-test-${Date.now()}@test.com`;
     await page.getByRole("button", { name: "Invite user" }).click();
     await page.getByRole("textbox", { name: "Email" }).fill(email);
-    await page.getByRole("combobox", { name: "Role" }).selectOption("manager");
+    await page.getByRole("combobox", { name: "Role" }).click();
+    await page.getByRole("option", { name: "Manager" }).click();
     await page.getByRole("button", { name: "Send invite" }).click();
     await expect(page.getByText("Invite sent successfully")).toBeVisible();
     await expect(page.getByText(email)).toBeVisible();

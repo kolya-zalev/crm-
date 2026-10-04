@@ -10,6 +10,12 @@ export const proxy = auth((request) => {
   const isPublic = publicRoutes.includes(pathname);
   const isGuest = guestRoutes.includes(pathname);
 
+  if (pathname === "/") {
+    return NextResponse.redirect(
+      new URL(isLoggedIn ? "/dashboard" : "/login", request.nextUrl),
+    );
+  }
+
   if (!isLoggedIn && !isPublic && !isGuest) {
     return NextResponse.redirect(new URL("/login", request.nextUrl));
   }

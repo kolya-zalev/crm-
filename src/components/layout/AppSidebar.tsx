@@ -4,7 +4,6 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarGroup,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuItem,
@@ -13,11 +12,10 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { sidebarItems, isNavItemActive } from "@/config/navigation";
-import { cn } from "@/lib/utils";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { useSession } from "next-auth/react";
+import { NotificationsPanel } from "@/features/notifications/components/NotificationsPanel";
 
-export function AppSidebar() {
+export const AppSidebar = () => {
   const pathname = usePathname();
   const { data: session } = useSession();
   const userRole = session?.user?.role;
@@ -26,18 +24,26 @@ export function AppSidebar() {
   );
   return (
     <Sidebar>
-      <SidebarHeader className="items-center py-8">
-        <Avatar className="w-24 h-24 rounded-full bg-blue-400 flex items-center justify-center text-white text-3xl font-bold overflow-hidden">
-          <AvatarImage
-            src="https://github.com/shadcn.png"
-            alt="@shadcn"
-            className="grayscale"
-          />
-        </Avatar>
+      <SidebarHeader className="px-3 py-3">
+        <div className="flex items-center gap-2">
+          <span className="bg-primary text-primary-foreground flex size-7 shrink-0 items-center justify-center rounded-md text-xs font-semibold">
+            C
+          </span>
+          <div className="flex min-w-0 flex-col">
+            <span className="truncate text-xs font-semibold">CRM</span>
+            {session?.user.name ? (
+              <span className="text-muted-foreground truncate text-xs">
+                {session.user.name}
+              </span>
+            ) : null}
+          </div>
+        </div>
       </SidebarHeader>
 
-      <SidebarContent className="px-4 mt-4 ">
-        <SidebarMenu>
+      <SidebarContent className="px-3">
+        <SidebarMenu className="gap-2">
+          <NotificationsPanel />
+          
           {visibleItems.map((item) => {
             const active = isNavItemActive(pathname, item.href, item.exact);
             const Icon = item.icon;
@@ -47,38 +53,20 @@ export function AppSidebar() {
                 <SidebarMenuButton
                   asChild
                   isActive={active}
-                  className={cn(
-                    "relative w-full h-11 justify-start gap-4 px-4 text-base font-medium rounded-xl text-white/80 transition-all duration-200 ease-in-out",
-                    "hover:bg-white/10 hover:text-white data-[active=true]:hover:bg-white/15 rounded-2xl hover:scale-110",
-                    active && [
-                      "bg-white/15 text-white font-semibold shadow-sm",
-                      "before:absolute before:left-0 before:top-3 before:bottom-3 before:w-1 before:rounded-r-full before:bg-white before:animate-ping",
-                    ],
-                  )}
+                  className="h-9 gap-2.5 rounded-md px-2.5 text-sm [&_svg]:size-5"
                 >
-                  <Link
-                    href={item.href}
-                    className="flex items-center justify-center w-full gap-3"
-                  >
-                    <Icon
-                      className={cn(
-                        "size-5 shrink-0 transition-transform duration-200 group-hover:scale-105",
-                        active ? "text-white" : "text-white/70",
-                      )}
-                    />
-                    {item.label}
+                  <Link href={item.href}>
+                    <Icon />
+                    <span>{item.label}</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             );
           })}
         </SidebarMenu>
-
-        <SidebarGroup />
-        <SidebarGroup />
       </SidebarContent>
 
       <SidebarFooter></SidebarFooter>
     </Sidebar>
   );
-}
+};

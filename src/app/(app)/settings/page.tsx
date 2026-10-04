@@ -1,1 +1,0 @@
-export {ModeToggle as default} from "@/features/settings/components/ModeToggle";
