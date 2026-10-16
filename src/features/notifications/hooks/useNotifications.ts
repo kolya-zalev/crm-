@@ -48,6 +48,12 @@ export const useNotifications = () => {
       queryClient.setQueryData(notificationsQuerykey, list);
     },
   });
+  const markAsDeleteMutation = useMutation({
+    mutationFn: () => notificationsApi.markAllDelete(),
+    onSuccess: (list) => {
+      queryClient.setQueryData(notificationsQuerykey, list);
+    },
+  });
 
   useEffect(() => {
     if (!accessToken) return;
@@ -87,5 +93,6 @@ export const useNotifications = () => {
     isLoading: sessionStatus === "loading" || (queryEnabled && isPending),
     markAsRead: (id: string) => markAsReadMutation.mutateAsync(id),
     markAllAsRead: () => markAllAsReadMutation.mutateAsync(),
+    markAsDelete: () => markAsDeleteMutation.mutateAsync(),
   };
 };

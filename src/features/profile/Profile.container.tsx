@@ -9,10 +9,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { Spinner } from "@/components/ui/spinner";
 import {
-  changePasswordSchema,
   updateEmailSchema,
   updateNameSchema,
-  type ChangePasswordFormValues,
   type UpdateEmailFormValues,
   type UpdateNameFormValues,
 } from "@/validators";
@@ -44,7 +42,6 @@ export const ProfileContainer = () => {
 
   const [isNameSaving, setIsNameSaving] = useState(false);
   const [isEmailSaving, setIsEmailSaving] = useState(false);
-  const [isPasswordSaving, setIsPasswordSaving] = useState(false);
 
   const nameForm = useForm<UpdateNameFormValues>({
     resolver: zodResolver(updateNameSchema),
@@ -54,15 +51,6 @@ export const ProfileContainer = () => {
     resolver: zodResolver(updateEmailSchema),
     defaultValues: { email: "" },
   });
-  const passwordForm = useForm<ChangePasswordFormValues>({
-    resolver: zodResolver(changePasswordSchema),
-    defaultValues: {
-      currentPassword: "",
-      newPassword: "",
-      confirmPassword: "",
-    },
-  });
-
   useEffect(() => {
     if (!me) return;
     nameForm.reset({ name: me.name });
@@ -97,22 +85,6 @@ export const ProfileContainer = () => {
     }
   };
 
-  const onSavePassword = async ({
-    currentPassword,
-    newPassword,
-  }: ChangePasswordFormValues) => {
-    setIsPasswordSaving(true);
-    try {
-      await profileApi.changePassword({ currentPassword, newPassword });
-      passwordForm.reset();
-      toast.success("Password updated");
-    } catch (error) {
-      toast.error(errorMessage(error));
-    } finally {
-      setIsPasswordSaving(false);
-    }
-  };
-
   if (isPending) {
     return (
       <div className="flex h-full w-full items-center justify-center">
@@ -142,12 +114,6 @@ export const ProfileContainer = () => {
       onEmailSubmit={emailForm.handleSubmit(onSaveEmail)}
       emailRegister={emailForm.register}
       emailError={emailForm.formState.errors.email?.message}
-      isPasswordSaving={isPasswordSaving}
-      onPasswordSubmit={passwordForm.handleSubmit(onSavePassword)}
-      passwordRegister={passwordForm.register}
-      currentPasswordError={passwordForm.formState.errors.currentPassword?.message}
-      newPasswordError={passwordForm.formState.errors.newPassword?.message}
-      confirmPasswordError={passwordForm.formState.errors.confirmPassword?.message}
     />
   );
 };

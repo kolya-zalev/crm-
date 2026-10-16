@@ -1,0 +1,1 @@
+export { EmployeeTableContainer as EmployeeTable } from "./EmployeeTable.container";

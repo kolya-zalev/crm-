@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { LeadsFilter } from "../components/LeadsFilter/LeadsFilter";
+import { LeadsFilter } from "../components/LeadsFilter/LeadsFilter.component";
 import userEvent from "@testing-library/user-event";
 
 describe("LeadsFilter", () => {

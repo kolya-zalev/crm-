@@ -23,6 +23,7 @@ export const TasksTableRow = ({
         <Checkbox
           checked={task.status === "completed"}
           onCheckedChange={(checked) => onToggle(task.id, checked === true)}
+          className="rounded-lg"
         />
       </TableCell>
       <TableCell>

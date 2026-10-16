@@ -7,6 +7,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { authRoutes } from "@/config/navigation";
 import { useSession } from "next-auth/react";
 import { UserMenu } from "./UserMenu";
+import { NotificationsPanel } from "@/features/notifications";
 export default function Navbar() {
   const { status } = useSession();
   return (
@@ -20,6 +21,7 @@ export default function Navbar() {
           <div className="h-8 w-24" />
         ) : status === "authenticated" ? (
           <>
+            <NotificationsPanel />
             <UserMenu />
           </>
         ) : (

@@ -1,4 +1,4 @@
-import { LuBell, LuCheckCheck, LuX } from "react-icons/lu";
+import { LuCheckCheck, LuX } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -7,79 +7,61 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import {
-  SidebarMenuBadge,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@/components/ui/sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { formatNotificationTime } from "./utils/formatNotificationTime";
 import type { NotificationsPanelProps } from "./NotificationsPanel.types";
-import { BellIcon } from "@phosphor-icons/react";
+import { BellIcon, TrashIcon } from "@phosphor-icons/react";
 
 export const NotificationsPanelComponent = ({
   isOpen,
   onOpenChange,
-  panelOffset,
   panelWidth,
   notifications,
   unreadCount,
   isLoading,
   onItemClick,
   onMarkAllAsRead,
+  onMarkAsDelele,
 }: NotificationsPanelProps) => (
   <Sheet open={isOpen} onOpenChange={onOpenChange}>
-    <SidebarMenuItem>
-      <SheetTrigger asChild>
-        <SidebarMenuButton
-          isActive={isOpen}
-          className="h-9 gap-2.5 rounded-md px-2.5 text-sm [&_svg]:size-5"
-        >
-          <BellIcon />
-          <span>Notifications</span>
-        </SidebarMenuButton>
-      </SheetTrigger>
-
-      {unreadCount > 0 ? (
-        <SidebarMenuBadge className="text-xs font-medium tabular-nums">
-          {unreadCount}
-        </SidebarMenuBadge>
-      ) : null}
-    </SidebarMenuItem>
+    <SheetTrigger asChild>
+      <Button variant="ghost" size="icon-lg">
+        <BellIcon
+          className={cn(
+            "size-5",
+            unreadCount > 0 ? "text-destructive" : "text-muted-foreground",
+          )}
+        />
+      </Button>
+    </SheetTrigger>
 
     <SheetContent
-      side="left"
+      side="right"
       showCloseButton={false}
-      style={{ left: panelOffset, width: panelWidth, maxWidth: panelWidth }}
-      className="border-r p-0"
+      style={{ width: panelWidth, maxWidth: panelWidth }}
+      className="border-l p-0 rounded-3xl"
     >
       <div className="flex items-center justify-between gap-2 border-b px-4 py-3">
-        <SheetTitle className="text-xs font-medium">
-          Notifications
-        </SheetTitle>
+        <SheetTitle className="text-xs font-medium">Notifications</SheetTitle>
 
         <div className="flex items-center gap-1">
           {unreadCount > 0 ? (
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              aria-label="Mark all as read"
-              onClick={onMarkAllAsRead}
-            >
+            <Button variant="ghost" size="icon" onClick={onMarkAllAsRead}>
               <LuCheckCheck className="size-4" />
             </Button>
           ) : null}
 
           <SheetClose asChild>
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              aria-label="Close notifications"
-            >
+            <Button variant="ghost" size="icon-sm">
               <LuX className="size-4" />
             </Button>
           </SheetClose>
+          {notifications.length > 0 ? (
+            <Button variant="ghost" size="icon" onClick={onMarkAsDelele}>
+              <TrashIcon className="size-4" />
+            </Button>
+          ) : null}
         </div>
       </div>
 
@@ -105,7 +87,7 @@ export const NotificationsPanelComponent = ({
                   variant="ghost"
                   onClick={() => onItemClick(notification)}
                   className={cn(
-                    "h-auto w-full items-start justify-start gap-2.5 whitespace-normal rounded-none border-b px-4 py-3 text-left hover:bg-sidebar-accent",
+                    "h-auto w-full items-start justify-start gap-2.5 whitespace-normal rounded-4xl border-b px-4 py-3 text-left hover:bg-sidebar-accent",
                     !notification.isRead && "bg-sidebar-accent/40",
                   )}
                 >

@@ -45,7 +45,7 @@ export function LeadDetailComponent({
           ) : null}
           <LeadStatusStepper
             currentStatusIndex={currentStatusIndex}
-            onStatusStepChange={canMutateLeads ? onStatusStepChange : undefined}
+            onStatusStepChange={onStatusStepChange}
           />
           {lead.status === "lost" && <LeadLostBanner />}
 

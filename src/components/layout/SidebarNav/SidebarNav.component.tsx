@@ -12,7 +12,7 @@ import { isNavItemActive, NavItem } from "@/config/navigation";
 import { cn } from "@/lib/utils";
 import { SidebarNavProps } from "./SidebarNav.types";
 
-export function SidebarNavComponent({ items }: SidebarNavProps) {
+export const SidebarNavComponent = ({ items }: SidebarNavProps) => {
   const pathname = usePathname();
 
   const renderNavItem = useCallback(
@@ -54,4 +54,4 @@ export function SidebarNavComponent({ items }: SidebarNavProps) {
   );
 
   return <SidebarMenu>{items.map(renderNavItem)}</SidebarMenu>;
-}
+};

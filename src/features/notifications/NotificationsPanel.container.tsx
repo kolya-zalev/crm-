@@ -11,8 +11,14 @@ export const NotificationsPanelContainer = () => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const { state } = useSidebar();
-  const { notifications, unreadCount, isLoading, markAsRead, markAllAsRead } =
-    useNotifications();
+  const {
+    notifications,
+    unreadCount,
+    isLoading,
+    markAsRead,
+    markAllAsRead,
+    markAsDelete,
+  } = useNotifications();
 
   const handleOpenChange = (nextIsOpen: boolean) => {
     setIsOpen(nextIsOpen);
@@ -29,6 +35,9 @@ export const NotificationsPanelContainer = () => {
       router.push(`/lead/${notification.leadId}`);
     }
   };
+  const handleMarkAsDelele = () => {
+    void markAsDelete();
+  };
 
   const isSidebarHidden = state === "collapsed";
 
@@ -43,6 +52,7 @@ export const NotificationsPanelContainer = () => {
       isLoading={isLoading}
       onItemClick={handleItemClick}
       onMarkAllAsRead={() => void markAllAsRead()}
+      onMarkAsDelele={handleMarkAsDelele}
     />
   );
 };

@@ -18,6 +18,9 @@ export const notificationsApi = {
     );
     return response.data;
   },
+  markAllDelete: async (): Promise<NotificationList> => {
+    const response = await api.delete<NotificationList>(`/api/notifications`);
+    return response.data;
+  },
 };
-
 export default notificationsApi;

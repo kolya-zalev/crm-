@@ -13,7 +13,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { sidebarItems, isNavItemActive } from "@/config/navigation";
 import { useSession } from "next-auth/react";
-import { NotificationsPanel } from "@/features/notifications/components/NotificationsPanel";
 
 export const AppSidebar = () => {
   const pathname = usePathname();
@@ -42,8 +41,6 @@ export const AppSidebar = () => {
 
       <SidebarContent className="px-3">
         <SidebarMenu className="gap-2">
-          <NotificationsPanel />
-          
           {visibleItems.map((item) => {
             const active = isNavItemActive(pathname, item.href, item.exact);
             const Icon = item.icon;

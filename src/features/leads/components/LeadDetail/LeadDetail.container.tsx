@@ -27,7 +27,6 @@ export function LeadDetailContainer({ leadId }: LeadDetailContainerProps) {
 
   const handleStatusStepChange = (step: number) => {
     const newStatus = LeadStatuses[step - 1];
-    if (!canMutateLead) return null;
     if (newStatus === lead?.status) return;
     if (newStatus) {
       updateLead(leadId, { status: newStatus });

@@ -1,10 +1,6 @@
 import type { FormEventHandler } from "react";
 import type { UseFormRegister } from "react-hook-form";
-import type {
-  ChangePasswordFormValues,
-  UpdateEmailFormValues,
-  UpdateNameFormValues,
-} from "@/validators";
+import type { UpdateEmailFormValues, UpdateNameFormValues } from "@/validators";
 
 export type ProfileComponentProps = {
   isNameSaving: boolean;
@@ -17,10 +13,4 @@ export type ProfileComponentProps = {
   onEmailSubmit: FormEventHandler<HTMLFormElement>;
   emailRegister: UseFormRegister<UpdateEmailFormValues>;
   emailError?: string;
-  isPasswordSaving: boolean;
-  onPasswordSubmit: FormEventHandler<HTMLFormElement>;
-  passwordRegister: UseFormRegister<ChangePasswordFormValues>;
-  currentPasswordError?: string;
-  newPasswordError?: string;
-  confirmPasswordError?: string;
 };

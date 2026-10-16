@@ -14,7 +14,7 @@ export const MessageInput = ({
   return (
     <div className="flex gap-2">
       <Textarea
-        className="min-h-20 flex-1"
+        className="min-h-20 flex-1 rounded-2xl"
         value={text}
         disabled={isSending}
         placeholder="Write a message…"

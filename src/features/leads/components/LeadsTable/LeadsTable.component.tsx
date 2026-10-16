@@ -2,7 +2,7 @@
 
 import { Table, TableBody } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { LeadsFilter } from "@/features/leads/components/LeadsFilter/LeadsFilter";
+import { LeadsFilter } from "@/features/leads/components/LeadsFilter/LeadsFilter.component";
 import { LeadsSearch } from "@/features/leads/components/LeadsSearch/LeadsSearch";
 import { LeadsTableComponentProps } from "./LeadsTable.types";
 import { LeadsTableSkeleton } from "./components/LeadsTableSkeleton/LeadsTableSkeleton.component";

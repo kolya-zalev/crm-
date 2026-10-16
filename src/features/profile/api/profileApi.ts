@@ -18,10 +18,4 @@ export const profileApi = {
     const response = await api.patch<MeProfile>("/api/users/me", data);
     return response.data;
   },
-  changePassword: async (data: {
-    currentPassword: string;
-    newPassword: string;
-  }) => {
-    await api.post("/api/users/me/password", data);
-  },
 };

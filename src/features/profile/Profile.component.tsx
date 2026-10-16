@@ -23,12 +23,6 @@ export const ProfileComponent = ({
   onEmailSubmit,
   emailRegister,
   emailError,
-  isPasswordSaving,
-  onPasswordSubmit,
-  passwordRegister,
-  currentPasswordError,
-  newPasswordError,
-  confirmPasswordError,
 }: ProfileComponentProps) => (
   <div className="mx-auto flex max-w-4xl flex-col gap-6">
     <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -104,70 +98,5 @@ export const ProfileComponent = ({
         </CardContent>
       </Card>
     </div>
-
-    <Card>
-      <CardHeader>
-        <CardTitle>Password</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={onPasswordSubmit}>
-          <FieldGroup>
-            <Field data-invalid={Boolean(currentPasswordError)}>
-              <FieldLabel htmlFor="profile-current-password">
-                Current password
-              </FieldLabel>
-              <Input
-                id="profile-current-password"
-                type="password"
-                disabled={isPasswordSaving}
-                {...passwordRegister("currentPassword")}
-              />
-              {currentPasswordError ? (
-                <FieldError>{currentPasswordError}</FieldError>
-              ) : null}
-            </Field>
-            <Field data-invalid={Boolean(newPasswordError)}>
-              <FieldLabel htmlFor="profile-new-password">
-                New password
-              </FieldLabel>
-              <Input
-                id="profile-new-password"
-                type="password"
-                disabled={isPasswordSaving}
-                {...passwordRegister("newPassword")}
-              />
-              {newPasswordError ? (
-                <FieldError>{newPasswordError}</FieldError>
-              ) : null}
-            </Field>
-            <Field data-invalid={Boolean(confirmPasswordError)}>
-              <FieldLabel htmlFor="profile-confirm-password">
-                Confirm password
-              </FieldLabel>
-              <Input
-                id="profile-confirm-password"
-                type="password"
-                disabled={isPasswordSaving}
-                {...passwordRegister("confirmPassword")}
-              />
-              {confirmPasswordError ? (
-                <FieldError>{confirmPasswordError}</FieldError>
-              ) : null}
-            </Field>
-            <div className="flex justify-end">
-              <Button
-                type="submit"
-                size="sm"
-                className="min-w-24"
-                disabled={isPasswordSaving}
-              >
-                {isPasswordSaving ? <Spinner /> : null}
-                Save
-              </Button>
-            </div>
-          </FieldGroup>
-        </form>
-      </CardContent>
-    </Card>
   </div>
 );

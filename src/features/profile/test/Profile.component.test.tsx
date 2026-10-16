@@ -3,11 +3,7 @@ import userEvent from "@testing-library/user-event";
 import type { FieldValues, UseFormRegister } from "react-hook-form";
 import { ProfileComponent } from "../Profile.component";
 import type { ProfileComponentProps } from "../Profile.types";
-import type {
-  ChangePasswordFormValues,
-  UpdateEmailFormValues,
-  UpdateNameFormValues,
-} from "@/validators";
+import type { UpdateEmailFormValues, UpdateNameFormValues } from "@/validators";
 
 const fakeRegister = <T extends FieldValues>(): UseFormRegister<T> =>
   ((name: string) => ({
@@ -26,21 +22,15 @@ const baseProps: ProfileComponentProps = {
   emailLockLabel: null,
   onEmailSubmit: jest.fn(),
   emailRegister: fakeRegister<UpdateEmailFormValues>(),
-  isPasswordSaving: false,
-  onPasswordSubmit: jest.fn(),
-  passwordRegister: fakeRegister<ChangePasswordFormValues>(),
 };
 
 describe("ProfileComponent", () => {
-  it("renders name, email and password fields", () => {
+  it("renders name and email fields", () => {
     render(<ProfileComponent {...baseProps} />);
 
     expect(screen.getByLabelText("Name")).toBeInTheDocument();
     expect(screen.getByLabelText("Email")).toBeInTheDocument();
-    expect(screen.getByLabelText("Current password")).toBeInTheDocument();
-    expect(screen.getByLabelText("New password")).toBeInTheDocument();
-    expect(screen.getByLabelText("Confirm password")).toBeInTheDocument();
-    expect(screen.getAllByRole("button", { name: "Save" })).toHaveLength(3);
+    expect(screen.getAllByRole("button", { name: "Save" })).toHaveLength(2);
   });
 
   it("locks email and shows the cooldown label", () => {

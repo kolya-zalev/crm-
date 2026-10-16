@@ -88,7 +88,7 @@ export const InviteUserModalComponent = ({
                 <Select value={field.value} onValueChange={field.onChange}>
                   <SelectTrigger
                     id="invite-role"
-                    className="w-full"
+                    className="w-full rounded-2xl"
                     aria-invalid={!!form.formState.errors.role}
                   >
                     <SelectValue placeholder="Role" />

@@ -78,11 +78,11 @@ export const authRoutes = {
   signup: { href: "/signup", label: "Sign up" },
 } as const;
 
-export function isNavItemActive(
+export const isNavItemActive = (
   pathname: string,
   href: string,
   exact?: boolean,
-): boolean {
+): boolean => {
   if (href === "/") {
     return pathname === "/";
   }
@@ -90,4 +90,4 @@ export function isNavItemActive(
     return pathname === href;
   }
   return pathname === href || pathname.startsWith(`${href}/`);
-}
+};

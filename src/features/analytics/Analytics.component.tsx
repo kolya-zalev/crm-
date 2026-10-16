@@ -5,7 +5,8 @@ import { ClosedByChart } from "./components/ClosedByChart";
 import { StuckChart } from "./components/StuckChart";
 import { AnalyticsComponentProps } from "./Analytics.types";
 import { UnassignedLeads } from "./components/UnassignedLeads";
-
+import { LeadsByUserChart } from "./components/LeadsByUserChart";
+import { EmployeeTable } from "./components/EmployeeTable";
 export const AnalyticsComponent = ({ analytics }: AnalyticsComponentProps) => {
   if (!analytics) return null;
 
@@ -19,7 +20,8 @@ export const AnalyticsComponent = ({ analytics }: AnalyticsComponentProps) => {
         <ClosedByChart closedBy={analytics.closedBy} />
         <StuckChart stuck={analytics.stuck} />
       </div>
-
+      <LeadsByUserChart leadsByUser={analytics.leadsByUser} />
+      <EmployeeTable />
       <UnassignedLeads unassigned={analytics.unassigned} />
     </div>
   );

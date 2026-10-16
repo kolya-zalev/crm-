@@ -1,4 +1,4 @@
-import { LuLogOut, LuMoon, LuSettings, LuUser } from "react-icons/lu";
+import { LuMoon, LuSettings, LuUser } from "react-icons/lu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,8 +12,8 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
 import type { UserMenuProps } from "./UserMenu.types";
-import { FaRegUser } from "react-icons/fa";
-
+import { UserIcon, GearIcon, MoonIcon, SunIcon } from "@phosphor-icons/react";
+import { DoorIcon, DoorOpenIcon } from "@phosphor-icons/react";
 export const UserMenuComponent = ({
   name,
   email,
@@ -78,7 +78,7 @@ export const UserMenuComponent = ({
           "focus:bg-muted",
         )}
       >
-        <FaRegUser className="size-4" />
+        <UserIcon className="size-4" />
         Profile
       </DropdownMenuItem>
       <DropdownMenuSeparator className="-mx-2 my-1.5" />
@@ -91,7 +91,7 @@ export const UserMenuComponent = ({
           "focus:bg-muted",
         )}
       >
-        <LuSettings />
+        <GearIcon />
         Settings
       </DropdownMenuItem>
 
@@ -101,14 +101,14 @@ export const UserMenuComponent = ({
         className={cn(
           "gap-3 rounded-lg px-2.5 py-2 font-sans text-sm text-foreground cursor-pointer",
           "[&_svg:not([role=switch]_*)]:size-4.5 [&>svg]:text-foreground/70",
-          "focus:bg-muted",
+          "focus:bg-muted ",
         )}
         onSelect={(event) => {
           event.preventDefault();
           onDarkChange(!isDark);
         }}
       >
-        <LuMoon />
+        {isDark ? <SunIcon /> : <MoonIcon />}
         Dark Mode
         <Switch
           size="sm"
@@ -127,11 +127,11 @@ export const UserMenuComponent = ({
         className={cn(
           "gap-3 rounded-lg px-2.5 py-2 font-sans text-sm text-foreground cursor-pointer",
           "[&_svg:not([role=switch]_*)]:size-4.5 [&>svg]:text-foreground/70",
-          "focus:bg-muted",
+          "focus:bg-muted group justify-center",
         )}
       >
-        <LuLogOut />
-        Log out
+        <DoorIcon className="group-hover:hidden" />
+        <DoorOpenIcon className="hidden group-hover:block" />
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>

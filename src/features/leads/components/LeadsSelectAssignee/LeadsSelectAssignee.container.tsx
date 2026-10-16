@@ -6,6 +6,7 @@ import { useAssignable } from "../../hooks/useAssignable";
 import { LeadsSelectAssigneeComponent } from "./LeadsSelectAssignee.component";
 import { LeadsSelectAssigneeContainerProps } from "./LeadsSelectAssignee.types";
 import { canMutateLeads } from "../../utils/canMutate";
+import { Button } from "@/components/ui/button";
 
 export const LeadsSelectAssigneeContainer = ({
   leadId,
@@ -20,8 +21,21 @@ export const LeadsSelectAssigneeContainer = ({
   const canAssign = canMutateLeads(session?.user?.role);
 
   if (!canAssign) {
+    if (role === "member" && assignedTo === null) {
+      return (
+        <Button
+          onClick={() =>
+            updateLead(leadId, { assignedToId: session?.user?.id })
+          }
+        >
+          Take lead
+        </Button>
+      );
+    }
     return (
-      <p className="text-sm">Assigned: {assignedTo?.name ?? "Unassigned"}</p>
+      <p className="font-medium text-sm ">
+        Assigned: {assignedTo?.name ?? "Unassigned"}
+      </p>
     );
   }
   const handleChange = (value: string) => {
