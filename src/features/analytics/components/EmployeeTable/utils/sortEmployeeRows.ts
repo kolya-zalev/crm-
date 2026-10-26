@@ -1,6 +1,13 @@
 import type { EmployeeAnalyticsRow } from "@/types/analytics";
 import type { EmployeeSortKey, SortDirection } from "../EmployeeTable.types";
 
+const collator = new Intl.Collator();
+
+const compareValues = (a: string | number, b: string | number): number =>
+  typeof a === "string" && typeof b === "string"
+    ? collator.compare(a, b)
+    : Number(a) - Number(b);
+
 export const sortEmployeeRows = (
   rows: EmployeeAnalyticsRow[],
   key: EmployeeSortKey,
@@ -12,13 +19,9 @@ export const sortEmployeeRows = (
     const aValue = a[key];
     const bValue = b[key];
 
-    if (aValue === null && bValue === null) return 0;
-    if (aValue === null) return 1;
-    if (bValue === null) return -1;
-
-    if (typeof aValue === "string" && typeof bValue === "string") {
-      return aValue.localeCompare(bValue) * factor;
+    if (aValue === null || bValue === null) {
+      return Number(aValue === null) - Number(bValue === null);
     }
-    return ((aValue as number) - (bValue as number)) * factor;
+    return compareValues(aValue, bValue) * factor;
   });
 };

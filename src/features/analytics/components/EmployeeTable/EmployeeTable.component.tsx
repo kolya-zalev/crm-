@@ -1,34 +1,40 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Spinner } from "@/components/ui/spinner";
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { TableCellEmpty } from "@/components/TableCellEmpty";
+import { TableCellLoading } from "@/components/TableCellLoading";
+import { EmployeeTableRow } from "./components/EmployeeTableRow";
 import { EmployeeSearch } from "./components/EmployeeSearch";
 import { EmployeeSortHead } from "./components/EmployeeSortHead";
-import { EmployeeTableRow } from "./components/EmployeeTableRow";
+import { TableCellError } from "@/components/TableCellError";
 import { PeriodSelect } from "./components/PeriodSelect";
-import type { EmployeeTableComponentProps } from "./EmployeeTable.types";
+import {
+  TableStatus,
+  type EmployeeTableComponentProps,
+} from "./EmployeeTable.types";
 
 export const EmployeeTableComponent = ({
   data,
-  rows,
-  isLoading,
-  isError,
+  tableStatus,
+  unassignedRow,
+  emptyText,
+  overdueText,
   period,
   onPeriodChange,
   search,
   onSearchChange,
   sortKey,
   sortDirection,
-  onSort,
   columnCount,
+  onSort,
+  rows,
 }: EmployeeTableComponentProps) => {
   const headProps = { activeKey: sortKey, direction: sortDirection, onSort };
 
@@ -47,7 +53,7 @@ export const EmployeeTableComponent = ({
           and time to win are events within the selected period.
           {data
             ? ` Overdue threshold: ${data.overdueThresholdDays} days.`
-            : null}
+            : overdueText}
         </p>
       </CardHeader>
       <CardContent>
@@ -95,47 +101,27 @@ export const EmployeeTableComponent = ({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {isLoading ? (
-                <TableRow className="hover:bg-transparent">
-                  <TableCell
-                    colSpan={columnCount}
-                    className="py-10 text-center"
-                  >
-                    <Spinner className="mx-auto size-6" />
-                  </TableCell>
-                </TableRow>
-              ) : isError || !data ? (
-                <TableRow className="hover:bg-transparent">
-                  <TableCell
-                    colSpan={columnCount}
-                    className="py-10 text-center text-sm text-muted-foreground"
-                  >
-                    Failed to load employees
-                  </TableCell>
-                </TableRow>
-              ) : (
-                <>
-                  {rows.length === 0 ? (
-                    <TableRow className="hover:bg-transparent">
-                      <TableCell
-                        colSpan={columnCount}
-                        className="py-6 text-center text-sm text-muted-foreground"
-                      >
-                        {search.trim() ? "No matches" : "No employees yet"}
-                      </TableCell>
-                    </TableRow>
-                  ) : (
-                    rows.map((row) => (
-                      <EmployeeTableRow key={row.userId} row={row} />
-                    ))
-                  )}
-                  <EmployeeTableRow
-                    key="unassigned"
-                    row={data.unassigned}
-                    isSummary
-                    hidePeriodMetrics
-                  />
-                </>
+              {tableStatus === TableStatus.Loading && (
+                <TableCellLoading colSpan={columnCount} />
+              )}
+              {tableStatus === TableStatus.Error && (
+                <TableCellError
+                  colSpan={columnCount}
+                  message="Failed to load employees"
+                />
+              )}
+              {tableStatus === TableStatus.Empty && (
+                <TableCellEmpty colSpan={columnCount} text={emptyText} />
+              )}
+              {rows.map((row) => (
+                <EmployeeTableRow key={row.userId} row={row} />
+              ))}
+              {unassignedRow && (
+                <EmployeeTableRow
+                  row={unassignedRow}
+                  isSummary
+                  hidePeriodMetrics
+                />
               )}
             </TableBody>
           </Table>

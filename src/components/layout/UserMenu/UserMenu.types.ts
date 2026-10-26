@@ -1,3 +1,4 @@
+import { AppRoute } from "@/config/routes";
 export type UserMenuProps = {
   name: string;
   email: string;
@@ -5,7 +6,6 @@ export type UserMenuProps = {
   role: string;
   isDark: boolean;
   onDarkChange: (checked: boolean) => void;
-  onSettings(): void;
-  onProfile(): void;
+  onNavigate: (route: AppRoute) => void;
   onLogout(): void;
 };

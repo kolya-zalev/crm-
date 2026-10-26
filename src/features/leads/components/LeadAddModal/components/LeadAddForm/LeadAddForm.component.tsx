@@ -7,13 +7,8 @@ import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { LeadAddFormProps } from "./LeadAddForm.types";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { FormSelect } from "@/components/FormSelect";
+import { leadStatusOptions } from "./utils/leadStatusOptions";
 
 export const LeadAddForm = ({
   isNew,
@@ -107,18 +102,12 @@ export const LeadAddForm = ({
           control={form.control}
           name="status"
           render={({ field }) => (
-            <Select value={field.value} onValueChange={field.onChange}>
-              <SelectTrigger id="lead-status" className="w-full">
-                <SelectValue placeholder="Status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="new">New</SelectItem>
-                <SelectItem value="contacted">Contacted</SelectItem>
-                <SelectItem value="qualified">Qualified</SelectItem>
-                <SelectItem value="won">Won</SelectItem>
-                <SelectItem value="lost">Lost</SelectItem>
-              </SelectContent>
-            </Select>
+            <FormSelect
+              id="lead-status"
+              value={field.value}
+              onChange={field.onChange}
+              options={leadStatusOptions}
+            />
           )}
         />
       </Field>

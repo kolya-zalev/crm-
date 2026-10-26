@@ -17,13 +17,8 @@ import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { InviteUserModalProps } from "./InviteUserModal.types";
 import { defaultValues } from "./utils/InviteModalValues/inviteModalValues";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { FormSelect } from "@/components/FormSelect";
+import { roleOptions } from "./utils/InviteModalValues/roleOptions";
 
 export const InviteUserModalComponent = ({
   open,
@@ -85,20 +80,14 @@ export const InviteUserModalComponent = ({
               control={form.control}
               name="role"
               render={({ field }) => (
-                <Select value={field.value} onValueChange={field.onChange}>
-                  <SelectTrigger
-                    id="invite-role"
-                    className="w-full rounded-2xl"
-                    aria-invalid={!!form.formState.errors.role}
-                  >
-                    <SelectValue placeholder="Role" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="admin">Admin</SelectItem>
-                    <SelectItem value="manager">Manager</SelectItem>
-                    <SelectItem value="member">Member</SelectItem>
-                  </SelectContent>
-                </Select>
+                <FormSelect
+                  id="invite-role"
+                  value={field.value}
+                  onChange={field.onChange}
+                  options={roleOptions}
+                  className="rounded-2xl"
+                  isInvalid={!!form.formState.errors.role}
+                />
               )}
             />
             {form.formState.errors.role?.message && (

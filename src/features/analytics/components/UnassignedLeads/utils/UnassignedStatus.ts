@@ -1,8 +1,12 @@
 import { Lead } from "@/types";
 
+export const leadStatuses = [
+  "new",
+  "contacted",
+  "qualified",
+  "won",
+  "lost",
+] as const;
+
 export const isLeadStatus = (status: string): status is Lead["status"] =>
-  status === "new" ||
-  status === "contacted" ||
-  status === "qualified" ||
-  status === "won" ||
-  status === "lost";
+  (leadStatuses as readonly string[]).includes(status);

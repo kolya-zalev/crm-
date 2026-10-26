@@ -14,15 +14,15 @@ import { cn } from "@/lib/utils";
 import type { UserMenuProps } from "./UserMenu.types";
 import { UserIcon, GearIcon, MoonIcon, SunIcon } from "@phosphor-icons/react";
 import { DoorIcon, DoorOpenIcon } from "@phosphor-icons/react";
+import { AppRoute } from "@/config/routes";
 export const UserMenuComponent = ({
   name,
   email,
   userId,
   role,
   isDark,
-  onProfile,
+  onNavigate,
   onDarkChange,
-  onSettings,
   onLogout,
 }: UserMenuProps) => (
   <DropdownMenu>
@@ -71,7 +71,7 @@ export const UserMenuComponent = ({
 
       <DropdownMenuSeparator className="-mx-2 my-1.5" />
       <DropdownMenuItem
-        onSelect={onProfile}
+        onSelect={() => onNavigate(AppRoute.Profile)}
         className={cn(
           "gap-3 rounded-lg px-2.5 py-2 font-sans text-sm text-foreground cursor-pointer",
           "[&_svg:not([role=switch]_*)]:size-4.5 [&>svg]:text-foreground/70",
@@ -84,7 +84,7 @@ export const UserMenuComponent = ({
       <DropdownMenuSeparator className="-mx-2 my-1.5" />
 
       <DropdownMenuItem
-        onSelect={onSettings}
+        onSelect={() => onNavigate(AppRoute.Settings)}
         className={cn(
           "gap-3 rounded-lg px-2.5 py-2 font-sans text-sm text-foreground cursor-pointer",
           "[&_svg:not([role=switch]_*)]:size-4.5 [&>svg]:text-foreground/70",
