@@ -5,9 +5,9 @@ import {
   ChartBarIcon,
   UsersIcon,
   CheckSquareIcon,
-  UsersThreeIcon,
   ChatCenteredTextIcon,
   CalendarIcon,
+  ShieldIcon,
 } from "@phosphor-icons/react";
 
 export type NavItem = {
@@ -19,7 +19,11 @@ export type NavItem = {
   exact?: boolean;
   size?: number;
 };
-
+export type NavGroup = {
+  id: string;
+  label: string;
+  items: NavItem[];
+};
 export const brand = {
   href: "/",
   label: "Home",
@@ -54,12 +58,6 @@ export const sidebarItems: NavItem[] = [
     icon: CheckSquareIcon,
   },
   {
-    id: "team",
-    href: "/team",
-    label: "Team",
-    icon: UsersThreeIcon,
-  },
-  {
     id: "chat",
     href: "/chat",
     label: "Chat",
@@ -70,6 +68,26 @@ export const sidebarItems: NavItem[] = [
     href: "/calendar",
     label: "Calendar",
     icon: CalendarIcon,
+  },
+];
+export const teamNavItem: NavItem = {
+  id: "team",
+  href: "/team",
+  label: "Team",
+  icon: UsersIcon,
+};
+export const rolesNavItem: NavItem = {
+  id: "roles",
+  href: "/roles",
+  label: "Roles",
+  icon: ShieldIcon,
+  roles: ["admin"],
+};
+export const sidebarGroups: NavGroup[] = [
+  {
+    id: "user-management",
+    label: "User Management",
+    items: [teamNavItem, rolesNavItem],
   },
 ];
 
@@ -90,4 +108,10 @@ export const isNavItemActive = (
     return pathname === href;
   }
   return pathname === href || pathname.startsWith(`${href}/`);
+};
+
+export const filterByRole = (items: NavItem[], role?: string): NavItem[] => {
+  return items.filter(
+    (item) => !item.roles || (role && item.roles.includes(role)),
+  );
 };

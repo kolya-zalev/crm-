@@ -1,4 +1,4 @@
-import { Lead } from "@/types";
+import { Lead, NewLead } from "@/types";
 import { LeadAddFormValues } from "@/validators";
 
 export const FormStatus = {
@@ -11,7 +11,7 @@ export type FormStatusType = (typeof FormStatus)[keyof typeof FormStatus];
 export interface LeadAddModalProps {
   open: boolean;
   onClose: () => void;
-  onSubmit: (data: Omit<Lead, "id">) => void;
+  onSubmit: (data: NewLead) => void;
   onEdit: (id: string, data: LeadAddFormValues) => void;
   formStatus: FormStatusType;
   lead?: Lead | null;

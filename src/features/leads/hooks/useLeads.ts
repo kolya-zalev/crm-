@@ -1,4 +1,4 @@
-import type { Lead } from "@/types";
+import type { Lead, NewLead } from "@/types";
 import leadsApi from "@/features/leads/api/leadsApi";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -15,7 +15,7 @@ export const useLeads = (options?: UseLeadsOptions) => {
   });
 
   const createLeadMutation = useMutation({
-    mutationFn: (data: Omit<Lead, "id">) => leadsApi.createLead(data),
+    mutationFn: (data: NewLead) => leadsApi.createLead(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["leads"] });
     },
@@ -43,8 +43,7 @@ export const useLeads = (options?: UseLeadsOptions) => {
     },
   });
 
-  const createLead = (data: Omit<Lead, "id">) =>
-    createLeadMutation.mutateAsync(data);
+  const createLead = (data: NewLead) => createLeadMutation.mutateAsync(data);
   const deleteLead = (id: string) => deleteLeadMutation.mutateAsync(id);
   const updateLead = (
     id: string,

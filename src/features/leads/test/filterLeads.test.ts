@@ -9,6 +9,7 @@ const leads: Lead[] = [
     company: "Example Inc.",
     status: "new",
     tags: [],
+    assignedTo: null,
   },
   {
     id: "2",
@@ -17,6 +18,7 @@ const leads: Lead[] = [
     company: "Example Corp.",
     status: "won",
     tags: [],
+    assignedTo: null,
   },
   {
     id: "3",
@@ -25,6 +27,7 @@ const leads: Lead[] = [
     company: "Example LLC.",
     status: "lost",
     tags: [],
+    assignedTo: null,
   },
 ];
 

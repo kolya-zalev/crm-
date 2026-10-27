@@ -11,6 +11,7 @@ const fakeLead: Lead = {
   company: "Acme Inc",
   status: "new",
   tags: [],
+  assignedTo: null,
 };
 
 const tableProps: LeadsTableComponentProps = {
@@ -59,7 +60,11 @@ describe("LeadsTable", () => {
   it("hides Import CSV for members and keeps Add Lead", () => {
     render(<LeadsTable {...tableProps} canMutateLead={false} />);
 
-    expect(screen.queryByRole("button", { name: "Import CSV" })).not.toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Add Lead" })).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Import CSV" }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Add Lead" }),
+    ).toBeInTheDocument();
   });
 });

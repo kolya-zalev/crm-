@@ -27,6 +27,9 @@ export const proxy = auth((request) => {
   if (pathname === "/analytics" && request.auth?.user?.role !== "admin") {
     return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
   }
+  if (pathname === "/roles" && request.auth?.user?.role !== "admin") {
+    return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
+  }
 
   return NextResponse.next();
 });

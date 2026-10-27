@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { authRoutes } from "@/config/navigation";
 import { useSession } from "next-auth/react";
-import { UserMenu } from "./UserMenu";
+import { UserMenu } from "../UserMenu";
 import { NotificationsPanel } from "@/features/notifications";
 export default function Navbar() {
   const { status } = useSession();

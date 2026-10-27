@@ -1,4 +1,4 @@
-import { Lead } from "@/types";
+import { Lead, NewLead } from "@/types";
 import { LeadAddFormValues } from "@/validators";
 import { FormStatusType } from "./components/LeadAddModal";
 
@@ -18,7 +18,7 @@ export interface LeadsComponentProps {
   onAddClick: () => void;
   onEditClick: (lead: Lead) => void;
   onCloseModal: () => void;
-  onCreate: (data: Omit<Lead, "id">) => Promise<void>;
+  onCreate: (data: NewLead) => Promise<void>;
   onUpdate: (id: string, data: LeadAddFormValues) => Promise<void>;
   onImportClick: () => void;
   onImportClose: () => void;

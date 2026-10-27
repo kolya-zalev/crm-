@@ -13,3 +13,7 @@ export interface LeadDetailComponentProps {
   onStatusStepChange: (step: number) => void;
   onMarkAsLost: () => void;
 }
+
+export type LeadDetailContainerProps = {
+  leadId: string;
+};

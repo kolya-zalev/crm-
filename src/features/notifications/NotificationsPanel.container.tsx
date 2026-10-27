@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSidebar } from "@/components/ui/sidebar";
 import { useNotifications } from "@/features/notifications/hooks/useNotifications";
 import type { AppNotification } from "@/types";
 import { NotificationsPanelComponent } from "./NotificationsPanel.component";
@@ -10,7 +9,6 @@ import { NotificationsPanelComponent } from "./NotificationsPanel.component";
 export const NotificationsPanelContainer = () => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
-  const { state } = useSidebar();
   const {
     notifications,
     unreadCount,
@@ -39,13 +37,10 @@ export const NotificationsPanelContainer = () => {
     void markAsDelete();
   };
 
-  const isSidebarHidden = state === "collapsed";
-
   return (
     <NotificationsPanelComponent
       isOpen={isOpen}
       onOpenChange={handleOpenChange}
-      panelOffset={isSidebarHidden ? "0rem" : "16rem"}
       panelWidth="20rem"
       notifications={notifications}
       unreadCount={unreadCount}

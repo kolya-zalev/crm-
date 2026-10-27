@@ -12,7 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { TeamTableSkeleton } from "./components/TeamTableSkeleton/TeamTableSkeleton.component";
+import { TeamTableSkeleton } from "./components/TeamTableSkeleton";
 
 export const TeamTableComponent = ({
   members,

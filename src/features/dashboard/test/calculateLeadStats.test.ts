@@ -8,6 +8,7 @@ const makeLead = (overrides: Partial<Lead> = {}): Lead => ({
   company: "Acme Inc",
   status: "new",
   tags: [],
+  assignedTo: null,
   ...overrides,
 });
 

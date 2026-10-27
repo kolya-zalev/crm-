@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Lead } from "@/types";
+import { Lead, NewLead } from "@/types";
 import { LeadAddFormValues } from "@/validators";
 import { useLeads } from "./hooks/useLeads";
 import { filterLeads } from "./utils/filterLeads";
@@ -22,7 +22,7 @@ export const LeadsContainer = () => {
   const isModalOpen = isAddOpen || editingLead !== null;
   const filteredLeads = filterLeads(leads, search, filter, session?.user?.id);
 
-  const handleCreate = async (data: Omit<Lead, "id">) => {
+  const handleCreate = async (data: NewLead) => {
     await createLead(data);
     setIsAddOpen(false);
   };

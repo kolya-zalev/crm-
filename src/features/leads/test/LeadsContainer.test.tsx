@@ -23,6 +23,7 @@ const fakeLead = {
   tags: ["vip"],
   notes: "Notes",
   source: "Web",
+  assignedTo: null,
 };
 
 const otherLead = {
@@ -33,6 +34,7 @@ const otherLead = {
   status: "won" as const,
   phone: "0987654321",
   tags: [],
+  assignedTo: null,
 };
 
 const createLeadData = {
@@ -44,6 +46,7 @@ const createLeadData = {
   tags: [] as string[],
   notes: "",
   source: "",
+  assignedTo: null,
 };
 
 const mockUseLeads = (overrides: Partial<ReturnType<typeof useLeads>> = {}) => {

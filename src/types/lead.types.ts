@@ -15,3 +15,5 @@ export type Lead = {
   source?: string;
   assignedTo: LeadAssignedTo | null;
 };
+
+export type NewLead = Omit<Lead, "id" | "assignedTo">;
