@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { isAxiosError } from "axios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useSession } from "next-auth/react";
+import { useSession } from "@/lib/auth-client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
@@ -30,7 +30,7 @@ const errorMessage = (error: unknown) => {
 
 export const ProfileContainer = () => {
   const queryClient = useQueryClient();
-  const { update } = useSession();
+  const { refetch: refecthSession } = useSession();
   const {
     data: me,
     isPending,
@@ -61,7 +61,7 @@ export const ProfileContainer = () => {
     setIsNameSaving(true);
     try {
       const next = await profileApi.updateMe({ name });
-      await update({ name: next.name });
+      await refecthSession();
       queryClient.setQueryData(profileQueryKey, next);
       toast.success("Name updated");
     } catch (error) {
@@ -75,7 +75,7 @@ export const ProfileContainer = () => {
     setIsEmailSaving(true);
     try {
       const next = await profileApi.updateMe({ email });
-      await update({ email: next.email });
+      await refecthSession();
       queryClient.setQueryData(profileQueryKey, next);
       toast.success("Email updated");
     } catch (error) {

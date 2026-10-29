@@ -5,11 +5,11 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { authRoutes } from "@/config/navigation";
-import { useSession } from "next-auth/react";
+import { useSession } from "@/lib/auth-client";
 import { UserMenu } from "../UserMenu";
 import { NotificationsPanel } from "@/features/notifications";
 export default function Navbar() {
-  const { status } = useSession();
+  const { data: session, isPending } = useSession();
   return (
     <header className="flex h-11 shrink-0 items-center justify-between gap-2 border-b border-border bg-background px-4">
       <div className="flex items-center gap-2">
@@ -17,9 +17,9 @@ export default function Navbar() {
       </div>
 
       <div className="flex items-center gap-2">
-        {status === "loading" ? (
+        {isPending ? (
           <div className="h-8 w-24" />
-        ) : status === "authenticated" ? (
+        ) : session ? (
           <>
             <NotificationsPanel />
             <UserMenu />

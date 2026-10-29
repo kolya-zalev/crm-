@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "@/lib/auth-client";
 import { useTheme } from "next-themes";
 import { UserMenuComponent } from "./UserMenu.component";
 import { isDarkTheme } from "./utils/isDarkTheme";
@@ -17,7 +17,8 @@ export const UserMenuContainer = () => {
   const handleNavigate = (route: AppRoute) => router.push(route);
   const handleDarkChange = (checked: boolean) =>
     setTheme(checked ? "dark" : "light");
-  const handleLogout = () => signOut({ callbackUrl: AppRoute.Login });
+  const handleLogout = () =>
+    signOut({ fetchOptions: { onSuccess: () => router.push(AppRoute.Login) } });
   if (!session?.user) return null;
 
   return (

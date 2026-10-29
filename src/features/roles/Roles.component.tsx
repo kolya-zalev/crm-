@@ -6,9 +6,6 @@ export const RolesComponent = ({ status, cards }: RolesComponentProps) => (
   <div className="flex flex-col gap-6">
     <div>
       <h1 className="text-2xl font-semibold">Roles</h1>
-      <p className="text-sm text-muted-foreground">
-        What each role can do in the CRM
-      </p>
     </div>
 
     {status === RolesStatus.Loading && (

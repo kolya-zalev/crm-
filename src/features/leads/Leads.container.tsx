@@ -7,7 +7,7 @@ import { useLeads } from "./hooks/useLeads";
 import { filterLeads } from "./utils/filterLeads";
 import { FormStatus } from "./components/LeadAddModal";
 import { LeadsComponent } from "./Leads.component";
-import { useSession } from "next-auth/react";
+import { useSession } from "@/lib/auth-client";
 import { canMutateLeads } from "./utils/canMutate";
 export const LeadsContainer = () => {
   const { leads, isLoading, createLead, deleteLead, updateLead } = useLeads();

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useSession } from "next-auth/react";
+import { useSession } from "@/lib/auth-client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import chatApi from "@/features/chat/api/chatApi";
 import { ChatNameSse, ChatMessage } from "@/features/chat/Chat.types";
@@ -17,9 +17,9 @@ export const appendMessage = (
 
 export const useChatMessages = () => {
   const queryClient = useQueryClient();
-  const { data: session, status: sessionStatus } = useSession();
-  const accessToken = session?.accessToken;
-  const queryEnabled = Boolean(accessToken);
+  const { data: session, isPending: isSessionPending } = useSession();
+  const userId = session?.user.id;
+  const queryEnabled = Boolean(userId);
 
   const { data: messages = [], isPending } = useQuery({
     queryKey: chatMessagesQueryKey,
@@ -31,10 +31,10 @@ export const useChatMessages = () => {
   });
 
   useEffect(() => {
-    if (!accessToken) return;
+    if (!userId) return;
     const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-    const url = `${baseUrl}/api/chat/sse?access_token=${encodeURIComponent(accessToken)}`;
-    const eventSource = new EventSource(url);
+    const url = `${baseUrl}/api/chat/sse`;
+    const eventSource = new EventSource(url, { withCredentials: true });
 
     const onMessage = (event: MessageEvent<string>) => {
       try {
@@ -51,11 +51,11 @@ export const useChatMessages = () => {
       eventSource.removeEventListener(ChatNameSse.message, onMessage);
       eventSource.close();
     };
-  }, [accessToken, queryClient]);
+  }, [userId, queryClient]);
 
   return {
     messages,
-    isLoading: sessionStatus === "loading" || (queryEnabled && isPending),
+    isLoading: isSessionPending || (queryEnabled && isPending),
     sendMessage: (text: string) => sendMutation.mutateAsync(text),
     isSending: sendMutation.isPending,
   };

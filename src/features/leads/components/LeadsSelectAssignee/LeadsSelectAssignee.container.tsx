@@ -1,6 +1,6 @@
 "use client";
 
-import { useSession } from "next-auth/react";
+import { useSession } from "@/lib/auth-client";
 import { useLeads } from "../../hooks/useLeads";
 import { useAssignable } from "../../hooks/useAssignable";
 import { LeadsSelectAssigneeComponent } from "./LeadsSelectAssignee.component";

@@ -1,10 +1,10 @@
 "use client";
 
-import { signIn } from "next-auth/react";
 import { LoginForm } from "./LoginForm.component";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { LoginFormValues } from "./LoginForm.types";
+import { signIn } from "@/lib/auth-client";
 
 export const LoginFormContainer = () => {
   const router = useRouter();
@@ -14,13 +14,12 @@ export const LoginFormContainer = () => {
   const handleSubmit = async (data: LoginFormValues) => {
     setError(null);
     setIsLoading(true);
-    const result = await signIn("credentials", {
+    const { error } = await signIn.email({
       email: data.email,
       password: data.password,
-      redirect: false,
     });
     setIsLoading(false);
-    if (result?.error) {
+    if (error) {
       setError("Invalid email or password");
       return;
     }

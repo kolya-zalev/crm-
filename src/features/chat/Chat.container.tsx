@@ -1,6 +1,6 @@
 "use client";
 
-import { useSession } from "next-auth/react";
+import { useSession } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { useChatMessages } from "./hooks/useChatMessage";
 import { ChatComponent } from "./Chat.component";

@@ -8,7 +8,7 @@ import { useLeads } from "@/features/leads/hooks/useLeads";
 import { getCurrentStatusIndex, LeadStatuses } from "./utils/leadStatus";
 import { LeadDetailComponent } from "./LeadDetail.component";
 import { canMutateLeads } from "@/features/leads/utils/canMutate";
-import { useSession } from "next-auth/react";
+import { useSession } from "@/lib/auth-client";
 import { LeadDetailContainerProps } from "./LeadDetail.types";
 
 export function LeadDetailContainer({ leadId }: LeadDetailContainerProps) {

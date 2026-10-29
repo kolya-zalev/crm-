@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { useSession } from "next-auth/react";
+import { useSession } from "@/lib/auth-client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import notificationsApi from "@/features/notifications/api/notificationsApi";
@@ -25,9 +25,9 @@ export const prependNotification = (
 
 export const useNotifications = () => {
   const queryClient = useQueryClient();
-  const { data: session, status: sessionStatus } = useSession();
-  const accessToken = session?.accessToken;
-  const queryEnabled = Boolean(accessToken);
+  const { data: session, isPending: isSessionPending } = useSession();
+  const userId = session?.user.id;
+  const queryEnabled = Boolean(userId);
 
   const { data, isPending } = useQuery({
     queryKey: notificationsQuerykey,
@@ -56,11 +56,11 @@ export const useNotifications = () => {
   });
 
   useEffect(() => {
-    if (!accessToken) return;
+    if (!userId) return;
 
     const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-    const url = `${baseUrl}/api/notifications/sse?access_token=${encodeURIComponent(accessToken)}`;
-    const eventSource = new EventSource(url);
+    const url = `${baseUrl}/api/notifications/sse`;
+    const eventSource = new EventSource(url, { withCredentials: true });
 
     const onNotification = (event: MessageEvent<string>) => {
       try {
@@ -85,12 +85,12 @@ export const useNotifications = () => {
       );
       eventSource.close();
     };
-  }, [accessToken, queryClient]);
+  }, [userId, queryClient]);
 
   return {
     notifications: data?.items ?? [],
     unreadCount: data?.unreadCount ?? 0,
-    isLoading: sessionStatus === "loading" || (queryEnabled && isPending),
+    isLoading: isSessionPending || (queryEnabled && isPending),
     markAsRead: (id: string) => markAsReadMutation.mutateAsync(id),
     markAllAsRead: () => markAllAsReadMutation.mutateAsync(),
     markAsDelete: () => markAsDeleteMutation.mutateAsync(),
