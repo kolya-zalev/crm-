@@ -1,1 +1,5 @@
-export {ModeToggle as default} from "@/features/settings/components/ModeToggle";
+import { Settings } from "@/features/settings";
+
+export default function SettingsPage() {
+  return <Settings />;
+}

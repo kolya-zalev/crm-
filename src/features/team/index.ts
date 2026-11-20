@@ -1,0 +1,1 @@
+export { TeamContainer as Team } from "./Team.container";

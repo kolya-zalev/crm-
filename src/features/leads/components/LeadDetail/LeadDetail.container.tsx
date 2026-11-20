@@ -7,16 +7,16 @@ import { useLead } from "@/features/leads/hooks/useLead";
 import { useLeads } from "@/features/leads/hooks/useLeads";
 import { getCurrentStatusIndex, LeadStatuses } from "./utils/leadStatus";
 import { LeadDetailComponent } from "./LeadDetail.component";
-
-interface LeadDetailContainerProps {
-  leadId: string;
-}
+import { canMutateLeads } from "@/features/leads/utils/canMutate";
+import { useSession } from "@/lib/auth-client";
+import { LeadDetailContainerProps } from "./LeadDetail.types";
 
 export function LeadDetailContainer({ leadId }: LeadDetailContainerProps) {
   const { lead, isLoading, isError } = useLead(leadId);
   const { updateLead } = useLeads({ enabled: false });
   const [isEditOpen, setIsEditOpen] = useState(false);
-
+  const { data: session } = useSession();
+  const canMutateLead = canMutateLeads(session?.user?.role);
   const handleUpdate = async (id: string, data: LeadAddFormValues) => {
     await updateLead(id, data);
     setIsEditOpen(false);
@@ -31,6 +31,7 @@ export function LeadDetailContainer({ leadId }: LeadDetailContainerProps) {
   };
 
   const handleMarkAsLost = () => {
+    if (!canMutateLead) return null;
     if (lead?.status === "lost") return;
     {
       updateLead(leadId, { status: "lost" });
@@ -60,6 +61,7 @@ export function LeadDetailContainer({ leadId }: LeadDetailContainerProps) {
       onEditOpen={() => setIsEditOpen(true)}
       onEditClose={() => setIsEditOpen(false)}
       onUpdate={handleUpdate}
+      canMutateLeads={canMutateLead}
     />
   );
 }

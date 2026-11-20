@@ -26,8 +26,8 @@ export const TaskSectionComponent = ({
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
         <CardTitle>Tasks ({allTasks.length})</CardTitle>
         <Button
+          variant={showForm ? "outline" : "default"}
           onClick={showForm ? onCancelForm : onOpenCreate}
-          className="cursor-pointer rounded-xl bg-blue-500 text-white shadow-md transition-colors hover:bg-blue-600"
         >
           {showForm ? "Cancel" : "Add Task"}
         </Button>

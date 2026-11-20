@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { TasksComponentProps } from "./Tasks.types";
 import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
@@ -35,10 +35,7 @@ export const TasksComponent = ({
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
         {showForm && (
-          <Button
-            onClick={onCancelForm}
-            className="cursor-pointer rounded-xl bg-blue-500 text-white shadow-md transition-colors hover:bg-blue-600"
-          >
+          <Button variant="outline" onClick={onCancelForm}>
             Cancel
           </Button>
         )}

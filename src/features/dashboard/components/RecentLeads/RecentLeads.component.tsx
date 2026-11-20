@@ -7,7 +7,7 @@ export function ResentLeadsComponents({ leads }: RecentLeadsProps) {
   return (
     <Card className="animate-in fade-in slide-in-from-bottom-4 duration-2000  fill-mode-forwards  shadow-sm hover:shadow-xl transition-shadow shadow-red-200">
       <CardHeader>
-        <CardTitle className="text-lg font-semibold text-slate-900">
+        <CardTitle className="text-lg font-semibold text-foreground">
           Recent Leads
         </CardTitle>
       </CardHeader>
@@ -16,7 +16,7 @@ export function ResentLeadsComponents({ leads }: RecentLeadsProps) {
           {leads.length === 0 ? (
             <p>No leads yet</p>
           ) : (
-            leads.map((lead: any) => (
+            leads.slice(0, 10).map((lead: any) => (
               <div
                 key={lead.id}
                 className="flex items-center justify-between py-3"

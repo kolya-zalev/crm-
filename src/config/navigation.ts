@@ -5,6 +5,15 @@ import {
   LuTags,
 } from "react-icons/lu";
 import { IconType } from "react-icons";
+import {
+  ChalkboardIcon,
+  ChartBarIcon,
+  UsersIcon,
+  CheckSquareIcon,
+  ChatCenteredTextIcon,
+  CalendarIcon,
+  ShieldIcon,
+} from "@phosphor-icons/react";
 
 import { CiCalendar } from "react-icons/ci";
 export type NavItem = {
@@ -12,9 +21,15 @@ export type NavItem = {
   href: string;
   label: string;
   icon: IconType;
-  description: string;
+  roles?: string[];
+  exact?: boolean;
+  size?: number;
 };
-
+export type NavGroup = {
+  id: string;
+  label: string;
+  items: NavItem[];
+};
 export const brand = {
   href: "/",
   label: "Home",
@@ -25,25 +40,34 @@ export const sidebarItems: NavItem[] = [
     id: "dashboard",
     href: "/dashboard",
     label: "Dashboard",
-    icon: LuLayoutDashboard,
-    description:
-      "Track performance metrics, monitor sales pipeline, and view real-time analytics",
+    icon: ChalkboardIcon,
+    exact: true,
   },
+  {
+    id: "analytics",
+    href: "/analytics",
+    label: "Analytics",
+    icon: ChartBarIcon,
+    roles: ["admin"],
+  },
+
   {
     id: "leads",
     href: "/lead",
     label: "Leads",
-    icon: LuUsersRound,
-    description:
-      "Manage your contacts, track deal progress, and organize your sales pipeline",
+    icon: UsersIcon,
   },
   {
     id: "tasks",
     href: "/tasks",
     label: "Tasks",
-    icon: LuTags,
-    description:
-      "Manage your tasks, track your progress, and organize your work",
+    icon: CheckSquareIcon,
+  },
+  {
+    id: "chat",
+    href: "/chat",
+    label: "Chat",
+    icon: ChatCenteredTextIcon,
   },
   {
     id: "calendar",
@@ -68,9 +92,22 @@ export const authRoutes = {
   signup: { href: "/signup", label: "Sign up" },
 } as const;
 
-export function isNavItemActive(pathname: string, href: string): boolean {
+export const isNavItemActive = (
+  pathname: string,
+  href: string,
+  exact?: boolean,
+): boolean => {
   if (href === "/") {
     return pathname === "/";
   }
+  if (exact) {
+    return pathname === href;
+  }
   return pathname === href || pathname.startsWith(`${href}/`);
-}
+};
+
+export const filterByRole = (items: NavItem[], role?: string): NavItem[] => {
+  return items.filter(
+    (item) => !item.roles || (role && item.roles.includes(role)),
+  );
+};

@@ -1,17 +1,14 @@
-"use client";
-
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import {
   Field,
-  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
@@ -40,15 +37,14 @@ export function LoginForm({
   });
 
   return (
-    <div className={cn("flex w-full flex-col gap-6", className)} {...props}>
-      <Card>
-        <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
+    <div className={cn("flex w-full flex-col", className)} {...props}>
+      <Card className="rounded-xl py-6 shadow-lg ring-foreground/15">
+        <CardHeader className="px-6">
+          <CardTitle className="text-xl font-semibold tracking-tight">
+            Welcome back!
+          </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="px-6">
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FieldGroup>
               <Field data-invalid={!!form.formState.errors.email}>
@@ -84,17 +80,28 @@ export function LoginForm({
               {error && <FieldError>{error}</FieldError>}
 
               <Field>
-                <Button type="submit" className="w-full" disabled={isLoading}>
+                <Button
+                  type="submit"
+                  className="w-full rounded-4xl"
+                  disabled={isLoading}
+                >
                   {isLoading ? <Spinner /> : "Log in"}
                 </Button>
-
-                <FieldDescription className="text-center">
-                  Don't have an account? <Link href="/signup">Sign up</Link>
-                </FieldDescription>
               </Field>
             </FieldGroup>
           </form>
         </CardContent>
+        <CardFooter className="justify-center bg-muted/50">
+          <p className="text-center text-sm text-muted-foreground">
+            Don't have an account?{" "}
+            <Link
+              href="/signup"
+              className="text-foreground underline-offset-4 hover:underline"
+            >
+              Sign up
+            </Link>
+          </p>
+        </CardFooter>
       </Card>
     </div>
   );

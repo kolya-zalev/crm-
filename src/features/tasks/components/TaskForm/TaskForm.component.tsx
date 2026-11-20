@@ -1,12 +1,19 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { schemaTasksAdd, TaskAddFormValues } from "@/validators";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { TaskFormProps } from "./TaskForm.types";
 import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export const TaskFormComponent = ({
   isEditing,
@@ -44,16 +51,26 @@ export const TaskFormComponent = ({
         <FieldLabel htmlFor="task-priority" className="text-sm font-medium">
           Priority
         </FieldLabel>
-        <select
-          id="task-priority"
-          {...form.register("priority")}
-          className="w-full rounded-none border border-input bg-transparent p-2 text-sm outline-none transition-colors focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring/50 dark:bg-zinc-900"
-          aria-invalid={!!form.formState.errors.priority}
-        >
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
+        <Controller
+          control={form.control}
+          name="priority"
+          render={({ field }) => (
+            <Select value={field.value} onValueChange={field.onChange}>
+              <SelectTrigger
+                id="task-priority"
+                className="w-full"
+                aria-invalid={!!form.formState.errors.priority}
+              >
+                <SelectValue placeholder="Priority" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="low">Low</SelectItem>
+                <SelectItem value="medium">Medium</SelectItem>
+                <SelectItem value="high">High</SelectItem>
+              </SelectContent>
+            </Select>
+          )}
+        />
         {form.formState.errors.priority?.message && (
           <FieldDescription className="text-sm text-red-500">
             {form.formState.errors.priority.message}
@@ -78,10 +95,7 @@ export const TaskFormComponent = ({
         )}
       </Field>
 
-      <Button
-        type="submit"
-        className="mt-1 w-full cursor-pointer rounded-xl bg-blue-500 text-white shadow-md transition-colors hover:bg-blue-600"
-      >
+      <Button type="submit" className="mt-1 w-full">
         {isEditing ? "Save Changes" : "Create Task"}
       </Button>
     </form>

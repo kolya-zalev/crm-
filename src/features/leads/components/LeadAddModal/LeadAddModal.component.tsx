@@ -9,15 +9,14 @@ import { FormStatus, LeadAddModalProps } from "./LeadAddModal.types";
 import { LeadAddForm } from "./components/LeadAddForm/LeadAddForm.component";
 import { emptyLeadValues } from "./utils/emptyLeadValues";
 
-
-export function LeadAddModalComponent({
+export const LeadAddModalComponent = ({
   open,
   onClose,
   onSubmit,
   formStatus,
   onEdit,
   lead,
-}: LeadAddModalProps) {
+}: LeadAddModalProps) => {
   const isNew = formStatus === FormStatus.NEW;
   const defaultValues = lead ?? emptyLeadValues;
 
@@ -48,4 +47,4 @@ export function LeadAddModalComponent({
       </DialogContent>
     </Dialog>
   );
-}
+};

@@ -1,3 +1,8 @@
+export type LeadAssignedTo = {
+  id: string;
+  name: string;
+};
+
 export type Lead = {
   id: string;
   name: string;
@@ -8,4 +13,7 @@ export type Lead = {
   tags: string[];
   notes?: string;
   source?: string;
+  assignedTo: LeadAssignedTo | null;
 };
+
+export type NewLead = Omit<Lead, "id" | "assignedTo">;

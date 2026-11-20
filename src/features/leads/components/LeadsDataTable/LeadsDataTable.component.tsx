@@ -99,7 +99,7 @@ export const LeadsDataTableComponent = ({
             <TableRow>
               <TableCell
                 colSpan={visibleColumnsCount}
-                className="h-24 text-center"
+                className="h-24 text-center "
               >
                 <EmptyState />
               </TableCell>
@@ -117,7 +117,6 @@ export const LeadsDataTableComponent = ({
             onClick={pagination.onPreviousPage}
             disabled={!pagination.canPreviousPage}
           >
-            <span className="sr-only">Go to previous page</span>
             <ChevronLeft className="size-4" />
           </Button>
           <span className="min-w-25 text-center text-sm font-medium">
@@ -130,7 +129,6 @@ export const LeadsDataTableComponent = ({
             onClick={pagination.onNextPage}
             disabled={!pagination.canNextPage}
           >
-            <span className="sr-only">Go to next page</span>
             <ChevronRight className="size-4" />
           </Button>
         </div>
@@ -141,7 +139,7 @@ export const LeadsDataTableComponent = ({
               pagination.onPageSizeChange(Number(value));
             }}
           >
-            <SelectTrigger className="h-8 w-17.5">
+            <SelectTrigger className="h-8 w-17.5 rounded-2xl">
               <SelectValue placeholder={pagination.pageSize} />
             </SelectTrigger>
             <SelectContent side="top">

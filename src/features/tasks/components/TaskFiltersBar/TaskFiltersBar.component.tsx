@@ -16,7 +16,7 @@ export const TaskFiltersBar = ({
           type="button"
           variant={activeFilter === filter ? "default" : "outline"}
           size="sm"
-          className="cursor-pointer capitalize"
+          className="cursor-pointer capitalize rounded-lg gap-2"
           onClick={() => onFilterChange(filter)}
         >
           {filter}
