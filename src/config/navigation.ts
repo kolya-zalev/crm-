@@ -1,9 +1,4 @@
-import {
-  LuLayoutDashboard,
-  LuUsersRound,
-  LuSettings,
-  LuTags,
-} from "react-icons/lu";
+"use client";
 import { IconType } from "react-icons";
 import {
   ChalkboardIcon,
@@ -15,7 +10,6 @@ import {
   ShieldIcon,
 } from "@phosphor-icons/react";
 
-import { CiCalendar } from "react-icons/ci";
 export type NavItem = {
   id: string;
   href: string;
@@ -73,17 +67,27 @@ export const sidebarItems: NavItem[] = [
     id: "calendar",
     href: "/calendar",
     label: "Calendar",
-    icon: CiCalendar,
-    description:
-      "Manage your calendar, track your events, and organize your schedule",
+    icon: CalendarIcon,
   },
+];
+export const teamNavItem: NavItem = {
+  id: "team",
+  href: "/team",
+  label: "Team",
+  icon: UsersIcon,
+};
+export const rolesNavItem: NavItem = {
+  id: "roles",
+  href: "/roles",
+  label: "Roles",
+  icon: ShieldIcon,
+  roles: ["admin"],
+};
+export const sidebarGroups: NavGroup[] = [
   {
-    id: "settings",
-    href: "/settings",
-    label: "Settings",
-    icon: LuSettings,
-    description:
-      "Configure your workspace, manage team access, and customize preferences",
+    id: "user-management",
+    label: "User Management",
+    items: [teamNavItem, rolesNavItem],
   },
 ];
 
